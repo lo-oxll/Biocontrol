@@ -5,7 +5,9 @@ const SPECIES = [
   {
     id:'catfish', kind:'fish', kindLabel:'سمك',
     name:'السلور الأفريقي (القرموط الإفريقي)', latin:'Clarias gariepinus',
-    threat:70, image:null, imageCredit:null,
+    threat:70,
+    image:'https://commons.wikimedia.org/wiki/Special:FilePath/Ikan%20lele%20dumbo%20(4).JPG?width=800',
+    imageCredit:'Wagino 20100516 — Wikimedia Commons (CC BY-SA 3.0)',
     source:{label:'تقرير: الجزيرة نت — "سمك دخيل يهدد التنوع البيئي بالعراق"', creator:0},
     summary:'نوع دخيل موثّق في الناصرية وبغداد وهور الحويزة، ينافس الأنواع المحلية على الغذاء ويهدد التوازن البيئي المائي.',
     features:[
@@ -26,7 +28,9 @@ const SPECIES = [
   {
     id:'tilapia', kind:'fish', kindLabel:'سمك',
     name:'البلطي (سمك المشط)', latin:'Oreochromis spp.',
-    threat:65, image:null, imageCredit:null,
+    threat:65,
+    image:'https://commons.wikimedia.org/wiki/Special:FilePath/Oreochromis-niloticus-Nairobi.JPG?width=800',
+    imageCredit:'Bjørn Christian Tørrissen — Wikimedia Commons (CC BY-SA 3.0)',
     summary:'من أسرع الأسماك الدخيلة انتشاراً في الأنهار العراقية، ويُوصف بأنه ينافس بشراسة الأنواع المحلية كالكارب والبني.',
     features:[
       'جسم بيضاوي مضغوط جانبياً بلون رمادي إلى مزرق مع خطوط عمودية باهتة',
@@ -46,7 +50,9 @@ const SPECIES = [
   {
     id:'hyacinth', kind:'plant', kindLabel:'نبات',
     name:'زهرة النيل (ياقوت الماء)', latin:'Eichhornia crassipes',
-    threat:85, image:null, imageCredit:null,
+    threat:85,
+    image:'https://commons.wikimedia.org/wiki/Special:FilePath/Eichhornia%20crassipes-water%20hyacinth.jpg?width=800',
+    imageCredit:'U.S. Army Corps of Engineers — Wikimedia Commons (ملكية عامة)',
     summary:'نبات مائي عائم جذاب المظهر تحوّل إلى "كابوس مائي" حقيقي على ضفاف دجلة والفرات لسرعة انتشاره الهائلة.',
     features:[
       'أوراق خضراء سميكة لامعة على شكل وردة عائمة فوق الماء',
@@ -65,7 +71,9 @@ const SPECIES = [
   {
     id:'hydrilla', kind:'plant', kindLabel:'نبات',
     name:'الهايدريلا (الكطل)', latin:'Hydrilla verticillata',
-    threat:60, image:null, imageCredit:null,
+    threat:60,
+    image:'https://commons.wikimedia.org/wiki/Special:FilePath/Hydrilla%20verticillata-1-bsi-yercaud-salem-India.jpg?width=800',
+    imageCredit:'Yercaud-elango — Wikimedia Commons (CC BY-SA 4.0)',
     summary:'نبات مائي مغمور دخيل وثّقته دراسات بيئية عراقية في أهوار جنوب العراق وغرب البلاد.',
     features:[
       'نبات مغمور بالكامل تحت سطح الماء بسيقان طويلة متفرعة',
@@ -84,7 +92,9 @@ const SPECIES = [
   {
     id:'gar', kind:'fish', kindLabel:'سمك',
     name:'الجار المدرّع (سمك التمساح)', latin:'Atractosteus spatula',
-    threat:55, image:null, imageCredit:null,
+    threat:55,
+    image:'https://commons.wikimedia.org/wiki/Special:FilePath/Alligator%20gar%20(Atractosteus%20spatula).JPG?width=800',
+    imageCredit:'ProjectManhattan — Wikimedia Commons (CC BY-SA 4.0)',
     source:{label:'توثيق أكاديمي: Mutlak, Jawad & Al-Faisal (2017)', creator:0},
     summary:'مفترس ضخم مصدره أمريكا الشمالية، سُجّل دخوله للمياه العراقية عبر تجارة أحواض الزينة، ويشكّل خطراً حقيقياً على الأسماك المحلية إن تكاثر.',
     features:[
@@ -105,7 +115,9 @@ const SPECIES = [
   {
     id:'oscar', kind:'fish', kindLabel:'سمك',
     name:'الأوسكار', latin:'Astronotus ocellatus',
-    threat:35, image:null, imageCredit:null,
+    threat:35,
+    image:'https://commons.wikimedia.org/wiki/Special:FilePath/Astronotus%20ocellatus.jpg?width=800',
+    imageCredit:'Jón Helgi Jónsson — Wikimedia Commons (صورة مميّزة، CC BY-SA)',
     source:{label:'توثيق أكاديمي: Jawad, Al-Sheikhly & Al-Fayadhi (2022)', creator:0},
     summary:'سمكة زينة شهيرة موطنها الأصلي حوض الأمازون، وثّق باحثون عراقيون أول تسجيل لها في نهر الفرات قرب الحلة عام 2021 نتيجة إطلاقها من أحواض منزلية.',
     features:[
