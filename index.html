@@ -15,7 +15,7 @@
   <div class="hero-inner">
     <span class="eyebrow">🌾 مرصد الأهوار والأنهار العراقية</span>
     <h1 class="display">رَصَد<br>دليل الأنواع الغازية في مياه العراق</h1>
-    <p class="lead">تعرّف على الأنواع الدخيلة والغازية في دجلة والفرات والأهوار، تتبّع مواقع رصدها على الخريطة، وتعلّم طرق المكافحة السليمة بيئياً — بمساهمة المجتمع المحلي.</p>
+    <p class="lead">تعرّف على الأنواع الدخيلة والغازية في دجلة والفرات والأهوار، تتبّع مواقع رصدها على الخريطة، وتعلّم طرق المكافحة السليمة بيئياً — بمساهمة المجتمع المحلي من كل العراق.</p>
   </div>
   <svg class="reeds" viewBox="0 0 1200 110" preserveAspectRatio="none">
     <path d="M0,110 L0,60 Q100,30 200,60 T400,55 T600,65 T800,50 T1000,60 T1200,55 L1200,110 Z" fill="#0f3a37" opacity="0.9"/>
@@ -41,7 +41,7 @@
   <section class="view active" id="view-species">
     <div class="section-head">
       <h2>الأنواع الغازية والدخيلة الموثّقة</h2>
-      <p>أربعة أنواع رئيسية موثّقة في مصادر بيئية وأكاديمية عراقية — اضغط على أي بطاقة لعرض التفاصيل الكاملة.</p>
+      <p>أنواع موثّقة في مصادر بيئية وأكاديمية عراقية — اضغط على أي بطاقة لعرض التفاصيل الكاملة.</p>
     </div>
     <div id="species-grid" class="grid"></div>
     <div id="species-detail" style="display:none;"></div>
@@ -51,7 +51,7 @@
   <section class="view" id="view-map">
     <div class="section-head">
       <h2>خريطة الرصد والبلاغات</h2>
-      <p>نقاط موثّقة من مصادر بيئية (دوائر ثابتة)، بالإضافة إلى بلاغات المجتمع المحلي (دوائر يضيفها المستخدمون). بلاغاتك تُخزَّن وتظهر لجميع مستخدمي هذا الدليل.</p>
+      <p>نقاط موثّقة من مصادر بيئية (دوائر ذهبية)، بالإضافة إلى بلاغات المجتمع المحلي من كل محافظات العراق (دوائر خضراء يضيفها المستخدمون). بلاغاتك تُخزَّن في قاعدة بيانات مشتركة وتظهر فوراً لجميع من يفتح هذا الدليل، من أي جهاز.</p>
     </div>
     <div id="map"></div>
     <div class="map-legend">
@@ -61,8 +61,14 @@
 
     <div class="report-form">
       <h3 style="margin:0;color:var(--parchment);font-size:17px;">أضف بلاغ رصد جديد</h3>
-      <p class="hint">اضغط على الخريطة أعلاه لتحديد الموقع، أو أدخل الإحداثيات يدوياً. أرفق صورة إن توفرت. هذه معلومة عامة يشاهدها كل من يفتح هذا الدليل.</p>
-      <div id="pick-note" class="pick-note">لم يتم تحديد موقع بعد — اضغط على الخريطة أو أدخل الإحداثيات.</div>
+      <p class="hint">اضغط على الخريطة لتحديد الموقع، أو الصق إحداثيات نسختها من تطبيق خرائط (قوقل مابس مثلاً)، أو أدخلها يدوياً. أرفق صورة إن توفرت. هذه معلومة عامة يشاهدها كل من يفتح هذا الدليل.</p>
+
+      <label>الصق موقعاً من تطبيق الخرائط (رابط مشاركة أو نص إحداثيات)</label>
+      <div class="paste-row">
+        <input id="rp-paste" type="text" placeholder="مثال: 31.05590, 46.25690 أو رابط https://maps.google.com/...">
+        <button type="button" id="rp-paste-btn">استخراج الموقع</button>
+      </div>
+      <div id="pick-note" class="pick-note">لم يتم تحديد موقع بعد — اضغط على الخريطة، أو الصق رابط/إحداثيات أعلاه.</div>
 
       <label>الإحداثيات (خط العرض / خط الطول)</label>
       <div class="coord-row">
@@ -139,19 +145,23 @@
     <div id="creators-grid" class="grid creators-grid"></div>
 
     <div class="video-note">
-      🎬 لا يوجد بث تلقائي: إنستغرام لا يسمح لأي موقع خارجي بمراقبة حساب ونشر فيديوهاته الجديدة تلقائياً. لكن أي شخص يفتح هذا الدليل يقدر يضيف رابط فيديو جديد بنفسه بالأسفل، ويبقى محفوظاً للجميع بعده.
+      🎬 معرض الفيديو مفتوح لأي فيديو حقيقي من داخل العراق عن الأنواع الغازية أو المائية — من إنستغرام أو تيك توك أو يوتيوب، وسواء كان من عمر ومهدي أو من أي صانع محتوى أو مستخدم آخر. لا يوجد بث تلقائي: أضِف رابط المنشور يدوياً وسيبقى محفوظاً للجميع.
     </div>
 
     <div class="block-title">أضف فيديو جديد للمعرض</div>
     <div class="report-form">
-      <label>رابط المنشور (Reel أو Post من إنستغرام)</label>
-      <input id="vid-url" type="text" placeholder="https://www.instagram.com/reel/...">
-      <label>من صاحب الحساب؟</label>
-      <select id="vid-creator">
-        <option value="">اختر (اختياري)...</option>
-      </select>
-      <label>وصف مختصر (اختياري)</label>
-      <input id="vid-caption" type="text" placeholder="مثال: فيديو عن السلور الأفريقي في هور الحويزة">
+      <label>رابط المنشور (إنستغرام Reel/Post، تيك توك، أو يوتيوب)</label>
+      <input id="vid-url" type="text" placeholder="https://www.instagram.com/reel/... أو tiktok.com/... أو youtube.com/...">
+
+      <label>وصف / تعليق الفيديو (يساعد في تحديد النوع تلقائياً)</label>
+      <textarea id="vid-caption" placeholder="مثال: فيديو عن السلور الأفريقي في هور الحويزة"></textarea>
+
+      <label>اسم صاحب المحتوى (اختياري، أي اسم)</label>
+      <input id="vid-creator-name" type="text" placeholder="اسم الحساب أو الشخص (اختياري)">
+
+      <button class="btn secondary" id="vid-analyze" type="button">🔍 تحليل تلقائي بالذكاء الاصطناعي (تحديد النوع والموقع)</button>
+      <div id="vid-ai-box" class="ai-suggest-box"></div>
+
       <button class="btn" id="vid-submit" disabled>إضافة الفيديو</button>
       <p class="hint" id="vid-hint"></p>
     </div>
@@ -167,7 +177,12 @@
 <footer>دليل مرجعي وتثقيفي — للإبلاغات الرسمية يُرجى مراجعة دائرة البيئة أو هيئة مساحة الأهوار في محافظتك.</footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script async src="//www.instagram.com/embed.js"></script>
+<script>
+  window.tiktokScriptLoaded = false;
+</script>
+<script src="config.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

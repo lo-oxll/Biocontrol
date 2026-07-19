@@ -1,8 +1,11 @@
+// ============================================================
+// رَصَد — بيانات الأنواع والمصادر
+// ============================================================
 const SPECIES = [
   {
     id:'catfish', kind:'fish', kindLabel:'سمك',
     name:'السلور الأفريقي (القرموط الإفريقي)', latin:'Clarias gariepinus',
-    threat:70,
+    threat:70, image:null, imageCredit:null,
     source:{label:'تقرير: الجزيرة نت — "سمك دخيل يهدد التنوع البيئي بالعراق"', creator:0},
     summary:'نوع دخيل موثّق في الناصرية وبغداد وهور الحويزة، ينافس الأنواع المحلية على الغذاء ويهدد التوازن البيئي المائي.',
     features:[
@@ -23,7 +26,7 @@ const SPECIES = [
   {
     id:'tilapia', kind:'fish', kindLabel:'سمك',
     name:'البلطي (سمك المشط)', latin:'Oreochromis spp.',
-    threat:65,
+    threat:65, image:null, imageCredit:null,
     summary:'من أسرع الأسماك الدخيلة انتشاراً في الأنهار العراقية، ويُوصف بأنه ينافس بشراسة الأنواع المحلية كالكارب والبني.',
     features:[
       'جسم بيضاوي مضغوط جانبياً بلون رمادي إلى مزرق مع خطوط عمودية باهتة',
@@ -43,7 +46,7 @@ const SPECIES = [
   {
     id:'hyacinth', kind:'plant', kindLabel:'نبات',
     name:'زهرة النيل (ياقوت الماء)', latin:'Eichhornia crassipes',
-    threat:85,
+    threat:85, image:null, imageCredit:null,
     summary:'نبات مائي عائم جذاب المظهر تحوّل إلى "كابوس مائي" حقيقي على ضفاف دجلة والفرات لسرعة انتشاره الهائلة.',
     features:[
       'أوراق خضراء سميكة لامعة على شكل وردة عائمة فوق الماء',
@@ -62,7 +65,7 @@ const SPECIES = [
   {
     id:'hydrilla', kind:'plant', kindLabel:'نبات',
     name:'الهايدريلا (الكطل)', latin:'Hydrilla verticillata',
-    threat:60,
+    threat:60, image:null, imageCredit:null,
     summary:'نبات مائي مغمور دخيل وثّقته دراسات بيئية عراقية في أهوار جنوب العراق وغرب البلاد.',
     features:[
       'نبات مغمور بالكامل تحت سطح الماء بسيقان طويلة متفرعة',
@@ -81,7 +84,7 @@ const SPECIES = [
   {
     id:'gar', kind:'fish', kindLabel:'سمك',
     name:'الجار المدرّع (سمك التمساح)', latin:'Atractosteus spatula',
-    threat:55,
+    threat:55, image:null, imageCredit:null,
     source:{label:'توثيق أكاديمي: Mutlak, Jawad & Al-Faisal (2017)', creator:0},
     summary:'مفترس ضخم مصدره أمريكا الشمالية، سُجّل دخوله للمياه العراقية عبر تجارة أحواض الزينة، ويشكّل خطراً حقيقياً على الأسماك المحلية إن تكاثر.',
     features:[
@@ -102,7 +105,7 @@ const SPECIES = [
   {
     id:'oscar', kind:'fish', kindLabel:'سمك',
     name:'الأوسكار', latin:'Astronotus ocellatus',
-    threat:35,
+    threat:35, image:null, imageCredit:null,
     source:{label:'توثيق أكاديمي: Jawad, Al-Sheikhly & Al-Fayadhi (2022)', creator:0},
     summary:'سمكة زينة شهيرة موطنها الأصلي حوض الأمازون، وثّق باحثون عراقيون أول تسجيل لها في نهر الفرات قرب الحلة عام 2021 نتيجة إطلاقها من أحواض منزلية.',
     features:[
@@ -160,7 +163,34 @@ const REFERENCES = [
   'دراسات بيئية عراقية عن انتشار النبات المائي الدخيل الهايدريلا (الكطل) في غرب العراق، مجلة أبحاث البصرة.'
 ];
 
-// ---------- TAB NAV ----------
+// ============================================================
+// SUPABASE CLIENT
+// ============================================================
+let sb = null;
+(function initSupabase(){
+  const url = window.SUPABASE_URL, key = window.SUPABASE_ANON_KEY;
+  if(!url || !key || url.includes('YOUR-PROJECT') || key.includes('YOUR-ANON')){
+    console.warn('رَصَد: لم يتم ضبط Supabase بعد — عدّل config.js. البلاغات والفيديوهات لن تُحفظ حتى تضبط الإعدادات.');
+    return;
+  }
+  try{
+    sb = window.supabase.createClient(url, key);
+  }catch(e){
+    console.error('تعذّر تهيئة Supabase', e);
+  }
+})();
+
+function sbReadyOrWarn(){
+  if(!sb){
+    alert('لم يتم ربط قاعدة البيانات بعد. افتح ملف config.js وأضف SUPABASE_URL و SUPABASE_ANON_KEY الخاصين بمشروعك في Supabase (راجع supabase_schema.sql لإنشاء الجداول أولاً).');
+    return false;
+  }
+  return true;
+}
+
+// ============================================================
+// TAB NAV
+// ============================================================
 document.querySelectorAll('.tab').forEach(tab=>{
   tab.addEventListener('click', ()=>{
     document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
@@ -171,7 +201,9 @@ document.querySelectorAll('.tab').forEach(tab=>{
   });
 });
 
-// ---------- SPECIES GRID ----------
+// ============================================================
+// SPECIES GRID
+// ============================================================
 function threatColor(v){ return v>=75?'#b5482d':v>=55?'#c9a227':'#4fb0a5'; }
 
 function renderGrid(){
@@ -179,6 +211,7 @@ function renderGrid(){
   grid.innerHTML = SPECIES.map(s=>`
     <div class="card" data-id="${s.id}">
       <span class="kind-badge">${s.kindLabel==='سمك'?'🐟':'🌿'} ${s.kindLabel}</span>
+      ${s.image ? `<img class="card-photo" src="${s.image}" alt="${s.name}">` : ''}
       <h3>${s.name}</h3>
       <span class="latin">${s.latin}</span>
       <p style="font-size:13.5px;color:var(--muted);line-height:1.8;margin:0;">${s.summary}</p>
@@ -206,6 +239,7 @@ function showDetail(id){
         <span class="pill">${s.kindLabel==='سمك'?'🐟':'🌿'} ${s.kindLabel} غازي/دخيل</span>
       </div>
       <span class="latin">${s.latin}</span>
+      ${s.image ? `<img class="detail-photo" src="${s.image}" alt="${s.name}">${s.imageCredit?`<div class="photo-credit">📷 ${s.imageCredit}</div>`:''}` : ''}
       <div class="gauge-row" style="margin-top:16px;max-width:320px;">
         <div class="gauge-track"><div class="gauge-fill" style="width:${s.threat}%;background:${threatColor(s.threat)}"></div></div>
         <span class="gauge-label">شدة الانتشار ${s.threat}%</span>
@@ -231,7 +265,9 @@ function showDetail(id){
 }
 renderGrid();
 
-// ---------- CONTENT CREATORS & SOURCES ----------
+// ============================================================
+// CREATORS & REFERENCES
+// ============================================================
 function renderCreators(){
   const grid = document.getElementById('creators-grid');
   if(!grid) return;
@@ -256,92 +292,245 @@ function renderCreators(){
 }
 renderCreators();
 
-// ---------- VIDEO FEED ----------
-const vidCreatorSelect = document.getElementById('vid-creator');
-CREATORS.forEach((c,i)=>{
-  const opt = document.createElement('option');
-  opt.value = i; opt.textContent = c.name;
-  vidCreatorSelect.appendChild(opt);
-});
+// ============================================================
+// VIDEO GALLERY — أي منصة (إنستغرام / تيك توك / يوتيوب)، أي صانع محتوى
+// ============================================================
 const vidUrlInput = document.getElementById('vid-url');
+const vidCaptionInput = document.getElementById('vid-caption');
+const vidCreatorNameInput = document.getElementById('vid-creator-name');
 const vidSubmitBtn = document.getElementById('vid-submit');
 const vidHint = document.getElementById('vid-hint');
+const vidAnalyzeBtn = document.getElementById('vid-analyze');
+const vidAiBox = document.getElementById('vid-ai-box');
 
-function isValidInstagramPostUrl(url){
-  return /^https:\/\/(www\.)?instagram\.com\/(p|reel|tv)\/[A-Za-z0-9_-]+\/?/.test(url.trim());
+let aiSuggestedSpecies = null, aiSuggestedPlace = null, aiSuggestedLatLng = null;
+
+function detectPlatform(url){
+  url = url.trim();
+  if(/instagram\.com\/(p|reel|tv)\//i.test(url)) return 'instagram';
+  if(/tiktok\.com\//i.test(url)) return 'tiktok';
+  if(/(youtube\.com\/(watch\?v=|shorts\/)|youtu\.be\/)/i.test(url)) return 'youtube';
+  return null;
 }
 
-vidUrlInput.addEventListener('input', ()=>{
+function youtubeId(url){
+  let m = url.match(/[?&]v=([A-Za-z0-9_-]{6,})/); if(m) return m[1];
+  m = url.match(/youtu\.be\/([A-Za-z0-9_-]{6,})/); if(m) return m[1];
+  m = url.match(/shorts\/([A-Za-z0-9_-]{6,})/); if(m) return m[1];
+  return null;
+}
+
+function validateVideoUrl(){
   const url = vidUrlInput.value.trim();
   if(url.length === 0){ vidHint.textContent=''; vidSubmitBtn.disabled = true; return; }
-  if(isValidInstagramPostUrl(url)){
-    vidHint.textContent = 'الرابط يبدو صحيحاً ✓';
+  const platform = detectPlatform(url);
+  if(platform){
+    const labels = {instagram:'إنستغرام', tiktok:'تيك توك', youtube:'يوتيوب'};
+    vidHint.textContent = `رابط ${labels[platform]} صالح ✓ — أي فيديو من داخل العراق مرحّب به`;
     vidHint.style.color = 'var(--gold-soft)';
     vidSubmitBtn.disabled = false;
   }else{
-    vidHint.textContent = 'الرابط يجب أن يكون رابط منشور محدد (يحتوي /p/ أو /reel/) وليس رابط صفحة عامة';
+    vidHint.textContent = 'الرابط يجب أن يكون منشور محدد من إنستغرام (/p/ أو /reel/)، تيك توك، أو يوتيوب';
     vidHint.style.color = 'var(--rust)';
     vidSubmitBtn.disabled = true;
   }
+}
+vidUrlInput.addEventListener('input', validateVideoUrl);
+
+// ---------- تحليل تلقائي بالذكاء الاصطناعي: النوع + الموقع من الرابط والوصف ----------
+async function callClaudeText(prompt){
+  const proxy = window.AI_PROXY_URL;
+  if(proxy){
+    const res = await fetch(proxy, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ prompt })
+    });
+    const data = await res.json();
+    return (data.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('\n').trim();
+  }
+  // مسار احتياطي: يعمل فقط داخل معاينة Claude Artifacts، ولن يعمل على الموقع بعد نشره فعلياً
+  const response = await fetch("https://api.anthropic.com/v1/messages", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      model: "claude-sonnet-4-6",
+      max_tokens: 400,
+      messages: [{ role:"user", content: prompt }]
+    })
+  });
+  const data = await response.json();
+  return (data.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('\n').trim();
+}
+
+async function geocodeIraq(placeName){
+  try{
+    const q = encodeURIComponent(placeName + ', العراق');
+    const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&countrycodes=iq&limit=1&q=${q}`);
+    const arr = await res.json();
+    if(arr && arr[0]) return { lat: parseFloat(arr[0].lat), lng: parseFloat(arr[0].lon) };
+  }catch(e){ console.error('geocode error', e); }
+  return null;
+}
+
+vidAnalyzeBtn.addEventListener('click', async ()=>{
+  const url = vidUrlInput.value.trim();
+  const caption = vidCaptionInput.value.trim();
+  if(!url && !caption){
+    alert('أضف رابط الفيديو أو وصفاً مختصراً أولاً حتى يقدر التحليل يفهم المحتوى.');
+    return;
+  }
+  vidAnalyzeBtn.disabled = true;
+  vidAnalyzeBtn.textContent = 'جارٍ التحليل...';
+  vidAiBox.classList.remove('show');
+
+  const speciesList = SPECIES.map(s=>`${s.id} = ${s.name} (${s.latin})`).join('\n');
+  const prompt = `لديك رابط فيديو ووصف مختصر عن كائن مائي أو نبات في العراق:
+الرابط: ${url || 'غير متوفر'}
+الوصف: ${caption || 'غير متوفر'}
+
+قائمة الأنواع الغازية الموثّقة (استخدم المعرّف id فقط إن تطابق):
+${speciesList}
+
+أجب حصراً بصيغة JSON بدون أي نص إضافي وبدون Markdown، بهذا الشكل بالضبط:
+{"species_id": "المعرف أو null", "place_name": "اسم منطقة عراقية مذكورة أو null", "confidence": "منخفضة|متوسطة|عالية"}`;
+
+  try{
+    const raw = await callClaudeText(prompt);
+    const clean = raw.replace(/```json|```/g,'').trim();
+    const parsed = JSON.parse(clean);
+    aiSuggestedSpecies = (parsed.species_id && parsed.species_id !== 'null') ? parsed.species_id : null;
+    aiSuggestedPlace = (parsed.place_name && parsed.place_name !== 'null') ? parsed.place_name : null;
+    aiSuggestedLatLng = null;
+
+    let boxHtml = '';
+    if(aiSuggestedSpecies){
+      const sp = SPECIES.find(s=>s.id===aiSuggestedSpecies);
+      boxHtml += `<b>النوع المقترح:</b> ${sp ? sp.name : aiSuggestedSpecies}<br>`;
+    }else{
+      boxHtml += `<b>النوع المقترح:</b> لم يتحدد تلقائياً — اختره يدوياً إن رغبت.<br>`;
+    }
+    if(aiSuggestedPlace){
+      boxHtml += `<b>الموقع المقترح:</b> ${aiSuggestedPlace} — جارٍ تحديد الإحداثيات...`;
+      vidAiBox.innerHTML = boxHtml;
+      vidAiBox.classList.add('show');
+      const loc = await geocodeIraq(aiSuggestedPlace);
+      if(loc){
+        aiSuggestedLatLng = loc;
+        boxHtml = boxHtml.replace('جارٍ تحديد الإحداثيات...', `تم ✓ (${loc.lat.toFixed(4)}, ${loc.lng.toFixed(4)}) — سيُضاف كنقطة على الخريطة`);
+      }else{
+        boxHtml = boxHtml.replace('جارٍ تحديد الإحداثيات...', 'تعذّر تحديد الإحداثيات تلقائياً.');
+      }
+    }else{
+      boxHtml += `<b>الموقع المقترح:</b> غير مذكور في الوصف.`;
+    }
+    vidAiBox.innerHTML = boxHtml;
+    vidAiBox.classList.add('show');
+  }catch(e){
+    console.error(e);
+    vidAiBox.innerHTML = 'تعذّر التحليل التلقائي حالياً. يمكنك المتابعة وإضافة الفيديو بدون التحديد الآلي.';
+    vidAiBox.classList.add('show');
+  }
+  vidAnalyzeBtn.disabled = false;
+  vidAnalyzeBtn.textContent = '🔍 تحليل تلقائي بالذكاء الاصطناعي (تحديد النوع والموقع)';
 });
+
+// ---------- تحميل وعرض معرض الفيديو ----------
+let tiktokScriptAdded = false;
+function ensureTiktokEmbed(){
+  if(tiktokScriptAdded) return;
+  const s = document.createElement('script');
+  s.src = 'https://www.tiktok.com/embed.js';
+  s.async = true;
+  document.body.appendChild(s);
+  tiktokScriptAdded = true;
+}
 
 async function loadVideoFeed(){
   const gallery = document.getElementById('video-gallery');
+  if(!sb){
+    gallery.innerHTML = '<p style="color:var(--muted);font-size:13px;">اضبط إعدادات Supabase في config.js لعرض معرض الفيديو المشترك.</p>';
+    return;
+  }
   try{
-    const res = await window.storage.list('video:', true);
-    if(!res || !res.keys || res.keys.length===0){
+    const { data: items, error } = await sb.from('videos').select('*').order('created_at', {ascending:false});
+    if(error) throw error;
+    if(!items || items.length===0){
       gallery.innerHTML = '<p style="color:var(--muted);font-size:13px;">لا توجد فيديوهات مضافة بعد — كن أول من يضيف واحداً.</p>';
       return;
     }
-    const items = [];
-    for(const k of res.keys){
-      try{
-        const r = await window.storage.get(k, true);
-        if(r) items.push(JSON.parse(r.value));
-      }catch(e){}
-    }
-    items.sort((a,b)=>b.time-a.time);
-    gallery.innerHTML = items.map(v=>`
+    const labels = {instagram:'إنستغرام', tiktok:'تيك توك', youtube:'يوتيوب', other:'فيديو'};
+    let needsTiktok = false;
+    gallery.innerHTML = items.map(v=>{
+      let embed = '';
+      if(v.platform==='instagram'){
+        embed = `<blockquote class="instagram-media" data-instgrm-permalink="${v.url}" data-instgrm-version="14" style="margin:0;"></blockquote>`;
+      }else if(v.platform==='tiktok'){
+        embed = `<blockquote class="tiktok-embed" cite="${v.url}" style="margin:0;max-width:100%;"><section></section></blockquote>`;
+        needsTiktok = true;
+      }else if(v.platform==='youtube'){
+        const id = youtubeId(v.url);
+        embed = id ? `<div style="position:relative;padding-bottom:56.25%;height:0;"><iframe src="https://www.youtube.com/embed/${id}" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;border-radius:10px;" allowfullscreen></iframe></div>`
+                   : `<a href="${v.url}" target="_blank" rel="noopener">فتح الفيديو ↗</a>`;
+      }else{
+        embed = `<a href="${v.url}" target="_blank" rel="noopener">فتح الفيديو ↗</a>`;
+      }
+      return `
       <div class="video-card">
         ${v.caption?`<div class="video-caption">${v.caption}</div>`:''}
-        <blockquote class="instagram-media" data-instgrm-permalink="${v.url}" data-instgrm-version="14" style="margin:0;"></blockquote>
-        <div class="video-meta">${v.creatorName?`📍 ${v.creatorName} · `:''}${new Date(v.time).toLocaleDateString('ar-IQ')}</div>
-      </div>
-    `).join('');
-    if(window.instgrm && window.instgrm.Embeds){ window.instgrm.Embeds.process(); }
-    else{
-      // embed.js may not have loaded yet; try again shortly
-      setTimeout(()=>{ if(window.instgrm && window.instgrm.Embeds) window.instgrm.Embeds.process(); }, 1200);
+        ${embed}
+        <div class="video-meta"><span class="video-platform-badge">${labels[v.platform]||'فيديو'}</span>${v.creator_name?` ${v.creator_name} · `:''}${new Date(v.created_at).toLocaleDateString('ar-IQ')}</div>
+      </div>`;
+    }).join('');
+    if(window.instgrm && window.instgrm.Embeds) window.instgrm.Embeds.process();
+    else setTimeout(()=>{ if(window.instgrm && window.instgrm.Embeds) window.instgrm.Embeds.process(); }, 1200);
+    if(needsTiktok) ensureTiktokEmbed();
+
+    // إضافة نقاط الفيديوهات التي تحتوي إحداثيات إلى الخريطة
+    if(window.__leafletMap && window.__documentedIcon){
+      items.filter(v=>v.lat && v.lng).forEach(v=>{
+        const sp = SPECIES.find(s=>s.id===v.species);
+        L.marker([v.lat, v.lng], {icon: window.__documentedIcon('#5aa9d6')})
+          .addTo(window.__leafletMap)
+          .bindPopup(`🎬 ${sp?sp.name:(v.species||'فيديو')}<br>${v.place||''}<br><a href="${v.url}" target="_blank">مشاهدة الفيديو ↗</a>`);
+      });
     }
   }catch(e){
     console.error('video feed load error', e);
+    gallery.innerHTML = '<p style="color:var(--rust);font-size:13px;">تعذّر تحميل معرض الفيديو. تحقق من إعدادات Supabase.</p>';
   }
 }
 loadVideoFeed();
 
 vidSubmitBtn.addEventListener('click', async ()=>{
+  if(!sbReadyOrWarn()) return;
   const url = vidUrlInput.value.trim();
-  if(!isValidInstagramPostUrl(url)) return;
+  const platform = detectPlatform(url);
+  if(!platform) return;
   vidSubmitBtn.disabled = true; vidSubmitBtn.textContent = 'جارٍ الإضافة...';
-  const creatorIdx = vidCreatorSelect.value;
   const video = {
-    url,
-    caption: document.getElementById('vid-caption').value.trim(),
-    creatorName: creatorIdx !== '' ? CREATORS[creatorIdx].name : '',
-    time: Date.now()
+    url, platform,
+    caption: vidCaptionInput.value.trim() || null,
+    creator_name: vidCreatorNameInput.value.trim() || null,
+    species: aiSuggestedSpecies || null,
+    place: aiSuggestedPlace || null,
+    lat: aiSuggestedLatLng ? aiSuggestedLatLng.lat : null,
+    lng: aiSuggestedLatLng ? aiSuggestedLatLng.lng : null
   };
   try{
-    const key = 'video:'+Date.now()+':'+Math.random().toString(36).slice(2,7);
-    await window.storage.set(key, JSON.stringify(video), true);
+    const { error } = await sb.from('videos').insert(video);
+    if(error) throw error;
     vidSubmitBtn.textContent = 'تمت الإضافة ✓';
     setTimeout(()=>location.reload(), 900);
   }catch(e){
+    console.error(e);
     vidSubmitBtn.textContent = 'حدث خطأ، حاول مجدداً';
     vidSubmitBtn.disabled = false;
   }
 });
 
-// ---------- SPECIES SELECT FOR REPORT FORM ----------
+// ============================================================
+// SPECIES SELECT FOR REPORT FORM
+// ============================================================
 const rpSelect = document.getElementById('rp-species');
 SPECIES.forEach(s=>{
   const opt = document.createElement('option');
@@ -349,7 +538,9 @@ SPECIES.forEach(s=>{
   rpSelect.appendChild(opt);
 });
 
-// ---------- MAP ----------
+// ============================================================
+// MAP
+// ============================================================
 let pickedLatLng = null;
 let pickMarker = null;
 const latInput = document.getElementById('rp-lat');
@@ -359,6 +550,7 @@ function setPickedLocation(lat, lng, fromMap){
   pickedLatLng = {lat, lng};
   latInput.value = lat.toFixed(5);
   lngInput.value = lng.toFixed(5);
+  document.getElementById('pick-note').style.color = 'var(--gold-soft)';
   document.getElementById('pick-note').textContent = `تم تحديد الموقع: ${lat.toFixed(5)}, ${lng.toFixed(5)}`;
   const map = window.__leafletMap;
   if(map){
@@ -390,6 +582,7 @@ function initMap(){
   });
 
   loadCommunityReports(map, documentedIcon);
+  loadVideoFeed(); // يعيد أيضاً وضع نقاط الفيديوهات بعد جهوزية الخريطة
 
   map.on('click', (e)=>{ setPickedLocation(e.latlng.lat, e.latlng.lng, true); });
 }
@@ -404,6 +597,48 @@ lngInput.addEventListener('change', ()=>{
   if(!isNaN(lat) && !isNaN(lng)) setPickedLocation(lat, lng, false);
 });
 
+// ---------- لصق موقع من تطبيقات الخرائط (رابط أو نص إحداثيات) ----------
+function parsePastedLocation(text){
+  text = text.trim();
+  if(!text) return null;
+
+  // 1) نص إحداثيات مباشر: "31.0559, 46.2569" أو "31.0559 46.2569"
+  let m = text.match(/(-?\d{1,2}\.\d{3,})\s*[,\s]\s*(-?\d{1,3}\.\d{3,})/);
+  if(m){
+    const lat = parseFloat(m[1]), lng = parseFloat(m[2]);
+    if(Math.abs(lat) <= 90 && Math.abs(lng) <= 180) return {lat, lng};
+  }
+
+  // 2) رابط قوقل مابس بصيغة @lat,lng,zoom
+  m = text.match(/@(-?\d{1,2}\.\d+),(-?\d{1,3}\.\d+)/);
+  if(m) return {lat: parseFloat(m[1]), lng: parseFloat(m[2])};
+
+  // 3) رابط بصيغة ?q=lat,lng أو &q=lat,lng
+  m = text.match(/[?&]q=(-?\d{1,2}\.\d+),(-?\d{1,3}\.\d+)/);
+  if(m) return {lat: parseFloat(m[1]), lng: parseFloat(m[2])};
+
+  // 4) رابط بصيغة ll=lat,lng
+  m = text.match(/[?&]ll=(-?\d{1,2}\.\d+),(-?\d{1,3}\.\d+)/);
+  if(m) return {lat: parseFloat(m[1]), lng: parseFloat(m[2])};
+
+  // 5) صيغة !3dLAT!4dLNG (تظهر أحياناً في روابط أماكن مُثبّتة بقوقل مابس)
+  m = text.match(/!3d(-?\d{1,2}\.\d+)!4d(-?\d{1,3}\.\d+)/);
+  if(m) return {lat: parseFloat(m[1]), lng: parseFloat(m[2])};
+
+  return null;
+}
+
+document.getElementById('rp-paste-btn').addEventListener('click', ()=>{
+  const raw = document.getElementById('rp-paste').value;
+  const loc = parsePastedLocation(raw);
+  if(loc){
+    setPickedLocation(loc.lat, loc.lng, false);
+  }else{
+    document.getElementById('pick-note').style.color = 'var(--rust)';
+    document.getElementById('pick-note').textContent = 'تعذّر استخراج إحداثيات من النص الملصق. جرّب نسخ الإحداثيات مباشرة (مثال: 31.0559, 46.2569) أو اضغط على الخريطة يدوياً.';
+  }
+});
+
 function checkFormReady(){
   const ready = pickedLatLng && rpSelect.value && document.getElementById('rp-place').value.trim();
   document.getElementById('rp-submit').disabled = !ready;
@@ -411,7 +646,9 @@ function checkFormReady(){
 rpSelect.addEventListener('change', checkFormReady);
 document.getElementById('rp-place').addEventListener('input', checkFormReady);
 
-// ---------- REPORT PHOTO ATTACHMENT ----------
+// ============================================================
+// REPORT PHOTO ATTACHMENT
+// ============================================================
 let reportPhotoData = null;
 const rpPhotoInput = document.getElementById('rp-photo-input');
 const rpPhotoAttach = document.getElementById('rp-photo-attach');
@@ -448,64 +685,70 @@ function compressImage(dataUrl, maxDim, quality, cb){
   img.src = dataUrl;
 }
 
-// ---------- COMMUNITY REPORTS: LOAD/SAVE ----------
+// ============================================================
+// COMMUNITY REPORTS: LOAD/SAVE (Supabase — عام لكل زوار الموقع)
+// ============================================================
 async function loadCommunityReports(map, iconFn){
+  const listEl = document.getElementById('reports-list');
+  if(!sb){
+    listEl.innerHTML = '<p style="color:var(--muted);font-size:13px;">اضبط إعدادات Supabase في config.js لعرض وحفظ بلاغات المجتمع (راجع supabase_schema.sql).</p>';
+    return;
+  }
   try{
-    const res = await window.storage.list('report:', true);
-    const listEl = document.getElementById('reports-list');
-    if(!res || !res.keys || res.keys.length===0){
+    const { data: reports, error } = await sb.from('reports').select('*').order('created_at', {ascending:false});
+    if(error) throw error;
+    if(!reports || reports.length===0){
       listEl.innerHTML = '<p style="color:var(--muted);font-size:13px;">لا توجد بلاغات مجتمعية بعد — كن أول من يضيف بلاغاً.</p>';
       return;
     }
     let itemsHtml = '';
-    for(const k of res.keys){
-      try{
-        const r = await window.storage.get(k, true);
-        if(!r) continue;
-        const rep = JSON.parse(r.value);
-        const sp = SPECIES.find(s=>s.id===rep.species);
-        L.marker([rep.lat,rep.lng], {icon:iconFn('#4fb0a5')})
-          .addTo(map)
-          .bindPopup(`<b>${sp?sp.name:rep.species}</b><br>${rep.place}${rep.photo?`<br><img src="${rep.photo}" style="width:120px;border-radius:8px;margin-top:6px;">`:''}<br><span style="color:#666">${rep.notes||''}</span>`);
-        itemsHtml += `<div class="report-item">
-            ${rep.photo?`<img src="${rep.photo}" alt="">`:''}
-            <div>
-              <b>${sp?sp.name:rep.species}</b> — ${rep.place}
-              <div class="meta">${rep.notes?rep.notes+' · ':''}${new Date(rep.time).toLocaleDateString('ar-IQ')}</div>
-              <div class="coords">📍 ${rep.lat.toFixed(5)}, ${rep.lng.toFixed(5)}</div>
-            </div>
-          </div>`;
-      }catch(e){}
-    }
-    listEl.innerHTML = itemsHtml || '<p style="color:var(--muted);font-size:13px;">لا توجد بلاغات مجتمعية بعد.</p>';
+    reports.forEach(rep=>{
+      const sp = SPECIES.find(s=>s.id===rep.species);
+      L.marker([rep.lat,rep.lng], {icon:iconFn('#4fb0a5')})
+        .addTo(map)
+        .bindPopup(`<b>${sp?sp.name:rep.species}</b><br>${rep.place}${rep.photo?`<br><img src="${rep.photo}" style="width:120px;border-radius:8px;margin-top:6px;">`:''}<br><span style="color:#666">${rep.notes||''}</span>`);
+      itemsHtml += `<div class="report-item">
+          ${rep.photo?`<img src="${rep.photo}" alt="">`:''}
+          <div>
+            <b>${sp?sp.name:rep.species}</b> — ${rep.place}
+            <div class="meta">${rep.notes?rep.notes+' · ':''}${new Date(rep.created_at).toLocaleDateString('ar-IQ')}</div>
+            <div class="coords">📍 ${rep.lat.toFixed(5)}, ${rep.lng.toFixed(5)}</div>
+          </div>
+        </div>`;
+    });
+    listEl.innerHTML = itemsHtml;
   }catch(e){
     console.error('report load error', e);
+    listEl.innerHTML = '<p style="color:var(--rust);font-size:13px;">تعذّر تحميل البلاغات. تحقق من إعدادات Supabase.</p>';
   }
 }
 
 document.getElementById('rp-submit').addEventListener('click', async ()=>{
+  if(!sbReadyOrWarn()) return;
   const btn = document.getElementById('rp-submit');
   btn.disabled = true; btn.textContent = 'جارٍ الإضافة...';
   const report = {
     species: rpSelect.value,
     place: document.getElementById('rp-place').value.trim(),
-    notes: document.getElementById('rp-notes').value.trim(),
+    notes: document.getElementById('rp-notes').value.trim() || null,
     lat: pickedLatLng.lat, lng: pickedLatLng.lng,
-    photo: reportPhotoData || null,
-    time: Date.now()
+    photo: reportPhotoData || null
   };
   try{
-    const key = 'report:'+Date.now()+':'+Math.random().toString(36).slice(2,7);
-    await window.storage.set(key, JSON.stringify(report), true);
+    const { error } = await sb.from('reports').insert(report);
+    if(error) throw error;
     btn.textContent = 'تمت الإضافة ✓';
     setTimeout(()=>{ location.reload(); }, 900);
   }catch(e){
+    console.error(e);
     btn.textContent = 'حدث خطأ، حاول مجدداً';
     btn.disabled = false;
   }
 });
 
-// ---------- PHOTO ID (identification tool, separate from report photo) ----------
+// ============================================================
+// PHOTO ID (identification tool, separate from report photo)
+// ============================================================
 const dropZone = document.getElementById('drop-zone');
 const fileInput = document.getElementById('file-input');
 const previewImg = document.getElementById('preview-img');
@@ -560,23 +803,34 @@ ${speciesBrief}
 إذا لم تكن الصورة واضحة بما يكفي أو لا تُظهر كائناً مائياً، وضّح ذلك بدلاً من التخمين.`;
 
   try{
-    const response = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        model: "claude-sonnet-4-6",
-        max_tokens: 500,
-        messages: [{
-          role: "user",
-          content: [
-            { type:"image", source:{ type:"base64", media_type: currentImageMedia, data: currentImageBase64 } },
-            { type:"text", text: prompt }
-          ]
-        }]
-      })
-    });
-    const data = await response.json();
-    const text = (data.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('\n').trim();
+    const proxy = window.AI_PROXY_URL;
+    let text;
+    if(proxy){
+      const res = await fetch(proxy, {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ prompt, image_base64: currentImageBase64, image_media_type: currentImageMedia })
+      });
+      const data = await res.json();
+      text = (data.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('\n').trim();
+    }else{
+      const response = await fetch("https://api.anthropic.com/v1/messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: "claude-sonnet-4-6",
+          max_tokens: 500,
+          messages: [{
+            role: "user",
+            content: [
+              { type:"image", source:{ type:"base64", media_type: currentImageMedia, data: currentImageBase64 } },
+              { type:"text", text: prompt }
+            ]
+          }]
+        })
+      });
+      const data = await response.json();
+      text = (data.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('\n').trim();
+    }
     idResult.textContent = text || 'تعذّر الحصول على نتيجة، حاول بصورة أخرى.';
   }catch(e){
     idResult.textContent = 'حدث خطأ أثناء التحليل. تحقق من الاتصال وحاول مرة أخرى.';
