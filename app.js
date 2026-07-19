@@ -9,6 +9,8 @@ const SPECIES = [
     image:'https://commons.wikimedia.org/wiki/Special:FilePath/Ikan_lele_dumbo_(4).JPG?width=800',
     imageCredit:'Wagino 20100516 — Wikimedia Commons (CC BY-SA 3.0)',
     lookalike:{name:'الجري العراقي (سمك الشلك)', latin:'Silurus triostegus',
+      image:'https://commons.wikimedia.org/wiki/Special:FilePath/Silurus_triostegus.jpg?width=500',
+      imageCredit:'Wikimedia Commons',
       howToTell:'الجري المحلي جسمه أكثر انسيابياً وأملس بدون زعنفة ظهرية بارزة، وله شاربان طويلان فقط (وليس أربعة أزواج كاملة). السلور الأفريقي يتميز بزعنفة ظهرية طويلة تمتد على كامل الجسم تقريباً، وأربعة أزواج شوارب واضحة حول الفم.'},
     source:{label:'تقرير: الجزيرة نت — "سمك دخيل يهدد التنوع البيئي بالعراق"', creator:0},
     summary:'نوع دخيل موثّق في الناصرية وبغداد وهور الحويزة، ينافس الأنواع المحلية على الغذاء ويهدد التوازن البيئي المائي.',
@@ -34,6 +36,8 @@ const SPECIES = [
     image:'https://commons.wikimedia.org/wiki/Special:FilePath/Oreochromis-niloticus-Nairobi.JPG?width=800',
     imageCredit:'Bjørn Christian Tørrissen — Wikimedia Commons (CC BY-SA 3.0)',
     lookalike:{name:'البني (الشبوط العراقي)', latin:'Barbus/Luciobarbus spp.',
+      image:'https://commons.wikimedia.org/wiki/Special:FilePath/Luciobarbus_xanthopterus_Iran.JPG?width=500',
+      imageCredit:'Wikimedia Commons',
       howToTell:'البني جسمه أطول وأكثر استطالة بلون فضي-ذهبي وزعانف حمراء أو برتقالية عند القاعدة، وله شاربان صغيران عند الفم. البلطي جسمه أقصر وأكثر استدارة (بيضاوي)، بلا شوارب، وزعنفته الظهرية طويلة ذات أشواك حادة واضحة.'},
     summary:'من أسرع الأسماك الدخيلة انتشاراً في الأنهار العراقية، ويُوصف بأنه ينافس بشراسة الأنواع المحلية كالكارب والبني.',
     features:[
@@ -58,6 +62,8 @@ const SPECIES = [
     image:'https://commons.wikimedia.org/wiki/Special:FilePath/Eichhornia_crassipes-water_hyacinth.jpg?width=800',
     imageCredit:'U.S. Army Corps of Engineers — Wikimedia Commons (ملكية عامة)',
     lookalike:{name:'عدس الماء الكبير (خس الماء)', latin:'Pistia stratiotes',
+      image:'https://commons.wikimedia.org/wiki/Special:FilePath/Pistia_stratiotes_(water_lettuce)_1.JPG?width=500',
+      imageCredit:'Wikimedia Commons',
       howToTell:'خس الماء أوراقه رمادية-خضراء مخملية الملمس بدون أزهار أرجوانية بارزة، وسيقانه غير منتفخة إسفنجياً. زهرة النيل تتميز بسيقان منتفخة كالبالون تساعدها على الطفو، وأزهار أرجوانية-وردية واضحة تتوسط النبتة.'},
     summary:'نبات مائي عائم جذاب المظهر تحوّل إلى "كابوس مائي" حقيقي على ضفاف دجلة والفرات لسرعة انتشاره الهائلة.',
     features:[
@@ -81,6 +87,8 @@ const SPECIES = [
     image:'https://commons.wikimedia.org/wiki/Special:FilePath/Hydrilla_verticillata-1-bsi-yercaud-salem-India.jpg?width=800',
     imageCredit:'Yercaud-elango — Wikimedia Commons (CC BY-SA 4.0)',
     lookalike:{name:'ذيل القط (الحندقوق المائي)', latin:'Ceratophyllum demersum',
+      image:'https://commons.wikimedia.org/wiki/Special:FilePath/Ceratophyllum_demersum_193786838.jpg?width=500',
+      imageCredit:'Wikimedia Commons',
       howToTell:'ذيل القط نبات محلي بلا جذور حقيقية (يطفو حراً تحت الماء) وأوراقه متفرعة ثنائياً بشكل ناعم كالريشة. الهايدريلا لها جذور تثبّتها بالقاع، وأوراقها مسننة الحواف بوضوح وتنمو في دوامات حول ساق مستقيم صلب نسبياً.'},
     summary:'نبات مائي مغمور دخيل وثّقته دراسات بيئية عراقية في أهوار جنوب العراق وغرب البلاد.',
     features:[
@@ -104,6 +112,8 @@ const SPECIES = [
     image:'https://commons.wikimedia.org/wiki/Special:FilePath/Alligator_gar_(Atractosteus_spatula).JPG?width=800',
     imageCredit:'ProjectManhattan — Wikimedia Commons (CC BY-SA 4.0)',
     lookalike:{name:'الجري العراقي (سمك الشلك)', latin:'Silurus triostegus',
+      image:'https://commons.wikimedia.org/wiki/Special:FilePath/Silurus_triostegus.jpg?width=500',
+      imageCredit:'Wikimedia Commons',
       howToTell:'الجري المحلي بلا حراشف صلبة على جسمه وفمه عريض مستدير وليس مستطيلاً، وله شاربان طويلان فقط. الجار المدرّع يتميز بفم طويل يشبه التمساح مليء بصفين من الأسنان الحادة، وجسمه مغطى بحراشف صلبة تشبه الدروع.'},
     source:{label:'توثيق أكاديمي: Mutlak, Jawad & Al-Faisal (2017)', creator:0},
     summary:'مفترس ضخم مصدره أمريكا الشمالية، سُجّل دخوله للمياه العراقية عبر تجارة أحواض الزينة، ويشكّل خطراً حقيقياً على الأسماك المحلية إن تكاثر.',
@@ -129,6 +139,8 @@ const SPECIES = [
     image:'https://commons.wikimedia.org/wiki/Special:FilePath/Astronotus_ocellatus.jpg?width=800',
     imageCredit:'Jón Helgi Jónsson — Wikimedia Commons (صورة مميّزة، CC BY-SA)',
     lookalike:{name:'صغار البلطي الداكنة اللون', latin:'Oreochromis spp. (يافعة)',
+      image:'https://commons.wikimedia.org/wiki/Special:FilePath/Oreochromis-niloticus-Nairobi.JPG?width=500',
+      imageCredit:'Wikimedia Commons',
       howToTell:'صغار البلطي جسمها أكثر استطالة قليلاً وبلا بقعة دائرية واضحة عند قاعدة الذيل، وزعنفتها الظهرية ذات أشواك بارزة أكثر حدة. الأوسكار يتميز ببقعة دائرية بارزة "كالعين" عند قاعدة الذيل وحركة أبطأ وأكثر استدارة في الجسم.'},
     source:{label:'توثيق أكاديمي: Jawad, Al-Sheikhly & Al-Fayadhi (2022)', creator:0},
     summary:'سمكة زينة شهيرة موطنها الأصلي حوض الأمازون، وثّق باحثون عراقيون أول تسجيل لها في نهر الفرات قرب الحلة عام 2021 نتيجة إطلاقها من أحواض منزلية.',
@@ -279,6 +291,16 @@ function showDetail(id){
 
       ${s.lookalike ? `<div class="lookalike-box">
         <div class="lk-title">🔍 لا تخلط بينه وبين: <span class="lk-name">${s.lookalike.name}</span> <span class="latin">(${s.lookalike.latin})</span></div>
+        <div class="lk-compare">
+          <div class="lk-col">
+            ${s.image?`<img src="${s.image}" alt="${s.name}">`:''}
+            <span class="lk-tag lk-tag-invasive">⚠️ ${s.name} (غازي/دخيل)</span>
+          </div>
+          <div class="lk-col">
+            ${s.lookalike.image?`<img src="${s.lookalike.image}" alt="${s.lookalike.name}">`:''}
+            <span class="lk-tag lk-tag-native">✅ ${s.lookalike.name} (محلي)</span>
+          </div>
+        </div>
         <p>${s.lookalike.howToTell}</p>
       </div>` : ''}
 
