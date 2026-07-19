@@ -393,30 +393,44 @@ function validateVideoUrl(){
 }
 vidUrlInput.addEventListener('input', validateVideoUrl);
 
-// ---------- تحليل تلقائي بالذكاء الاصطناعي: النوع + الموقع من الرابط والوصف ----------
-async function callClaudeText(prompt){
-  const proxy = window.AI_PROXY_URL;
-  if(proxy){
-    const res = await fetch(proxy, {
+// ---------- استدعاء موحّد للذكاء الاصطناعي: Gemini المجاني أولاً، ثم وسيط Anthropic، ثم مسار الطوارئ ----------
+async function callAI(prompt, imageBase64, imageMediaType){
+  // 1) الخيار المجاني: Google Gemini
+  if(window.GEMINI_API_KEY){
+    const parts = [{ text: prompt }];
+    if(imageBase64) parts.unshift({ inline_data: { mime_type: imageMediaType || 'image/jpeg', data: imageBase64 } });
+    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${window.GEMINI_API_KEY}`, {
       method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({ prompt })
+      body: JSON.stringify({ contents:[{ parts }] })
+    });
+    const data = await res.json();
+    if(data.error) throw new Error(data.error.message || 'Gemini error');
+    const cand = data.candidates && data.candidates[0];
+    return ((cand && cand.content && cand.content.parts) || []).map(p=>p.text||'').join('\n').trim();
+  }
+  // 2) خيار بديل مدفوع: دالة وسيطة تنادي Anthropic
+  if(window.AI_PROXY_URL){
+    const res = await fetch(window.AI_PROXY_URL, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ prompt, image_base64: imageBase64 || null, image_media_type: imageMediaType || null })
     });
     const data = await res.json();
     return (data.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('\n').trim();
   }
-  // مسار احتياطي: يعمل فقط داخل معاينة Claude Artifacts، ولن يعمل على الموقع بعد نشره فعلياً
+  // 3) مسار احتياطي: يعمل فقط داخل معاينة Claude Artifacts، ولن يعمل على الموقع بعد نشره فعلياً
+  const content = [];
+  if(imageBase64) content.push({ type:"image", source:{ type:"base64", media_type: imageMediaType||'image/jpeg', data: imageBase64 } });
+  content.push({ type:"text", text: prompt });
   const response = await fetch("https://api.anthropic.com/v1/messages", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      model: "claude-sonnet-4-6",
-      max_tokens: 400,
-      messages: [{ role:"user", content: prompt }]
-    })
+    body: JSON.stringify({ model: "claude-sonnet-4-6", max_tokens: 500, messages: [{ role:"user", content }] })
   });
   const data = await response.json();
   return (data.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('\n').trim();
 }
+
+// ---------- تحليل تلقائي بالذكاء الاصطناعي: النوع + الموقع من الرابط والوصف ----------
 
 async function geocodeIraq(placeName){
   try{
@@ -451,7 +465,7 @@ ${speciesList}
 {"species_id": "المعرف أو null", "place_name": "اسم منطقة عراقية مذكورة أو null", "confidence": "منخفضة|متوسطة|عالية"}`;
 
   try{
-    const raw = await callClaudeText(prompt);
+    const raw = await callAI(prompt);
     const clean = raw.replace(/```json|```/g,'').trim();
     const parsed = JSON.parse(clean);
     aiSuggestedSpecies = (parsed.species_id && parsed.species_id !== 'null') ? parsed.species_id : null;
@@ -1077,37 +1091,11 @@ ${speciesBrief}
 إذا لم تكن الصورة واضحة بما يكفي أو لا تُظهر كائناً مائياً، وضّح ذلك بدلاً من التخمين.`;
 
   try{
-    const proxy = window.AI_PROXY_URL;
-    let text;
-    if(proxy){
-      const res = await fetch(proxy, {
-        method:'POST', headers:{'Content-Type':'application/json'},
-        body: JSON.stringify({ prompt, image_base64: currentImageBase64, image_media_type: currentImageMedia })
-      });
-      const data = await res.json();
-      text = (data.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('\n').trim();
-    }else{
-      const response = await fetch("https://api.anthropic.com/v1/messages", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          model: "claude-sonnet-4-6",
-          max_tokens: 500,
-          messages: [{
-            role: "user",
-            content: [
-              { type:"image", source:{ type:"base64", media_type: currentImageMedia, data: currentImageBase64 } },
-              { type:"text", text: prompt }
-            ]
-          }]
-        })
-      });
-      const data = await response.json();
-      text = (data.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('\n').trim();
-    }
+    const text = await callAI(prompt, currentImageBase64, currentImageMedia);
     idResult.textContent = text || 'تعذّر الحصول على نتيجة، حاول بصورة أخرى.';
   }catch(e){
-    idResult.textContent = 'حدث خطأ أثناء التحليل. تحقق من الاتصال وحاول مرة أخرى.';
+    console.error(e);
+    idResult.textContent = 'حدث خطأ أثناء التحليل. تحقق من إعدادات الذكاء الاصطناعي في config.js (مفتاح Gemini المجاني) وحاول مرة أخرى.';
   }
   analyzeBtn.disabled = false;
   analyzeBtn.textContent = 'تحليل صورة أخرى';
