@@ -407,8 +407,10 @@ async function callAI(prompt, imageBase64, imageMediaType){
       },
       body: JSON.stringify({ contents:[{ parts }] })
     });
-    const data = await res.json();
-    if(data.error) throw new Error(data.error.message || 'Gemini error');
+    const data = await res.json().catch(()=>({}));
+    if(!res.ok || data.error){
+      throw new Error((data.error && (data.error.message||JSON.stringify(data.error))) || `HTTP ${res.status} ${res.statusText}`);
+    }
     const cand = data.candidates && data.candidates[0];
     return ((cand && cand.content && cand.content.parts) || []).map(p=>p.text||'').join('\n').trim();
   }
@@ -1099,7 +1101,7 @@ ${speciesBrief}
     idResult.textContent = text || 'تعذّر الحصول على نتيجة، حاول بصورة أخرى.';
   }catch(e){
     console.error(e);
-    idResult.textContent = 'حدث خطأ أثناء التحليل. تحقق من إعدادات الذكاء الاصطناعي في config.js (مفتاح Gemini المجاني) وحاول مرة أخرى.';
+    idResult.textContent = `حدث خطأ أثناء التحليل:\n${e.message || e}\n\nإذا كان الخطأ يذكر "API key" أو "referer" أو "403"، راجع قيود المفتاح بـ Google AI Studio. وإذا كان يذكر "CORS" أو "Failed to fetch"، تأكد من اتصال الإنترنت.`;
   }
   analyzeBtn.disabled = false;
   analyzeBtn.textContent = 'تحليل صورة أخرى';
