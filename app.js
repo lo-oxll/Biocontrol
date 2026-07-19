@@ -8,6 +8,8 @@ const SPECIES = [
     threat:70,
     image:'https://commons.wikimedia.org/wiki/Special:FilePath/Ikan%20lele%20dumbo%20(4).JPG?width=800',
     imageCredit:'Wagino 20100516 — Wikimedia Commons (CC BY-SA 3.0)',
+    lookalike:{name:'الجري العراقي (سمك الشلك)', latin:'Silurus triostegus',
+      howToTell:'الجري المحلي جسمه أكثر انسيابياً وأملس بدون زعنفة ظهرية بارزة، وله شاربان طويلان فقط (وليس أربعة أزواج كاملة). السلور الأفريقي يتميز بزعنفة ظهرية طويلة تمتد على كامل الجسم تقريباً، وأربعة أزواج شوارب واضحة حول الفم.'},
     source:{label:'تقرير: الجزيرة نت — "سمك دخيل يهدد التنوع البيئي بالعراق"', creator:0},
     summary:'نوع دخيل موثّق في الناصرية وبغداد وهور الحويزة، ينافس الأنواع المحلية على الغذاء ويهدد التوازن البيئي المائي.',
     features:[
@@ -31,6 +33,8 @@ const SPECIES = [
     threat:65,
     image:'https://commons.wikimedia.org/wiki/Special:FilePath/Oreochromis-niloticus-Nairobi.JPG?width=800',
     imageCredit:'Bjørn Christian Tørrissen — Wikimedia Commons (CC BY-SA 3.0)',
+    lookalike:{name:'البني (الشبوط العراقي)', latin:'Barbus/Luciobarbus spp.',
+      howToTell:'البني جسمه أطول وأكثر استطالة بلون فضي-ذهبي وزعانف حمراء أو برتقالية عند القاعدة، وله شاربان صغيران عند الفم. البلطي جسمه أقصر وأكثر استدارة (بيضاوي)، بلا شوارب، وزعنفته الظهرية طويلة ذات أشواك حادة واضحة.'},
     summary:'من أسرع الأسماك الدخيلة انتشاراً في الأنهار العراقية، ويُوصف بأنه ينافس بشراسة الأنواع المحلية كالكارب والبني.',
     features:[
       'جسم بيضاوي مضغوط جانبياً بلون رمادي إلى مزرق مع خطوط عمودية باهتة',
@@ -53,6 +57,8 @@ const SPECIES = [
     threat:85,
     image:'https://commons.wikimedia.org/wiki/Special:FilePath/Eichhornia%20crassipes-water%20hyacinth.jpg?width=800',
     imageCredit:'U.S. Army Corps of Engineers — Wikimedia Commons (ملكية عامة)',
+    lookalike:{name:'عدس الماء الكبير (خس الماء)', latin:'Pistia stratiotes',
+      howToTell:'خس الماء أوراقه رمادية-خضراء مخملية الملمس بدون أزهار أرجوانية بارزة، وسيقانه غير منتفخة إسفنجياً. زهرة النيل تتميز بسيقان منتفخة كالبالون تساعدها على الطفو، وأزهار أرجوانية-وردية واضحة تتوسط النبتة.'},
     summary:'نبات مائي عائم جذاب المظهر تحوّل إلى "كابوس مائي" حقيقي على ضفاف دجلة والفرات لسرعة انتشاره الهائلة.',
     features:[
       'أوراق خضراء سميكة لامعة على شكل وردة عائمة فوق الماء',
@@ -74,6 +80,8 @@ const SPECIES = [
     threat:60,
     image:'https://commons.wikimedia.org/wiki/Special:FilePath/Hydrilla%20verticillata-1-bsi-yercaud-salem-India.jpg?width=800',
     imageCredit:'Yercaud-elango — Wikimedia Commons (CC BY-SA 4.0)',
+    lookalike:{name:'ذيل القط (الحندقوق المائي)', latin:'Ceratophyllum demersum',
+      howToTell:'ذيل القط نبات محلي بلا جذور حقيقية (يطفو حراً تحت الماء) وأوراقه متفرعة ثنائياً بشكل ناعم كالريشة. الهايدريلا لها جذور تثبّتها بالقاع، وأوراقها مسننة الحواف بوضوح وتنمو في دوامات حول ساق مستقيم صلب نسبياً.'},
     summary:'نبات مائي مغمور دخيل وثّقته دراسات بيئية عراقية في أهوار جنوب العراق وغرب البلاد.',
     features:[
       'نبات مغمور بالكامل تحت سطح الماء بسيقان طويلة متفرعة',
@@ -95,6 +103,8 @@ const SPECIES = [
     threat:55,
     image:'https://commons.wikimedia.org/wiki/Special:FilePath/Alligator%20gar%20(Atractosteus%20spatula).JPG?width=800',
     imageCredit:'ProjectManhattan — Wikimedia Commons (CC BY-SA 4.0)',
+    lookalike:{name:'الجري العراقي (سمك الشلك)', latin:'Silurus triostegus',
+      howToTell:'الجري المحلي بلا حراشف صلبة على جسمه وفمه عريض مستدير وليس مستطيلاً، وله شاربان طويلان فقط. الجار المدرّع يتميز بفم طويل يشبه التمساح مليء بصفين من الأسنان الحادة، وجسمه مغطى بحراشف صلبة تشبه الدروع.'},
     source:{label:'توثيق أكاديمي: Mutlak, Jawad & Al-Faisal (2017)', creator:0},
     summary:'مفترس ضخم مصدره أمريكا الشمالية، سُجّل دخوله للمياه العراقية عبر تجارة أحواض الزينة، ويشكّل خطراً حقيقياً على الأسماك المحلية إن تكاثر.',
     features:[
@@ -118,6 +128,8 @@ const SPECIES = [
     threat:35,
     image:'https://commons.wikimedia.org/wiki/Special:FilePath/Astronotus%20ocellatus.jpg?width=800',
     imageCredit:'Jón Helgi Jónsson — Wikimedia Commons (صورة مميّزة، CC BY-SA)',
+    lookalike:{name:'صغار البلطي الداكنة اللون', latin:'Oreochromis spp. (يافعة)',
+      howToTell:'صغار البلطي جسمها أكثر استطالة قليلاً وبلا بقعة دائرية واضحة عند قاعدة الذيل، وزعنفتها الظهرية ذات أشواك بارزة أكثر حدة. الأوسكار يتميز ببقعة دائرية بارزة "كالعين" عند قاعدة الذيل وحركة أبطأ وأكثر استدارة في الجسم.'},
     source:{label:'توثيق أكاديمي: Jawad, Al-Sheikhly & Al-Fayadhi (2022)', creator:0},
     summary:'سمكة زينة شهيرة موطنها الأصلي حوض الأمازون، وثّق باحثون عراقيون أول تسجيل لها في نهر الفرات قرب الحلة عام 2021 نتيجة إطلاقها من أحواض منزلية.',
     features:[
@@ -136,15 +148,20 @@ const SPECIES = [
 ];
 
 const SIGHTINGS = [
-  {species:'catfish', place:'الناصرية', lat:31.0559, lng:46.2569, note:'أول توثيق مسجل للنوع في جنوب العراق'},
-  {species:'catfish', place:'بغداد', lat:33.3152, lng:44.3661, note:'رصد على ضفاف دجلة داخل العاصمة'},
-  {species:'catfish', place:'هور الحويزة', lat:31.4667, lng:47.6167, note:'رصد ضمن الهور الحدودي'},
-  {species:'hyacinth', place:'ضفاف دجلة والفرات', lat:33.0, lng:44.6, note:'انتشار متزايد على ضفاف النهرين'},
-  {species:'hyacinth', place:'البصرة وشط العرب', lat:30.5085, lng:47.7835, note:'انتشار كثيف في شط العرب'},
-  {species:'hydrilla', place:'بحيرة الحبانية / غرب العراق', lat:33.3667, lng:43.5333, note:'دراسة بيئية وثّقت انتشاره غرب العراق'},
-  {species:'tilapia', place:'الأهوار الجنوبية', lat:31.0, lng:47.0, note:'انتشار واسع في مياه الجنوب'},
-  {species:'oscar', place:'نهر الفرات قرب الحلة', lat:32.4796, lng:44.3661, note:'أول تسجيل علمي موثّق للنوع في العراق (2021)، عينة فرد واحد'},
-  {species:'gar', place:'جنوب العراق (تسجيل أولي)', lat:30.7, lng:47.5, note:'تسجيل أولي نادر عبر تجارة أحواض الزينة — يستدعي إبلاغاً مبكراً عند أي رصد جديد'}
+  {species:'catfish', place:'الناصرية', gov:'ذي قار', lat:31.0559, lng:46.2569, note:'أول توثيق مسجل للنوع في جنوب العراق'},
+  {species:'catfish', place:'بغداد', gov:'بغداد', lat:33.3152, lng:44.3661, note:'رصد على ضفاف دجلة داخل العاصمة'},
+  {species:'catfish', place:'هور الحويزة', gov:'ميسان', lat:31.4667, lng:47.6167, note:'رصد ضمن الهور الحدودي'},
+  {species:'hyacinth', place:'ضفاف دجلة والفرات', gov:null, lat:33.0, lng:44.6, note:'انتشار متزايد على ضفاف النهرين'},
+  {species:'hyacinth', place:'البصرة وشط العرب', gov:'البصرة', lat:30.5085, lng:47.7835, note:'انتشار كثيف في شط العرب'},
+  {species:'hydrilla', place:'بحيرة الحبانية / غرب العراق', gov:'الأنبار', lat:33.3667, lng:43.5333, note:'دراسة بيئية وثّقت انتشاره غرب العراق'},
+  {species:'tilapia', place:'الأهوار الجنوبية', gov:'ذي قار', lat:31.0, lng:47.0, note:'انتشار واسع في مياه الجنوب'},
+  {species:'oscar', place:'نهر الفرات قرب الحلة', gov:'بابل', lat:32.4796, lng:44.3661, note:'أول تسجيل علمي موثّق للنوع في العراق (2021)، عينة فرد واحد'},
+  {species:'gar', place:'جنوب العراق (تسجيل أولي)', gov:null, lat:30.7, lng:47.5, note:'تسجيل أولي نادر عبر تجارة أحواض الزينة — يستدعي إبلاغاً مبكراً عند أي رصد جديد'}
+];
+
+const IRAQ_GOVERNORATES = [
+  'بغداد','البصرة','نينوى','أربيل','النجف','كربلاء','بابل','واسط','ديالى',
+  'الأنبار','القادسية','المثنى','ذي قار','ميسان','صلاح الدين','كركوك','دهوك','السليمانية'
 ];
 
 const CREATORS = [
@@ -259,6 +276,11 @@ function showDetail(id){
 
       <div class="block-title">علامات التعرّف</div>
       <ul class="clean">${s.features.map(f=>`<li>${f}</li>`).join('')}</ul>
+
+      ${s.lookalike ? `<div class="lookalike-box">
+        <div class="lk-title">🔍 لا تخلط بينه وبين: <span class="lk-name">${s.lookalike.name}</span> <span class="latin">(${s.lookalike.latin})</span></div>
+        <p>${s.lookalike.howToTell}</p>
+      </div>` : ''}
 
       <div class="block-title">الأثر البيئي</div>
       <p class="body-text">${s.impact}</p>
@@ -501,9 +523,10 @@ async function loadVideoFeed(){
     if(window.__leafletMap && window.__documentedIcon){
       items.filter(v=>v.lat && v.lng).forEach(v=>{
         const sp = SPECIES.find(s=>s.id===v.species);
-        L.marker([v.lat, v.lng], {icon: window.__documentedIcon('#5aa9d6')})
+        const marker = L.marker([v.lat, v.lng], {icon: window.__documentedIcon('#5aa9d6')})
           .addTo(window.__leafletMap)
           .bindPopup(`🎬 ${sp?sp.name:(v.species||'فيديو')}<br>${v.place||''}<br><a href="${v.url}" target="_blank">مشاهدة الفيديو ↗</a>`);
+        mapMarkerRefs.push({marker, species:v.species||null, gov:null});
       });
     }
   }catch(e){
@@ -518,6 +541,10 @@ vidSubmitBtn.addEventListener('click', async ()=>{
   const url = vidUrlInput.value.trim();
   const platform = detectPlatform(url);
   if(!platform) return;
+  if(!checkRateLimit('video', 5)){
+    alert('لقد وصلت للحد الأقصى من إضافات الفيديو اليوم (5) من هذا الجهاز. حاول غداً.');
+    return;
+  }
   vidSubmitBtn.disabled = true; vidSubmitBtn.textContent = 'جارٍ الإضافة...';
   const video = {
     url, platform,
@@ -548,6 +575,47 @@ SPECIES.forEach(s=>{
   const opt = document.createElement('option');
   opt.value = s.id; opt.textContent = `${s.kindLabel==='سمك'?'🐟':'🌿'} ${s.name}`;
   rpSelect.appendChild(opt);
+});
+
+const rpGovSelect = document.getElementById('rp-gov');
+IRAQ_GOVERNORATES.forEach(g=>{
+  const opt = document.createElement('option');
+  opt.value = g; opt.textContent = g;
+  rpGovSelect.appendChild(opt);
+});
+
+// ---------- فلترة الخريطة حسب النوع/المحافظة ----------
+const filterSpeciesSelect = document.getElementById('filter-species');
+const filterGovSelect = document.getElementById('filter-gov');
+SPECIES.forEach(s=>{
+  const opt = document.createElement('option');
+  opt.value = s.id; opt.textContent = `${s.kindLabel==='سمك'?'🐟':'🌿'} ${s.name}`;
+  filterSpeciesSelect.appendChild(opt);
+});
+IRAQ_GOVERNORATES.forEach(g=>{
+  const opt = document.createElement('option');
+  opt.value = g; opt.textContent = g;
+  filterGovSelect.appendChild(opt);
+});
+
+let mapMarkerRefs = []; // {marker, species, gov}
+function applyMapFilters(){
+  const fSpecies = filterSpeciesSelect.value;
+  const fGov = filterGovSelect.value;
+  mapMarkerRefs.forEach(ref=>{
+    const matchesSpecies = !fSpecies || ref.species === fSpecies;
+    const matchesGov = !fGov || ref.gov === fGov;
+    const show = matchesSpecies && matchesGov;
+    const onMap = window.__leafletMap.hasLayer(ref.marker);
+    if(show && !onMap) ref.marker.addTo(window.__leafletMap);
+    if(!show && onMap) window.__leafletMap.removeLayer(ref.marker);
+  });
+  renderReportsList(); // القائمة النصية تحترم نفس الفلاتر
+}
+filterSpeciesSelect.addEventListener('change', applyMapFilters);
+filterGovSelect.addEventListener('change', applyMapFilters);
+document.getElementById('filter-reset').addEventListener('click', ()=>{
+  filterSpeciesSelect.value=''; filterGovSelect.value=''; applyMapFilters();
 });
 
 // ============================================================
@@ -588,9 +656,10 @@ function initMap(){
 
   SIGHTINGS.forEach(pt=>{
     const sp = SPECIES.find(s=>s.id===pt.species);
-    L.marker([pt.lat,pt.lng], {icon:documentedIcon('#c9a227')})
+    const marker = L.marker([pt.lat,pt.lng], {icon:documentedIcon('#c9a227')})
       .addTo(map)
       .bindPopup(`<b>${sp?sp.name:pt.species}</b><br>${pt.place}<br><span style="color:#666">${pt.note}</span>`);
+    mapMarkerRefs.push({marker, species:pt.species, gov:pt.gov||null});
   });
 
   loadCommunityReports(map, documentedIcon);
@@ -652,10 +721,11 @@ document.getElementById('rp-paste-btn').addEventListener('click', ()=>{
 });
 
 function checkFormReady(){
-  const ready = pickedLatLng && rpSelect.value && document.getElementById('rp-place').value.trim();
+  const ready = pickedLatLng && rpSelect.value && rpGovSelect.value && document.getElementById('rp-place').value.trim();
   document.getElementById('rp-submit').disabled = !ready;
 }
 rpSelect.addEventListener('change', checkFormReady);
+rpGovSelect.addEventListener('change', checkFormReady);
 document.getElementById('rp-place').addEventListener('input', checkFormReady);
 
 // ============================================================
@@ -700,47 +770,217 @@ function compressImage(dataUrl, maxDim, quality, cb){
 // ============================================================
 // COMMUNITY REPORTS: LOAD/SAVE (Supabase — عام لكل زوار الموقع)
 // ============================================================
+let ALL_REPORTS = [];
+
+function renderStats(){
+  const bar = document.getElementById('stats-bar');
+  const govCount = new Set(ALL_REPORTS.map(r=>r.governorate).filter(Boolean)).size;
+  bar.innerHTML = `
+    <div class="stat-chip"><span class="num">${ALL_REPORTS.length}</span><span class="lbl">بلاغ مجتمعي</span></div>
+    <div class="stat-chip"><span class="num">${govCount} / ${IRAQ_GOVERNORATES.length}</span><span class="lbl">محافظة مشمولة</span></div>
+    <div class="stat-chip"><span class="num">${SIGHTINGS.length}</span><span class="lbl">رصد موثّق (مصادر بيئية)</span></div>
+  `;
+}
+
+function getConfirmedSet(){
+  try{ return new Set(JSON.parse(localStorage.getItem('rasad_confirmed')||'[]')); }
+  catch(e){ return new Set(); }
+}
+function saveConfirmedSet(set){
+  localStorage.setItem('rasad_confirmed', JSON.stringify([...set]));
+}
+
+async function confirmReport(id, btnEl){
+  const confirmed = getConfirmedSet();
+  if(confirmed.has(id)) return;
+  const rep = ALL_REPORTS.find(r=>r.id===id);
+  if(!rep) return;
+  btnEl.disabled = true;
+  try{
+    const newCount = (rep.confirmations||0) + 1;
+    const { error } = await sb.from('reports').update({confirmations:newCount}).eq('id', id);
+    if(error) throw error;
+    rep.confirmations = newCount;
+    confirmed.add(id);
+    saveConfirmedSet(confirmed);
+    btnEl.textContent = `تم التأكيد ✓ (${newCount})`;
+    btnEl.classList.add('confirmed');
+  }catch(e){
+    console.error(e);
+    btnEl.disabled = false;
+    alert('تعذّر تسجيل التأكيد، حاول مجدداً.');
+  }
+}
+
+function generateShareCardImage(rep){
+  const sp = SPECIES.find(s=>s.id===rep.species);
+  const canvas = document.createElement('canvas');
+  canvas.width = 1080; canvas.height = 1080;
+  const ctx = canvas.getContext('2d');
+  const g = ctx.createLinearGradient(0,0,0,1080);
+  g.addColorStop(0,'#0a2b29'); g.addColorStop(1,'#0f3a37');
+  ctx.fillStyle = g; ctx.fillRect(0,0,1080,1080);
+
+  ctx.fillStyle = '#c9a227';
+  ctx.font = '700 42px Tajawal, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('🌾 رَصَد — دليل الأنواع الغازية في العراق', 540, 90);
+
+  const drawPhoto = (img)=>{
+    if(img){
+      const size = 640;
+      ctx.save();
+      ctx.beginPath();
+      if(ctx.roundRect) ctx.roundRect(220, 150, size, size, 24);
+      else ctx.rect(220, 150, size, size);
+      ctx.clip();
+      ctx.drawImage(img, 220, 150, size, size);
+      ctx.restore();
+    }
+    ctx.fillStyle = '#f1e9d2';
+    ctx.font = '700 46px Amiri, serif';
+    ctx.fillText(sp?sp.name:rep.species, 540, 850);
+    ctx.fillStyle = '#9fbfb9';
+    ctx.font = '400 28px Tajawal, sans-serif';
+    ctx.fillText(`📍 ${rep.place}${rep.governorate?' — محافظة '+rep.governorate:''}`, 540, 900);
+    ctx.fillText(new Date(rep.created_at).toLocaleDateString('ar-IQ'), 540, 940);
+    ctx.fillStyle = '#e0c15c';
+    ctx.font = '700 24px Tajawal, sans-serif';
+    ctx.fillText('بلاغ مجتمعي حقيقي — شارك برصدك أنت أيضاً', 540, 1000);
+    return canvas.toDataURL('image/png');
+  };
+
+  if(rep.photo){
+    return new Promise(resolve=>{
+      const img = new Image();
+      img.onload = ()=> resolve(drawPhoto(img));
+      img.onerror = ()=> resolve(drawPhoto(null));
+      img.src = rep.photo;
+    });
+  }
+  return Promise.resolve(drawPhoto(null));
+}
+
+async function shareReport(id){
+  const rep = ALL_REPORTS.find(r=>r.id===id);
+  if(!rep) return;
+  const shareUrl = `${location.origin}${location.pathname}?report=${id}`;
+  try{
+    const dataUrl = await generateShareCardImage(rep);
+    const blob = await (await fetch(dataUrl)).blob();
+    const file = new File([blob], 'rasad-report.png', {type:'image/png'});
+    if(navigator.share && navigator.canShare && navigator.canShare({files:[file]})){
+      await navigator.share({
+        files:[file],
+        title:'رَصَد — بلاغ رصد',
+        text:`بلاغ رصد على تطبيق رَصَد: ${shareUrl}`
+      });
+    }else{
+      const a = document.createElement('a');
+      a.href = dataUrl; a.download = 'rasad-report.png';
+      document.body.appendChild(a); a.click(); a.remove();
+      prompt('انسخ رابط البلاغ للمشاركة:', shareUrl);
+    }
+  }catch(e){
+    console.error(e);
+    prompt('انسخ رابط البلاغ للمشاركة:', shareUrl);
+  }
+}
+window.__rasad_confirmReport = confirmReport;
+window.__rasad_shareReport = shareReport;
+
+function renderReportsList(){
+  const listEl = document.getElementById('reports-list');
+  const fSpecies = document.getElementById('filter-species').value;
+  const fGov = document.getElementById('filter-gov').value;
+  const filtered = ALL_REPORTS.filter(rep=>
+    (!fSpecies || rep.species===fSpecies) && (!fGov || rep.governorate===fGov)
+  );
+  if(filtered.length===0){
+    listEl.innerHTML = '<p style="color:var(--muted);font-size:13px;">لا توجد بلاغات مطابقة للفلتر الحالي.</p>';
+    return;
+  }
+  const confirmed = getConfirmedSet();
+  listEl.innerHTML = filtered.map(rep=>{
+    const sp = SPECIES.find(s=>s.id===rep.species);
+    const isConfirmed = confirmed.has(rep.id);
+    return `<div class="report-item">
+        ${rep.photo?`<img src="${rep.photo}" alt="">`:''}
+        <div class="report-item-body">
+          <b>${sp?sp.name:rep.species}</b> — ${rep.place}${rep.governorate?` (${rep.governorate})`:''}
+          <div class="meta">${rep.notes?rep.notes+' · ':''}${new Date(rep.created_at).toLocaleDateString('ar-IQ')}</div>
+          <div class="coords">📍 ${rep.lat.toFixed(5)}, ${rep.lng.toFixed(5)}</div>
+          <div class="report-actions">
+            <button class="mini-btn ${isConfirmed?'confirmed':''}" onclick="window.__rasad_confirmReport('${rep.id}', this)">${isConfirmed?`تم التأكيد ✓ (${rep.confirmations||0})`:`✅ أنا رأيته أيضاً (${rep.confirmations||0})`}</button>
+            <button class="mini-btn" onclick="window.__rasad_shareReport('${rep.id}')">📤 مشاركة</button>
+          </div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
 async function loadCommunityReports(map, iconFn){
   const listEl = document.getElementById('reports-list');
   if(!sb){
     listEl.innerHTML = '<p style="color:var(--muted);font-size:13px;">اضبط إعدادات Supabase في config.js لعرض وحفظ بلاغات المجتمع (راجع supabase_schema.sql).</p>';
+    renderStats();
     return;
   }
   try{
     const { data: reports, error } = await sb.from('reports').select('*').order('created_at', {ascending:false});
     if(error) throw error;
-    if(!reports || reports.length===0){
-      listEl.innerHTML = '<p style="color:var(--muted);font-size:13px;">لا توجد بلاغات مجتمعية بعد — كن أول من يضيف بلاغاً.</p>';
-      return;
-    }
-    let itemsHtml = '';
-    reports.forEach(rep=>{
+    ALL_REPORTS = reports || [];
+    renderStats();
+    ALL_REPORTS.forEach(rep=>{
       const sp = SPECIES.find(s=>s.id===rep.species);
-      L.marker([rep.lat,rep.lng], {icon:iconFn('#4fb0a5')})
+      const marker = L.marker([rep.lat,rep.lng], {icon:iconFn('#4fb0a5')})
         .addTo(map)
         .bindPopup(`<b>${sp?sp.name:rep.species}</b><br>${rep.place}${rep.photo?`<br><img src="${rep.photo}" style="width:120px;border-radius:8px;margin-top:6px;">`:''}<br><span style="color:#666">${rep.notes||''}</span>`);
-      itemsHtml += `<div class="report-item">
-          ${rep.photo?`<img src="${rep.photo}" alt="">`:''}
-          <div>
-            <b>${sp?sp.name:rep.species}</b> — ${rep.place}
-            <div class="meta">${rep.notes?rep.notes+' · ':''}${new Date(rep.created_at).toLocaleDateString('ar-IQ')}</div>
-            <div class="coords">📍 ${rep.lat.toFixed(5)}, ${rep.lng.toFixed(5)}</div>
-          </div>
-        </div>`;
+      mapMarkerRefs.push({marker, species:rep.species, gov:rep.governorate||null});
+      rep.__marker = marker;
     });
-    listEl.innerHTML = itemsHtml;
+    renderReportsList();
+
+    // دعم رابط مشاركة مباشر ?report=ID
+    const params = new URLSearchParams(location.search);
+    const targetId = params.get('report');
+    if(targetId){
+      const target = ALL_REPORTS.find(r=>r.id===targetId);
+      if(target){
+        document.querySelector('.tab[data-tab="map"]').click();
+        setTimeout(()=>{
+          map.setView([target.lat, target.lng], 12);
+          target.__marker.openPopup();
+        }, 300);
+      }
+    }
   }catch(e){
     console.error('report load error', e);
     listEl.innerHTML = '<p style="color:var(--rust);font-size:13px;">تعذّر تحميل البلاغات. تحقق من إعدادات Supabase.</p>';
   }
 }
 
+// ---------- حد أقصى للإضافات اليومية من نفس الجهاز (حماية خفيفة، بدون حسابات) ----------
+function checkRateLimit(kind, limit){
+  const today = new Date().toISOString().slice(0,10);
+  const key = `rasad_rl_${kind}_${today}`;
+  const count = parseInt(localStorage.getItem(key)||'0', 10);
+  if(count >= limit) return false;
+  localStorage.setItem(key, String(count+1));
+  return true;
+}
+
 document.getElementById('rp-submit').addEventListener('click', async ()=>{
   if(!sbReadyOrWarn()) return;
+  if(!checkRateLimit('report', 5)){
+    alert('لقد وصلت للحد الأقصى من البلاغات اليوم (5) من هذا الجهاز. حاول غداً أو استخدم جهازاً آخر.');
+    return;
+  }
   const btn = document.getElementById('rp-submit');
   btn.disabled = true; btn.textContent = 'جارٍ الإضافة...';
   const report = {
     species: rpSelect.value,
+    governorate: rpGovSelect.value || null,
     place: document.getElementById('rp-place').value.trim(),
     notes: document.getElementById('rp-notes').value.trim() || null,
     lat: pickedLatLng.lat, lng: pickedLatLng.lng,

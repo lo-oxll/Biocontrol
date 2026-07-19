@@ -53,15 +53,25 @@
       <h2>خريطة الرصد والبلاغات</h2>
       <p>نقاط موثّقة من مصادر بيئية (دوائر ذهبية)، بالإضافة إلى بلاغات المجتمع المحلي من كل محافظات العراق (دوائر خضراء يضيفها المستخدمون). بلاغاتك تُخزَّن في قاعدة بيانات مشتركة وتظهر فوراً لجميع من يفتح هذا الدليل، من أي جهاز.</p>
     </div>
+
+    <div id="stats-bar" class="stats-bar"></div>
+
+    <div class="filter-bar">
+      <select id="filter-species"><option value="">كل الأنواع</option></select>
+      <select id="filter-gov"><option value="">كل المحافظات</option></select>
+      <button type="button" id="filter-reset" class="btn secondary" style="margin-top:0;padding:9px 18px;">إعادة تعيين</button>
+    </div>
+
     <div id="map"></div>
     <div class="map-legend">
       <span><span class="dot" style="background:#c9a227"></span> رصد موثّق (مصدر بيئي/بحثي)</span>
       <span><span class="dot" style="background:#4fb0a5"></span> بلاغ من المجتمع المحلي</span>
+      <span><span class="dot" style="background:#5aa9d6"></span> فيديو محدَّد الموقع</span>
     </div>
 
     <div class="report-form">
       <h3 style="margin:0;color:var(--parchment);font-size:17px;">أضف بلاغ رصد جديد</h3>
-      <p class="hint">اضغط على الخريطة لتحديد الموقع، أو الصق إحداثيات نسختها من تطبيق خرائط (قوقل مابس مثلاً)، أو أدخلها يدوياً. أرفق صورة إن توفرت. هذه معلومة عامة يشاهدها كل من يفتح هذا الدليل.</p>
+      <p class="hint">اضغط على الخريطة لتحديد الموقع، أو الصق إحداثيات نسختها من تطبيق خرائط (قوقل مابس مثلاً)، أو أدخلها يدوياً. أرفق صورة إن توفرت. هذه معلومة عامة يشاهدها كل من يفتح هذا الدليل. (حد أقصى 5 بلاغات باليوم من نفس الجهاز)</p>
 
       <label>الصق موقعاً من تطبيق الخرائط (رابط مشاركة أو نص إحداثيات)</label>
       <div class="paste-row">
@@ -79,6 +89,11 @@
       <label>نوع الكائن الغازي</label>
       <select id="rp-species">
         <option value="">اختر النوع...</option>
+      </select>
+
+      <label>المحافظة</label>
+      <select id="rp-gov">
+        <option value="">اختر المحافظة...</option>
       </select>
 
       <label>اسم المنطقة (مثال: هور الحويزة، ضفاف دجلة قرب...)</label>
