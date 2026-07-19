@@ -399,11 +399,11 @@ async function callAI(prompt, imageBase64, imageMediaType){
   if(window.GEMINI_API_KEY){
     const parts = [{ text: prompt }];
     if(imageBase64) parts.unshift({ inline_data: { mime_type: imageMediaType || 'image/jpeg', data: imageBase64 } });
-    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent`, {
+    const res = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent', {
       method:'POST',
       headers:{
         'Content-Type':'application/json',
-        'X-goog-api-key': window.GEMINI_API_KEY
+        'x-goog-api-key': window.GEMINI_API_KEY
       },
       body: JSON.stringify({ contents:[{ parts }] })
     });
@@ -641,6 +641,7 @@ IRAQ_GOVERNORATES.forEach(g=>{
 });
 
 let mapMarkerRefs = []; // {marker, species, gov}
+let ALL_REPORTS = []; // يُملأ لاحقاً من Supabase — يُعلن هنا لتفادي استخدامه قبل التصريح
 function applyMapFilters(){
   const fSpecies = filterSpeciesSelect.value;
   const fGov = filterGovSelect.value;
@@ -812,7 +813,6 @@ function compressImage(dataUrl, maxDim, quality, cb){
 // ============================================================
 // COMMUNITY REPORTS: LOAD/SAVE (Supabase — عام لكل زوار الموقع)
 // ============================================================
-let ALL_REPORTS = [];
 
 function renderStats(){
   const bar = document.getElementById('stats-bar');
