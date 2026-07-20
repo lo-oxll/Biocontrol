@@ -44,6 +44,11 @@
       <p>أنواع موثّقة في مصادر بيئية وأكاديمية عراقية — اضغط على أي بطاقة لعرض التفاصيل الكاملة.</p>
     </div>
     <div id="species-grid" class="grid"></div>
+    <div id="community-species-section" style="display:none;">
+      <div class="block-title" style="margin-top:34px;">🧑‍🤝‍🧑 أنواع اقترحها المستخدمون (قيد التوثيق)</div>
+      <p style="color:var(--muted);font-size:13px;margin:-6px 0 16px;">هذي أنواع أضافها المجتمع عبر البلاغات ولم تُدرج بعد بقائمة الأنواع الموثّقة رسمياً. راجعها بحذر ولا تعتبرها مؤكدة علمياً حتى تُوثَّق.</p>
+      <div id="community-species-grid" class="grid"></div>
+    </div>
     <div id="species-detail" style="display:none;"></div>
   </section>
 
@@ -90,6 +95,7 @@
       <select id="rp-species">
         <option value="">اختر النوع...</option>
       </select>
+      <input id="rp-species-other" type="text" placeholder="اكتب اسم النوع (مثال: القوقع الأفريقي العملاق)" style="display:none;margin-top:8px;">
 
       <label>المحافظة</label>
       <select id="rp-gov">
