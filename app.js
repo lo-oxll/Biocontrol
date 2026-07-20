@@ -1,6 +1,9 @@
 // ============================================================
 // رَصَد — بيانات الأنواع والمصادر
 // ============================================================
+const KIND_ICON = {'سمك':'🐟','نبات':'🌿','قوقع':'🐌','حشرة':'🐛','حيوان':'🐾'};
+function kindIcon(label){ return KIND_ICON[label] || '🔶'; }
+
 const SPECIES = [
   {
     id:'catfish', kind:'fish', kindLabel:'سمك',
@@ -156,6 +159,56 @@ const SPECIES = [
       'الإبلاغ عند رصد أي فرد في مياه مفتوحة لأنه لا يزال نادراً ويسهل احتواؤه مبكراً',
       'التوعية بمخاطر تجارة أسماك الزينة غير المنضبطة كمصدر رئيسي لدخول أنواع غريبة'
     ]
+  },
+  {
+    id:'snail', kind:'other', kindLabel:'قوقع',
+    name:'القوقع الأفريقي العملاق', latin:'Lissachatina fulica',
+    threat:40,
+    image:'https://commons.wikimedia.org/wiki/Special:FilePath/Giant_African_land_snail_(Achatina_fulica)_Ranomafana.jpg?width=800',
+    imageCredit:'Charlesjsharp — Wikimedia Commons (CC BY-SA 4.0)',
+    lookalike:{name:'الحلزون البري المحلي', latin:'Helix spp. (قواقع محلية صغيرة)',
+      image:null, imageCredit:null,
+      howToTell:'القواقع البرية المحلية بالعراق صغيرة الحجم عادة (أقل من 3-4 سم) بقواقع مخططة. القوقع الأفريقي العملاق يتميز بحجمه الضخم غير المعتاد (قد يتجاوز 20 سم) وقوقعة بنية مخروطية الشكل مستطيلة.'},
+    summary:'من أخطر القواقع الغازية عالمياً، يهدد المحاصيل الزراعية والحدائق وينقل طفيليات ضارة. لم يُوثَّق انتشار مؤكَّد وواسع له بالعراق حتى الآن، لكنه مسجَّل كخطر محتمل يستدعي المراقبة المبكرة.',
+    features:[
+      'قوقعة بنية مخروطية الشكل مستطيلة، قد يتجاوز طولها 20 سم في الحالات الكبيرة',
+      'جسم طري رمادي-بني كبير الحجم مقارنة بالقواقع المحلية',
+      'نشاط ليلي بشكل أساسي، يختبئ بالنهار بأماكن رطبة مظللة',
+      'يتغذى على مجموعة هائلة من النباتات والمحاصيل الزراعية'
+    ],
+    impact:'يتكاثر بسرعة هائلة (البيضة الواحدة تنتج مئات الصغار سنوياً)، يلتهم كميات كبيرة من المحاصيل والنباتات المحلية، وينقل طفيليات قد تصيب الإنسان والحيوان. يُصنَّف عالمياً كأحد أخطر الأنواع الغازية على الإطلاق حسب الاتحاد الدولي لحفظ الطبيعة.',
+    control:[
+      'الإبلاغ الفوري لدوائر الزراعة والبيئة عند رصده — الإنذار المبكر ضروري لمنع تأسسه',
+      'عدم لمسه بيد مباشرة (يفضَّل استخدام قفازات) لاحتمال نقله طفيليات',
+      'عدم إدخاله كحيوان أليف أو "قوقع زينة" منزلي أصلاً — تجارة الحيوانات الغريبة من أهم أسباب انتشاره عالمياً',
+      'إزالة البيض والقواقع الصغيرة يدوياً من الحدائق والمزارع عند رصدها'
+    ]
+  },
+  {
+    id:'mesquite', kind:'plant', kindLabel:'نبات',
+    name:'شجرة البرسوبس (الغاف الدخيل/المسكيت)', latin:'Prosopis juliflora',
+    threat:50,
+    image:'https://commons.wikimedia.org/wiki/Special:FilePath/A_scene_of_Prosopis_juliflora.JPG?width=800',
+    imageCredit:'Thamizhpparithi Maari — Wikimedia Commons (CC BY-SA 3.0)',
+    lookalike:{name:'السنط الصحراوي المحلي (الطلح)', latin:'Vachellia tortilis (Acacia tortilis)',
+      image:'https://commons.wikimedia.org/wiki/Special:FilePath/Acacia_Negev.JPG?width=500',
+      imageCredit:'Wikimedia Commons',
+      howToTell:'السنط المحلي تاجه مسطّح مظلي مميز (شكل مظلة عريضة)، وأشواكه أطول وأكثر تناسقاً. البرسوبس الدخيل شجيرة أكثر تفرعاً وفوضوية الشكل، بتاج غير منتظم، وأشواك أقصر وأكثر كثافة على الأغصان الصغيرة.'},
+    summary:'شجرة شوكية دخيلة إلى المنطقة، أُدخلت أصلاً لأغراض التشجير لكنها انتشرت عشوائياً بالمحافظات الوسطى والجنوبية، وتستنزف المياه الجوفية وتزاحم الغطاء النباتي المحلي والمراعي الطبيعية.',
+    features:[
+      'شجيرة أو شجرة شوكية يصل ارتفاعها 3-12 متراً، جذعها يتشقق مع التقدم بالعمر',
+      'أوراق مركّبة ريشية مزدوجة صغيرة خضراء مزرقّة',
+      'أشواك حادة كثيفة على الأغصان الصغيرة',
+      'قرون بذور طويلة معلّقة تشبه قرون الخروب الصغيرة',
+      'جذور عميقة جداً قادرة على الوصول لمياه جوفية بعيدة'
+    ],
+    impact:'يستهلك كميات هائلة من المياه الجوفية بجذوره العميقة، ويكوّن غابات كثيفة شوكية تمنع نمو النباتات والمحاصيل المحلية وتُصعّب حركة الماشية والرعي، ويصعب اقتلاعه بمجرد تأسسه لعمق جذوره.',
+    control:[
+      'الإزالة اليدوية أو الميكانيكية للشتلات الصغيرة قبل أن تتعمّق جذورها',
+      'عدم استخدامه لأغراض التشجير أو تثبيت الرمال بديلاً عن أنواع محلية',
+      'الإبلاغ عن انتشاره الكثيف بمناطق زراعية أو رعوية جديدة لدوائر الزراعة',
+      'التنسيق مع الجهات الزراعية المختصة لأي إزالة واسعة لأنها تحتاج معدات ثقيلة غالباً'
+    ]
   }
 ];
 
@@ -190,8 +243,8 @@ const CREATORS = [
     bio:'صانع محتوى عراقي متخصص بالحياة البرية والطبيعة، ينشر فيديوهات توعوية على إنستغرام وتيك توك ويوتيوب حول الحيوانات والأنواع الغازية وطرق التعامل معها، بمتابعة واسعة من الجمهور العراقي والعربي.',
     instagram:'https://www.instagram.com/mahdilaith',
     extraLinks:[
-      {label:'يوتيوب', url:'https://www.youtube.com/@MahdiLaith'},
-      {label:'تيك توك', url:'https://www.tiktok.com/@mahdilaith'}
+      {label:'يوتيوب', url:'https://www.youtube.com/@MahdiLaith', platform:'youtube'},
+      {label:'تيك توك', url:'https://www.tiktok.com/@mahdilaith', platform:'tiktok'}
     ],
     tag:'🎥 صانع محتوى بيئي'
   }
@@ -251,7 +304,7 @@ function renderGrid(){
   const grid = document.getElementById('species-grid');
   grid.innerHTML = SPECIES.map(s=>`
     <div class="card" data-id="${s.id}">
-      <span class="kind-badge">${s.kindLabel==='سمك'?'🐟':'🌿'} ${s.kindLabel}</span>
+      <span class="kind-badge">${kindIcon(s.kindLabel)} ${s.kindLabel}</span>
       ${s.image ? `<img class="card-photo" src="${s.image}" alt="${s.name}">` : ''}
       <h3>${s.name}</h3>
       <span class="latin">${s.latin}</span>
@@ -277,7 +330,7 @@ function showDetail(id){
       <button class="back-btn" id="back-btn">→ العودة لكل الأنواع</button>
       <div class="detail-title">
         <h2 class="display">${s.name}</h2>
-        <span class="pill">${s.kindLabel==='سمك'?'🐟':'🌿'} ${s.kindLabel} غازي/دخيل</span>
+        <span class="pill">${kindIcon(s.kindLabel)} ${s.kindLabel} غازي/دخيل</span>
       </div>
       <span class="latin">${s.latin}</span>
       ${s.image ? `<img class="detail-photo" src="${s.image}" alt="${s.name}">${s.imageCredit?`<div class="photo-credit">📷 ${s.imageCredit}</div>`:''}` : ''}
@@ -324,22 +377,42 @@ renderGrid();
 // ============================================================
 // CREATORS & REFERENCES
 // ============================================================
+const AVATAR_PALETTE = ['#c9a227','#4fb0a5','#b5482d','#5aa9d6','#8a6fd1','#d68a5a','#6fb56a','#d65a8a'];
+function avatarColor(seed){
+  let hash = 0;
+  for(let i=0;i<seed.length;i++) hash = seed.charCodeAt(i) + ((hash<<5)-hash);
+  return AVATAR_PALETTE[Math.abs(hash) % AVATAR_PALETTE.length];
+}
+function initialsOf(name){
+  const clean = name.replace(/^د\.\s*/,'').trim();
+  const parts = clean.split(/\s+/).filter(Boolean);
+  return (parts[0]?.[0]||'') + (parts[1]?.[0]||'');
+}
+const PLATFORM_ICON = {instagram:'📷', tiktok:'🎵', youtube:'▶️', twitter:'🐦', facebook:'📘', website:'🌐'};
+
 function renderCreators(){
   const grid = document.getElementById('creators-grid');
   if(!grid) return;
-  grid.innerHTML = CREATORS.map(c=>`
+  grid.innerHTML = CREATORS.map(c=>{
+    const color = avatarColor(c.name);
+    const links = [{label:'إنستغرام', url:c.instagram, platform:'instagram'}, ...(c.extraLinks||[])];
+    return `
     <div class="creator-card">
-      <span class="creator-tag">${c.tag}</span>
-      <h3>${c.name}</h3>
-      <span class="latin">${c.latin}</span>
+      <div class="creator-head">
+        <div class="creator-avatar" style="background:linear-gradient(155deg, ${color}, ${color}99);">${initialsOf(c.name)}</div>
+        <div>
+          <span class="creator-tag">${c.tag}</span>
+          <h3>${c.name}</h3>
+          <span class="latin">${c.latin}</span>
+        </div>
+      </div>
       <p class="creator-role">${c.role}</p>
       <p class="creator-bio">${c.bio}</p>
       <div class="creator-links">
-        <a href="${c.instagram}" target="_blank" rel="noopener">إنستغرام ↗</a>
-        ${(c.extraLinks||[]).map(l=>`<a href="${l.url}" target="_blank" rel="noopener">${l.label} ↗</a>`).join('')}
+        ${links.map(l=>`<a href="${l.url}" target="_blank" rel="noopener">${PLATFORM_ICON[l.platform]||'🔗'} ${l.label} ↗</a>`).join('')}
       </div>
-    </div>
-  `).join('');
+    </div>`;
+  }).join('');
 
   const refList = document.getElementById('references-list');
   if(refList){
@@ -615,9 +688,12 @@ vidSubmitBtn.addEventListener('click', async ()=>{
 const rpSelect = document.getElementById('rp-species');
 SPECIES.forEach(s=>{
   const opt = document.createElement('option');
-  opt.value = s.id; opt.textContent = `${s.kindLabel==='سمك'?'🐟':'🌿'} ${s.name}`;
+  opt.value = s.id; opt.textContent = `${kindIcon(s.kindLabel)} ${s.name}`;
   rpSelect.appendChild(opt);
 });
+const otherOpt = document.createElement('option');
+otherOpt.value = 'other'; otherOpt.textContent = '➕ نوع آخر (غير مدرج بالقائمة)';
+rpSelect.appendChild(otherOpt);
 
 const rpGovSelect = document.getElementById('rp-gov');
 IRAQ_GOVERNORATES.forEach(g=>{
@@ -631,7 +707,7 @@ const filterSpeciesSelect = document.getElementById('filter-species');
 const filterGovSelect = document.getElementById('filter-gov');
 SPECIES.forEach(s=>{
   const opt = document.createElement('option');
-  opt.value = s.id; opt.textContent = `${s.kindLabel==='سمك'?'🐟':'🌿'} ${s.name}`;
+  opt.value = s.id; opt.textContent = `${kindIcon(s.kindLabel)} ${s.name}`;
   filterSpeciesSelect.appendChild(opt);
 });
 IRAQ_GOVERNORATES.forEach(g=>{
@@ -641,6 +717,12 @@ IRAQ_GOVERNORATES.forEach(g=>{
 });
 
 let mapMarkerRefs = []; // {marker, species, gov}
+function speciesDisplayName(rep){
+  if(rep.species === 'other') return rep.species_other_name || 'نوع غير معروف (مقترح من مستخدم)';
+  const sp = SPECIES.find(s=>s.id===rep.species);
+  return sp ? sp.name : rep.species;
+}
+
 let ALL_REPORTS = []; // يُملأ لاحقاً من Supabase — يُعلن هنا لتفادي استخدامه قبل التصريح
 function applyMapFilters(){
   const fSpecies = filterSpeciesSelect.value;
@@ -763,11 +845,20 @@ document.getElementById('rp-paste-btn').addEventListener('click', ()=>{
   }
 });
 
+const rpSpeciesOtherInput = document.getElementById('rp-species-other');
+rpSelect.addEventListener('change', ()=>{
+  rpSpeciesOtherInput.style.display = rpSelect.value==='other' ? 'block' : 'none';
+  checkFormReady();
+});
+
 function checkFormReady(){
-  const ready = pickedLatLng && rpSelect.value && rpGovSelect.value && document.getElementById('rp-place').value.trim();
+  const speciesOk = rpSelect.value==='other'
+    ? rpSpeciesOtherInput.value.trim().length > 1
+    : !!rpSelect.value;
+  const ready = pickedLatLng && speciesOk && rpGovSelect.value && document.getElementById('rp-place').value.trim();
   document.getElementById('rp-submit').disabled = !ready;
 }
-rpSelect.addEventListener('change', checkFormReady);
+rpSpeciesOtherInput.addEventListener('input', checkFormReady);
 rpGovSelect.addEventListener('change', checkFormReady);
 document.getElementById('rp-place').addEventListener('input', checkFormReady);
 
@@ -881,7 +972,7 @@ function generateShareCardImage(rep){
     }
     ctx.fillStyle = '#f1e9d2';
     ctx.font = '700 46px Amiri, serif';
-    ctx.fillText(sp?sp.name:rep.species, 540, 850);
+    ctx.fillText(speciesDisplayName(rep), 540, 850);
     ctx.fillStyle = '#9fbfb9';
     ctx.font = '400 28px Tajawal, sans-serif';
     ctx.fillText(`📍 ${rep.place}${rep.governorate?' — محافظة '+rep.governorate:''}`, 540, 900);
@@ -949,7 +1040,7 @@ function renderReportsList(){
     return `<div class="report-item">
         ${rep.photo?`<img src="${rep.photo}" alt="">`:''}
         <div class="report-item-body">
-          <b>${sp?sp.name:rep.species}</b> — ${rep.place}${rep.governorate?` (${rep.governorate})`:''}
+          <b>${speciesDisplayName(rep)}</b> — ${rep.place}${rep.governorate?` (${rep.governorate})`:''}
           <div class="meta">${rep.notes?rep.notes+' · ':''}${new Date(rep.created_at).toLocaleDateString('ar-IQ')}</div>
           <div class="coords">📍 ${rep.lat.toFixed(5)}, ${rep.lng.toFixed(5)}</div>
           <div class="report-actions">
@@ -959,6 +1050,33 @@ function renderReportsList(){
         </div>
       </div>`;
   }).join('');
+}
+
+function renderCommunitySpecies(){
+  const section = document.getElementById('community-species-section');
+  const grid = document.getElementById('community-species-grid');
+  if(!section || !grid) return;
+  const others = ALL_REPORTS.filter(r=>r.species==='other' && r.species_other_name && r.species_other_name.trim());
+  if(others.length===0){ section.style.display='none'; return; }
+
+  const groups = {};
+  others.forEach(r=>{
+    const key = r.species_other_name.trim().toLowerCase();
+    if(!groups[key]) groups[key] = { name:r.species_other_name.trim(), count:0, photo:null, places:[] };
+    groups[key].count++;
+    if(!groups[key].photo && r.photo) groups[key].photo = r.photo;
+    if(r.place) groups[key].places.push(r.place);
+  });
+
+  section.style.display = 'block';
+  grid.innerHTML = Object.values(groups).map(g=>`
+    <div class="card" style="cursor:default;">
+      <span class="kind-badge">🆕 مقترح</span>
+      ${g.photo ? `<img class="card-photo" src="${g.photo}" alt="${g.name}">` : ''}
+      <h3>${g.name}</h3>
+      <p style="font-size:13.5px;color:var(--muted);line-height:1.8;margin:0;">أبلغ عنه ${g.count} ${g.count===1?'مستخدم':'مستخدمين'} — أماكن الرصد: ${[...new Set(g.places)].slice(0,3).join('، ')}${g.places.length>3?'...':''}</p>
+    </div>
+  `).join('');
 }
 
 async function loadCommunityReports(map, iconFn){
@@ -974,14 +1092,14 @@ async function loadCommunityReports(map, iconFn){
     ALL_REPORTS = reports || [];
     renderStats();
     ALL_REPORTS.forEach(rep=>{
-      const sp = SPECIES.find(s=>s.id===rep.species);
       const marker = L.marker([rep.lat,rep.lng], {icon:iconFn('#4fb0a5')})
         .addTo(map)
-        .bindPopup(`<b>${sp?sp.name:rep.species}</b><br>${rep.place}${rep.photo?`<br><img src="${rep.photo}" style="width:120px;border-radius:8px;margin-top:6px;">`:''}<br><span style="color:#666">${rep.notes||''}</span>`);
+        .bindPopup(`<b>${speciesDisplayName(rep)}</b><br>${rep.place}${rep.photo?`<br><img src="${rep.photo}" style="width:120px;border-radius:8px;margin-top:6px;">`:''}<br><span style="color:#666">${rep.notes||''}</span>`);
       mapMarkerRefs.push({marker, species:rep.species, gov:rep.governorate||null});
       rep.__marker = marker;
     });
     renderReportsList();
+    renderCommunitySpecies();
 
     // دعم رابط مشاركة مباشر ?report=ID
     const params = new URLSearchParams(location.search);
@@ -1022,6 +1140,7 @@ document.getElementById('rp-submit').addEventListener('click', async ()=>{
   btn.disabled = true; btn.textContent = 'جارٍ الإضافة...';
   const report = {
     species: rpSelect.value,
+    species_other_name: rpSelect.value==='other' ? rpSpeciesOtherInput.value.trim() : null,
     governorate: rpGovSelect.value || null,
     place: document.getElementById('rp-place').value.trim(),
     notes: document.getElementById('rp-notes').value.trim() || null,
