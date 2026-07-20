@@ -9,10 +9,10 @@ const SPECIES = [
     id:'catfish', kind:'fish', kindLabel:'سمك',
     name:'السلور الأفريقي (القرموط الإفريقي)', latin:'Clarias gariepinus',
     threat:70,
-    image:'https://commons.wikimedia.org/wiki/Special:FilePath/Ikan_lele_dumbo_(4).JPG?width=800',
+    image:'https://commons.wikimedia.org/wiki/Special:FilePath/Ikan_lele_dumbo_(4).JPG?width=1000',
     imageCredit:'Wagino 20100516 — Wikimedia Commons (CC BY-SA 3.0)',
     lookalike:{name:'الجري العراقي (سمك الشلك)', latin:'Silurus triostegus',
-      image:'https://commons.wikimedia.org/wiki/Special:FilePath/Silurus_triostegus.jpg?width=500',
+      image:'https://commons.wikimedia.org/wiki/Special:FilePath/Silurus_triostegus.jpg?width=700',
       imageCredit:'Wikimedia Commons',
       howToTell:'الجري المحلي جسمه أكثر انسيابياً وأملس بدون زعنفة ظهرية بارزة، وله شاربان طويلان فقط (وليس أربعة أزواج كاملة). السلور الأفريقي يتميز بزعنفة ظهرية طويلة تمتد على كامل الجسم تقريباً، وأربعة أزواج شوارب واضحة حول الفم.'},
     source:{label:'تقرير: الجزيرة نت — "سمك دخيل يهدد التنوع البيئي بالعراق"', creator:0},
@@ -36,10 +36,10 @@ const SPECIES = [
     id:'tilapia', kind:'fish', kindLabel:'سمك',
     name:'البلطي (سمك المشط)', latin:'Oreochromis spp.',
     threat:65,
-    image:'https://commons.wikimedia.org/wiki/Special:FilePath/Oreochromis-niloticus-Nairobi.JPG?width=800',
+    image:'https://commons.wikimedia.org/wiki/Special:FilePath/Oreochromis-niloticus-Nairobi.JPG?width=1000',
     imageCredit:'Bjørn Christian Tørrissen — Wikimedia Commons (CC BY-SA 3.0)',
     lookalike:{name:'البني (الشبوط العراقي)', latin:'Barbus/Luciobarbus spp.',
-      image:'https://commons.wikimedia.org/wiki/Special:FilePath/Luciobarbus_xanthopterus_Iran.JPG?width=500',
+      image:'https://commons.wikimedia.org/wiki/Special:FilePath/Luciobarbus_xanthopterus_Iran.JPG?width=700',
       imageCredit:'Wikimedia Commons',
       howToTell:'البني جسمه أطول وأكثر استطالة بلون فضي-ذهبي وزعانف حمراء أو برتقالية عند القاعدة، وله شاربان صغيران عند الفم. البلطي جسمه أقصر وأكثر استدارة (بيضاوي)، بلا شوارب، وزعنفته الظهرية طويلة ذات أشواك حادة واضحة.'},
     summary:'من أسرع الأسماك الدخيلة انتشاراً في الأنهار العراقية، ويُوصف بأنه ينافس بشراسة الأنواع المحلية كالكارب والبني.',
@@ -62,10 +62,10 @@ const SPECIES = [
     id:'hyacinth', kind:'plant', kindLabel:'نبات',
     name:'زهرة النيل (ياقوت الماء)', latin:'Eichhornia crassipes',
     threat:85,
-    image:'https://commons.wikimedia.org/wiki/Special:FilePath/Eichhornia_crassipes-water_hyacinth.jpg?width=800',
+    image:'https://commons.wikimedia.org/wiki/Special:FilePath/Eichhornia_crassipes-water_hyacinth.jpg?width=1000',
     imageCredit:'U.S. Army Corps of Engineers — Wikimedia Commons (ملكية عامة)',
     lookalike:{name:'عدس الماء الكبير (خس الماء)', latin:'Pistia stratiotes',
-      image:'https://commons.wikimedia.org/wiki/Special:FilePath/Pistia_stratiotes_(water_lettuce)_1.JPG?width=500',
+      image:'https://commons.wikimedia.org/wiki/Special:FilePath/Pistia_stratiotes_(water_lettuce)_1.JPG?width=700',
       imageCredit:'Wikimedia Commons',
       howToTell:'خس الماء أوراقه رمادية-خضراء مخملية الملمس بدون أزهار أرجوانية بارزة، وسيقانه غير منتفخة إسفنجياً. زهرة النيل تتميز بسيقان منتفخة كالبالون تساعدها على الطفو، وأزهار أرجوانية-وردية واضحة تتوسط النبتة.'},
     summary:'نبات مائي عائم جذاب المظهر تحوّل إلى "كابوس مائي" حقيقي على ضفاف دجلة والفرات لسرعة انتشاره الهائلة.',
@@ -87,10 +87,10 @@ const SPECIES = [
     id:'hydrilla', kind:'plant', kindLabel:'نبات',
     name:'الهايدريلا (الكطل)', latin:'Hydrilla verticillata',
     threat:60,
-    image:'https://commons.wikimedia.org/wiki/Special:FilePath/Hydrilla_verticillata-1-bsi-yercaud-salem-India.jpg?width=800',
+    image:'https://commons.wikimedia.org/wiki/Special:FilePath/Hydrilla_verticillata-1-bsi-yercaud-salem-India.jpg?width=1000',
     imageCredit:'Yercaud-elango — Wikimedia Commons (CC BY-SA 4.0)',
     lookalike:{name:'ذيل القط (الحندقوق المائي)', latin:'Ceratophyllum demersum',
-      image:'https://commons.wikimedia.org/wiki/Special:FilePath/Ceratophyllum_demersum_193786838.jpg?width=500',
+      image:'https://commons.wikimedia.org/wiki/Special:FilePath/Ceratophyllum_demersum_193786838.jpg?width=700',
       imageCredit:'Wikimedia Commons',
       howToTell:'ذيل القط نبات محلي بلا جذور حقيقية (يطفو حراً تحت الماء) وأوراقه متفرعة ثنائياً بشكل ناعم كالريشة. الهايدريلا لها جذور تثبّتها بالقاع، وأوراقها مسننة الحواف بوضوح وتنمو في دوامات حول ساق مستقيم صلب نسبياً.'},
     summary:'نبات مائي مغمور دخيل وثّقته دراسات بيئية عراقية في أهوار جنوب العراق وغرب البلاد.',
@@ -112,10 +112,10 @@ const SPECIES = [
     id:'gar', kind:'fish', kindLabel:'سمك',
     name:'الجار المدرّع (سمك التمساح)', latin:'Atractosteus spatula',
     threat:55,
-    image:'https://commons.wikimedia.org/wiki/Special:FilePath/Alligator_gar_(Atractosteus_spatula).JPG?width=800',
+    image:'https://commons.wikimedia.org/wiki/Special:FilePath/Alligator_gar_(Atractosteus_spatula).JPG?width=1000',
     imageCredit:'ProjectManhattan — Wikimedia Commons (CC BY-SA 4.0)',
     lookalike:{name:'الجري العراقي (سمك الشلك)', latin:'Silurus triostegus',
-      image:'https://commons.wikimedia.org/wiki/Special:FilePath/Silurus_triostegus.jpg?width=500',
+      image:'https://commons.wikimedia.org/wiki/Special:FilePath/Silurus_triostegus.jpg?width=700',
       imageCredit:'Wikimedia Commons',
       howToTell:'الجري المحلي بلا حراشف صلبة على جسمه وفمه عريض مستدير وليس مستطيلاً، وله شاربان طويلان فقط. الجار المدرّع يتميز بفم طويل يشبه التمساح مليء بصفين من الأسنان الحادة، وجسمه مغطى بحراشف صلبة تشبه الدروع.'},
     source:{label:'توثيق أكاديمي: Mutlak, Jawad & Al-Faisal (2017)', creator:0},
@@ -139,10 +139,10 @@ const SPECIES = [
     id:'oscar', kind:'fish', kindLabel:'سمك',
     name:'الأوسكار', latin:'Astronotus ocellatus',
     threat:35,
-    image:'https://commons.wikimedia.org/wiki/Special:FilePath/Astronotus_ocellatus.jpg?width=800',
+    image:'https://commons.wikimedia.org/wiki/Special:FilePath/Astronotus_ocellatus.jpg?width=1000',
     imageCredit:'Jón Helgi Jónsson — Wikimedia Commons (صورة مميّزة، CC BY-SA)',
     lookalike:{name:'صغار البلطي الداكنة اللون', latin:'Oreochromis spp. (يافعة)',
-      image:'https://commons.wikimedia.org/wiki/Special:FilePath/Oreochromis-niloticus-Nairobi.JPG?width=500',
+      image:'https://commons.wikimedia.org/wiki/Special:FilePath/Oreochromis-niloticus-Nairobi.JPG?width=700',
       imageCredit:'Wikimedia Commons',
       howToTell:'صغار البلطي جسمها أكثر استطالة قليلاً وبلا بقعة دائرية واضحة عند قاعدة الذيل، وزعنفتها الظهرية ذات أشواك بارزة أكثر حدة. الأوسكار يتميز ببقعة دائرية بارزة "كالعين" عند قاعدة الذيل وحركة أبطأ وأكثر استدارة في الجسم.'},
     source:{label:'توثيق أكاديمي: Jawad, Al-Sheikhly & Al-Fayadhi (2022)', creator:0},
@@ -164,7 +164,7 @@ const SPECIES = [
     id:'snail', kind:'other', kindLabel:'قوقع',
     name:'القوقع الأفريقي العملاق', latin:'Lissachatina fulica',
     threat:40,
-    image:'https://commons.wikimedia.org/wiki/Special:FilePath/Giant_African_land_snail_(Achatina_fulica)_Ranomafana.jpg?width=800',
+    image:'https://commons.wikimedia.org/wiki/Special:FilePath/Giant_African_land_snail_(Achatina_fulica)_Ranomafana.jpg?width=1000',
     imageCredit:'Charlesjsharp — Wikimedia Commons (CC BY-SA 4.0)',
     lookalike:{name:'الحلزون البري المحلي', latin:'Helix spp. (قواقع محلية صغيرة)',
       image:null, imageCredit:null,
@@ -188,10 +188,10 @@ const SPECIES = [
     id:'mesquite', kind:'plant', kindLabel:'نبات',
     name:'شجرة البرسوبس (الغاف الدخيل/المسكيت)', latin:'Prosopis juliflora',
     threat:50,
-    image:'https://commons.wikimedia.org/wiki/Special:FilePath/A_scene_of_Prosopis_juliflora.JPG?width=800',
+    image:'https://commons.wikimedia.org/wiki/Special:FilePath/A_scene_of_Prosopis_juliflora.JPG?width=1000',
     imageCredit:'Thamizhpparithi Maari — Wikimedia Commons (CC BY-SA 3.0)',
     lookalike:{name:'السنط الصحراوي المحلي (الطلح)', latin:'Vachellia tortilis (Acacia tortilis)',
-      image:'https://commons.wikimedia.org/wiki/Special:FilePath/Acacia_Negev.JPG?width=500',
+      image:'https://commons.wikimedia.org/wiki/Special:FilePath/Acacia_Negev.JPG?width=700',
       imageCredit:'Wikimedia Commons',
       howToTell:'السنط المحلي تاجه مسطّح مظلي مميز (شكل مظلة عريضة)، وأشواكه أطول وأكثر تناسقاً. البرسوبس الدخيل شجيرة أكثر تفرعاً وفوضوية الشكل، بتاج غير منتظم، وأشواك أقصر وأكثر كثافة على الأغصان الصغيرة.'},
     summary:'شجرة شوكية دخيلة إلى المنطقة، أُدخلت أصلاً لأغراض التشجير لكنها انتشرت عشوائياً بالمحافظات الوسطى والجنوبية، وتستنزف المياه الجوفية وتزاحم الغطاء النباتي المحلي والمراعي الطبيعية.',
@@ -247,6 +247,13 @@ const CREATORS = [
       {label:'تيك توك', url:'https://www.tiktok.com/@mahdilaith', platform:'tiktok'}
     ],
     tag:'🎥 صانع محتوى بيئي'
+  },
+  {
+    name:'منظمة طبيعة العراق', latin:'Nature Iraq',
+    role:'أول وأكبر منظمة بيئية غير حكومية في العراق — تأسست 2003',
+    bio:'منظمة عراقية غير حكومية أسسها د. عزام العلوش عام 2003 لإعادة تأهيل أهوار جنوب العراق بعد تجفيفها، ومعتمدة لدى برنامج الأمم المتحدة للبيئة وعضو BirdLife International. تعمل على مسح التنوع الحيوي، جودة المياه، وتوثيق أكثر من 80 موقعاً حيوياً رئيسياً بالعراق، وتصدر أدلة علمية ميدانية عن الطيور والأحياء العراقية.',
+    website:'http://www.natureiraq.org',
+    tag:'🌿 منظمة بيئية رسمية'
   }
 ];
 
@@ -395,7 +402,9 @@ function renderCreators(){
   if(!grid) return;
   grid.innerHTML = CREATORS.map(c=>{
     const color = avatarColor(c.name);
-    const links = [{label:'إنستغرام', url:c.instagram, platform:'instagram'}, ...(c.extraLinks||[])];
+    const primary = c.instagram ? [{label:'إنستغرام', url:c.instagram, platform:'instagram'}]
+      : c.website ? [{label:'الموقع الرسمي', url:c.website, platform:'website'}] : [];
+    const links = [...primary, ...(c.extraLinks||[])];
     return `
     <div class="creator-card">
       <div class="creator-head">
@@ -468,7 +477,28 @@ vidUrlInput.addEventListener('input', validateVideoUrl);
 
 // ---------- استدعاء موحّد للذكاء الاصطناعي: Gemini المجاني أولاً، ثم وسيط Anthropic، ثم مسار الطوارئ ----------
 async function callAI(prompt, imageBase64, imageMediaType){
-  // 1) الخيار المجاني: Google Gemini
+  // 1) مفتاح Anthropic مباشر بالكود (أبسط إعداداً، أقل أماناً — يحتاج تحديد حد إنفاق شهري بحساب Anthropic)
+  if(window.ANTHROPIC_API_KEY){
+    const content = [];
+    if(imageBase64) content.push({ type:"image", source:{ type:"base64", media_type: imageMediaType||'image/jpeg', data: imageBase64 } });
+    content.push({ type:"text", text: prompt });
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-api-key": window.ANTHROPIC_API_KEY,
+        "anthropic-version": "2023-06-01",
+        "anthropic-dangerous-direct-browser-access": "true"
+      },
+      body: JSON.stringify({ model: "claude-sonnet-4-6", max_tokens: 500, messages: [{ role:"user", content }] })
+    });
+    const data = await response.json().catch(()=>({}));
+    if(!response.ok || data.error){
+      throw new Error((data.error && (data.error.message||JSON.stringify(data.error))) || `HTTP ${response.status} ${response.statusText}`);
+    }
+    return (data.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('\n').trim();
+  }
+  // 2) الخيار المجاني: Google Gemini
   if(window.GEMINI_API_KEY){
     const parts = [{ text: prompt }];
     if(imageBase64) parts.unshift({ inline_data: { mime_type: imageMediaType || 'image/jpeg', data: imageBase64 } });
@@ -487,7 +517,7 @@ async function callAI(prompt, imageBase64, imageMediaType){
     const cand = data.candidates && data.candidates[0];
     return ((cand && cand.content && cand.content.parts) || []).map(p=>p.text||'').join('\n').trim();
   }
-  // 2) خيار بديل مدفوع: دالة وسيطة تنادي Anthropic
+  // 3) خيار بديل مدفوع: دالة وسيطة تنادي Anthropic
   if(window.AI_PROXY_URL){
     const res = await fetch(window.AI_PROXY_URL, {
       method:'POST', headers:{'Content-Type':'application/json'},
@@ -496,7 +526,7 @@ async function callAI(prompt, imageBase64, imageMediaType){
     const data = await res.json();
     return (data.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('\n').trim();
   }
-  // 3) مسار احتياطي: يعمل فقط داخل معاينة Claude Artifacts، ولن يعمل على الموقع بعد نشره فعلياً
+  // 4) مسار احتياطي: يعمل فقط داخل معاينة Claude Artifacts، ولن يعمل على الموقع بعد نشره فعلياً
   const content = [];
   if(imageBase64) content.push({ type:"image", source:{ type:"base64", media_type: imageMediaType||'image/jpeg', data: imageBase64 } });
   content.push({ type:"text", text: prompt });
