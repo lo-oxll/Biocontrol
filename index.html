@@ -4,12 +4,36 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>رَصَد | دليل ومرصد الأنواع الغازية في مياه العراق</title>
+<meta name="description" content="دليل تفاعلي وخريطة مجتمعية للأنواع الغازية والدخيلة في أنهار وأهوار العراق — رصد، تحديد بالصورة، وطرق مكافحة آمنة بيئياً.">
+
+<!-- Open Graph (المعاينة عند المشاركة على إنستغرام/فيسبوك/واتساب) -->
+<meta id="og-title" property="og:title" content="رَصَد | دليل الأنواع الغازية في مياه العراق">
+<meta id="og-description" property="og:description" content="تتبّع الأنواع الغازية والدخيلة في دجلة والفرات والأهوار، وشارك بلاغات الرصد من منطقتك.">
+<meta id="og-image" property="og:image" content="https://commons.wikimedia.org/wiki/Special:FilePath/Eichhornia_crassipes-water_hyacinth.jpg?width=1200">
+<meta property="og:type" content="website">
+<meta id="og-url" property="og:url" content="https://lo-oxll.github.io/Biocontrol/">
+<meta name="twitter:card" content="summary_large_image">
+<!--
+  ملاحظة تقنية: هذا موقع Static (GitHub Pages) بدون خادم، لذا لا يمكن توليد
+  وسوم og: مختلفة لكل بلاغ من طرف الخادم. الكود بالأسفل (app.js) يحدّث هذه
+  الوسوم عبر JS عند فتح رابط بلاغ محدد ?report=ID، وهذا يعمل مع متصفحات
+  المستخدمين العاديين، لكن أغلب روبوتات المعاينة (فيسبوك/واتساب/إنستغرام)
+  لا تُنفّذ JavaScript فتعرض دائماً الوسوم الافتراضية أعلاه. لمعاينة مخصصة
+  حقيقية لكل بلاغ يلزم Cloudflare Worker بسيط أو خدمة SSR خارجية.
+-->
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.Default.css">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+<div id="offline-banner" class="offline-banner" style="display:none;">
+  📡 أنت غير متصل بالإنترنت حالياً. يمكنك تصفّح المحتوى المحمّل مسبقاً، وأي بلاغ تضيفه سيُحفظ على جهازك ويُرسَل تلقائياً عند عودة الاتصال.
+</div>
 
 <div class="hero">
   <div class="hero-inner">
@@ -118,6 +142,7 @@
       <button class="btn" id="rp-submit" disabled>إضافة البلاغ</button>
     </div>
 
+    <div id="offline-queue-note" class="offline-note" style="display:none;"></div>
     <div id="reports-list" class="reports-list"></div>
   </section>
 
@@ -198,6 +223,7 @@
 <footer>دليل مرجعي وتثقيفي — للإبلاغات الرسمية يُرجى مراجعة دائرة البيئة أو هيئة مساحة الأهوار في محافظتك.</footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script async src="//www.instagram.com/embed.js"></script>
 <script>
@@ -205,5 +231,13 @@
 </script>
 <script src="config.js"></script>
 <script src="app.js"></script>
+<script>
+  // تسجيل Service Worker (تخزين مؤقت أساسي + دعم عمل بدون إنترنت للمحتوى الثابت)
+  if('serviceWorker' in navigator){
+    window.addEventListener('load', ()=>{
+      navigator.serviceWorker.register('sw.js').catch(err=>console.warn('SW register failed', err));
+    });
+  }
+</script>
 </body>
 </html>

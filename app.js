@@ -290,6 +290,70 @@ function sbReadyOrWarn(){
 }
 
 // ============================================================
+// معرّف جهاز ثابت (بدون حسابات) — يُستخدم للحد من البلاغات المكررة
+// والتصويت المكرر على مستوى قاعدة البيانات، وليس فقط بالمتصفح.
+// هذا لا يعادل حساب مستخدم حقيقي (يمكن تجاوزه بمسح بيانات المتصفح)
+// لكنه أقوى بكثير من فحص localStorage وحده الذي كان يُتجاوز فوراً
+// من أدوات المطوّر بدون أي عائق.
+// ============================================================
+function getDeviceId(){
+  let id = localStorage.getItem('rasad_device_id');
+  if(!id){
+    id = (crypto.randomUUID ? crypto.randomUUID() : 'dev-' + Date.now() + '-' + Math.random().toString(36).slice(2));
+    localStorage.setItem('rasad_device_id', id);
+  }
+  return id;
+}
+const DEVICE_ID = getDeviceId();
+
+// ============================================================
+// حالة الاتصال بالإنترنت — بانر تنبيه + قائمة انتظار للبلاغات
+// ============================================================
+const offlineBanner = document.getElementById('offline-banner');
+function updateOnlineStatus(){
+  if(offlineBanner) offlineBanner.style.display = navigator.onLine ? 'none' : 'block';
+  if(navigator.onLine) syncOfflineQueue();
+}
+window.addEventListener('online', updateOnlineStatus);
+window.addEventListener('offline', updateOnlineStatus);
+
+function getOfflineQueue(){
+  try{ return JSON.parse(localStorage.getItem('rasad_offline_queue') || '[]'); }
+  catch(e){ return []; }
+}
+function saveOfflineQueue(q){
+  localStorage.setItem('rasad_offline_queue', JSON.stringify(q));
+  renderOfflineQueueNote();
+}
+function renderOfflineQueueNote(){
+  const el = document.getElementById('offline-queue-note');
+  if(!el) return;
+  const q = getOfflineQueue();
+  if(q.length === 0){ el.style.display = 'none'; return; }
+  el.style.display = 'block';
+  el.textContent = `📥 لديك ${q.length} بلاغ${q.length>1?'ات':''} محفوظ${q.length>1?'ة':''} على جهازك بانتظار الاتصال بالإنترنت ليُرسَل تلقائياً.`;
+}
+async function syncOfflineQueue(){
+  if(!sb) return;
+  const q = getOfflineQueue();
+  if(q.length === 0) return;
+  const remaining = [];
+  for(const item of q){
+    try{
+      const { error } = await sb.from(item.table).insert(item.payload);
+      if(error) throw error;
+    }catch(e){
+      console.warn('تعذّر مزامنة عنصر من قائمة الانتظار، سيُعاد المحاولة لاحقاً', e);
+      remaining.push(item);
+    }
+  }
+  saveOfflineQueue(remaining);
+  if(remaining.length < q.length) location.reload();
+}
+updateOnlineStatus();
+renderOfflineQueueNote();
+
+// ============================================================
 // TAB NAV
 // ============================================================
 document.querySelectorAll('.tab').forEach(tab=>{
@@ -669,8 +733,9 @@ async function loadVideoFeed(){
       items.filter(v=>v.lat && v.lng).forEach(v=>{
         const sp = SPECIES.find(s=>s.id===v.species);
         const marker = L.marker([v.lat, v.lng], {icon: window.__documentedIcon('#5aa9d6')})
-          .addTo(window.__leafletMap)
           .bindPopup(`🎬 ${sp?sp.name:(v.species||'فيديو')}<br>${v.place||''}<br><a href="${v.url}" target="_blank">مشاهدة الفيديو ↗</a>`);
+        const layer = window.__markerLayer || window.__leafletMap;
+        layer.addLayer ? layer.addLayer(marker) : marker.addTo(window.__leafletMap);
         mapMarkerRefs.push({marker, species:v.species||null, gov:null});
       });
     }
@@ -698,8 +763,19 @@ vidSubmitBtn.addEventListener('click', async ()=>{
     species: aiSuggestedSpecies || null,
     place: aiSuggestedPlace || null,
     lat: aiSuggestedLatLng ? aiSuggestedLatLng.lat : null,
-    lng: aiSuggestedLatLng ? aiSuggestedLatLng.lng : null
+    lng: aiSuggestedLatLng ? aiSuggestedLatLng.lng : null,
+    device_id: DEVICE_ID
   };
+
+  if(!navigator.onLine){
+    const q = getOfflineQueue();
+    q.push({ table:'videos', payload:video });
+    saveOfflineQueue(q);
+    vidSubmitBtn.textContent = 'تم الحفظ محلياً (سيُرسَل عند عودة الاتصال) ✓';
+    setTimeout(()=>location.reload(), 1200);
+    return;
+  }
+
   try{
     const { error } = await sb.from('videos').insert(video);
     if(error) throw error;
@@ -707,7 +783,11 @@ vidSubmitBtn.addEventListener('click', async ()=>{
     setTimeout(()=>location.reload(), 900);
   }catch(e){
     console.error(e);
-    vidSubmitBtn.textContent = 'حدث خطأ، حاول مجدداً';
+    if(e.message && /rate|حد أقصى|too many/i.test(e.message)){
+      vidSubmitBtn.textContent = 'وصلت للحد الأقصى المسموح به من هذا الجهاز اليوم';
+    }else{
+      vidSubmitBtn.textContent = 'حدث خطأ، حاول مجدداً';
+    }
     vidSubmitBtn.disabled = false;
   }
 });
@@ -757,13 +837,14 @@ let ALL_REPORTS = []; // يُملأ لاحقاً من Supabase — يُعلن ه
 function applyMapFilters(){
   const fSpecies = filterSpeciesSelect.value;
   const fGov = filterGovSelect.value;
+  const layer = window.__markerLayer || window.__leafletMap;
   mapMarkerRefs.forEach(ref=>{
     const matchesSpecies = !fSpecies || ref.species === fSpecies;
     const matchesGov = !fGov || ref.gov === fGov;
     const show = matchesSpecies && matchesGov;
-    const onMap = window.__leafletMap.hasLayer(ref.marker);
-    if(show && !onMap) ref.marker.addTo(window.__leafletMap);
-    if(!show && onMap) window.__leafletMap.removeLayer(ref.marker);
+    const onLayer = layer.hasLayer(ref.marker);
+    if(show && !onLayer){ layer.addLayer ? layer.addLayer(ref.marker) : ref.marker.addTo(window.__leafletMap); }
+    if(!show && onLayer){ layer.removeLayer(ref.marker); }
   });
   renderReportsList(); // القائمة النصية تحترم نفس الفلاتر
 }
@@ -803,6 +884,16 @@ function initMap(){
     attribution:'&copy; OpenStreetMap contributors', maxZoom:18
   }).addTo(map);
 
+  // تجميع النقاط (clustering) — يمنع ازدحام الخريطة بصرياً عند تراكم
+  // عشرات البلاغات في نفس المنطقة، ويتفكك تلقائياً عند التكبير.
+  const clusterGroup = (typeof L.markerClusterGroup === 'function')
+    ? L.markerClusterGroup({ maxClusterRadius:50, spiderfyOnMaxZoom:true })
+    : null;
+  if(clusterGroup) map.addLayer(clusterGroup);
+  window.__clusterGroup = clusterGroup;
+  // طبقة الإضافة الفعلية: مجموعة التجميع إن توفرت، وإلا الخريطة مباشرة (تدهور سلس)
+  window.__markerLayer = clusterGroup || map;
+
   const documentedIcon = (color)=> L.divIcon({
     className:'', html:`<div style="width:14px;height:14px;border-radius:50%;background:${color};border:2px solid #0a2b29;box-shadow:0 0 0 2px ${color}55;"></div>`,
     iconSize:[14,14], iconAnchor:[7,7]
@@ -812,8 +903,8 @@ function initMap(){
   SIGHTINGS.forEach(pt=>{
     const sp = SPECIES.find(s=>s.id===pt.species);
     const marker = L.marker([pt.lat,pt.lng], {icon:documentedIcon('#c9a227')})
-      .addTo(map)
       .bindPopup(`<b>${sp?sp.name:pt.species}</b><br>${pt.place}<br><span style="color:#666">${pt.note}</span>`);
+    window.__markerLayer.addLayer ? window.__markerLayer.addLayer(marker) : marker.addTo(map);
     mapMarkerRefs.push({marker, species:pt.species, gov:pt.gov||null});
   });
 
@@ -935,6 +1026,26 @@ function compressImage(dataUrl, maxDim, quality, cb){
 // COMMUNITY REPORTS: LOAD/SAVE (Supabase — عام لكل زوار الموقع)
 // ============================================================
 
+// تحديث وسوم og: ديناميكياً عند فتح رابط بلاغ محدد. يعمل هذا فقط في متصفح
+// المستخدم نفسه (يغيّر العنوان وبطاقة المشاركة إذا أعاد مشاركة الرابط من
+// المتصفح مباشرة)، لكنه لا يؤثر على معاينة الروابط التي تولّدها تطبيقات
+// مثل واتساب/فيسبوك/إنستغرام لأن روبوتاتها لا تُشغّل JavaScript إطلاقاً —
+// تلك التطبيقات ستستمر بعرض الوسوم الثابتة في index.html فقط.
+function updateOgTags(rep){
+  try{
+    const sp = SPECIES.find(s=>s.id===rep.species);
+    const title = `رَصَد | بلاغ رصد: ${speciesDisplayName(rep)}`;
+    const desc = `بلاغ من ${rep.place}${rep.governorate?' — محافظة '+rep.governorate:''} على خريطة رَصَد لتتبع الأنواع الغازية في مياه العراق.`;
+    document.title = title;
+    const set = (id, val)=>{ const el = document.getElementById(id); if(el) el.setAttribute('content', val); };
+    set('og-title', title);
+    set('og-description', desc);
+    set('og-url', location.href);
+    if(rep.photo) set('og-image', rep.photo);
+    else if(sp && sp.image) set('og-image', sp.image);
+  }catch(e){ console.warn('تعذّر تحديث وسوم og:', e); }
+}
+
 function renderStats(){
   const bar = document.getElementById('stats-bar');
   const govCount = new Set(ALL_REPORTS.map(r=>r.governorate).filter(Boolean)).size;
@@ -945,6 +1056,12 @@ function renderStats(){
   `;
 }
 
+// ملاحظة أمان: التأكيد المحلي (localStorage) وحده كان يُمكن تجاوزه بمسح
+// بيانات المتصفح والتصويت عدة مرات على نفس البلاغ. الآن التحقق الفعلي
+// (منع التكرار) يتم في قاعدة البيانات عبر جدول report_confirmations
+// وقيد UNIQUE(report_id, voter_id) + دالة RPC ذرّية confirm_report_once
+// (انظر supabase_migration_v2.sql). localStorage يبقى فقط لتحسين الواجهة
+// فوراً (تعطيل الزر) دون انتظار الشبكة، وليس كحماية فعلية.
 function getConfirmedSet(){
   try{ return new Set(JSON.parse(localStorage.getItem('rasad_confirmed')||'[]')); }
   catch(e){ return new Set(); }
@@ -960,9 +1077,25 @@ async function confirmReport(id, btnEl){
   if(!rep) return;
   btnEl.disabled = true;
   try{
-    const newCount = (rep.confirmations||0) + 1;
-    const { error } = await sb.from('reports').update({confirmations:newCount}).eq('id', id);
-    if(error) throw error;
+    // الدالة الذرّية بقاعدة البيانات: تُدخل صوتاً في report_confirmations
+    // (يفشل تلقائياً بقيد UNIQUE إن كان نفس voter_id قد صوّت من قبل)
+    // ثم تُعيد العدد الجديد للتأكيدات في نفس المعاملة.
+    const { data, error } = await sb.rpc('confirm_report_once', {
+      p_report_id: id,
+      p_voter_id: DEVICE_ID
+    });
+    if(error){
+      // كود 23505 = انتهاك قيد UNIQUE (صوّت مسبقاً من هذا الجهاز)
+      if(error.code === '23505' || /duplicate|unique/i.test(error.message||'')){
+        confirmed.add(id);
+        saveConfirmedSet(confirmed);
+        btnEl.textContent = `تم التأكيد مسبقاً من هذا الجهاز ✓ (${rep.confirmations||0})`;
+        btnEl.classList.add('confirmed');
+        return;
+      }
+      throw error;
+    }
+    const newCount = (data !== null && data !== undefined) ? data : (rep.confirmations||0)+1;
     rep.confirmations = newCount;
     confirmed.add(id);
     saveConfirmedSet(confirmed);
@@ -1123,8 +1256,9 @@ async function loadCommunityReports(map, iconFn){
     renderStats();
     ALL_REPORTS.forEach(rep=>{
       const marker = L.marker([rep.lat,rep.lng], {icon:iconFn('#4fb0a5')})
-        .addTo(map)
         .bindPopup(`<b>${speciesDisplayName(rep)}</b><br>${rep.place}${rep.photo?`<br><img src="${rep.photo}" style="width:120px;border-radius:8px;margin-top:6px;">`:''}<br><span style="color:#666">${rep.notes||''}</span>`);
+      const layer = window.__markerLayer || map;
+      layer.addLayer ? layer.addLayer(marker) : marker.addTo(map);
       mapMarkerRefs.push({marker, species:rep.species, gov:rep.governorate||null});
       rep.__marker = marker;
     });
@@ -1137,10 +1271,16 @@ async function loadCommunityReports(map, iconFn){
     if(targetId){
       const target = ALL_REPORTS.find(r=>r.id===targetId);
       if(target){
+        updateOgTags(target);
         document.querySelector('.tab[data-tab="map"]').click();
         setTimeout(()=>{
-          map.setView([target.lat, target.lng], 12);
-          target.__marker.openPopup();
+          const cluster = window.__clusterGroup;
+          if(cluster && cluster.zoomToShowLayer){
+            cluster.zoomToShowLayer(target.__marker, ()=>target.__marker.openPopup());
+          }else{
+            map.setView([target.lat, target.lng], 12);
+            target.__marker.openPopup();
+          }
         }, 300);
       }
     }
@@ -1162,6 +1302,9 @@ function checkRateLimit(kind, limit){
 
 document.getElementById('rp-submit').addEventListener('click', async ()=>{
   if(!sbReadyOrWarn()) return;
+  // فحص سريع من طرف المتصفح لتجربة استخدام أفضل — الفحص الحقيقي الملزم
+  // يتم في قاعدة البيانات عبر device_id (انظر supabase_migration_v2.sql)
+  // لأن أي فحص بالمتصفح وحده يمكن تجاوزه فوراً بمسح localStorage.
   if(!checkRateLimit('report', 5)){
     alert('لقد وصلت للحد الأقصى من البلاغات اليوم (5) من هذا الجهاز. حاول غداً أو استخدم جهازاً آخر.');
     return;
@@ -1175,8 +1318,19 @@ document.getElementById('rp-submit').addEventListener('click', async ()=>{
     place: document.getElementById('rp-place').value.trim(),
     notes: document.getElementById('rp-notes').value.trim() || null,
     lat: pickedLatLng.lat, lng: pickedLatLng.lng,
-    photo: reportPhotoData || null
+    photo: reportPhotoData || null,
+    device_id: DEVICE_ID
   };
+
+  if(!navigator.onLine){
+    const q = getOfflineQueue();
+    q.push({ table:'reports', payload:report });
+    saveOfflineQueue(q);
+    btn.textContent = 'تم الحفظ محلياً (سيُرسَل عند عودة الاتصال) ✓';
+    setTimeout(()=>{ location.reload(); }, 1200);
+    return;
+  }
+
   try{
     const { error } = await sb.from('reports').insert(report);
     if(error) throw error;
@@ -1184,7 +1338,11 @@ document.getElementById('rp-submit').addEventListener('click', async ()=>{
     setTimeout(()=>{ location.reload(); }, 900);
   }catch(e){
     console.error(e);
-    btn.textContent = 'حدث خطأ، حاول مجدداً';
+    if(e.message && /rate|حد أقصى|too many/i.test(e.message)){
+      btn.textContent = 'وصلت للحد الأقصى المسموح به من هذا الجهاز اليوم';
+    }else{
+      btn.textContent = 'حدث خطأ، حاول مجدداً';
+    }
     btn.disabled = false;
   }
 });
