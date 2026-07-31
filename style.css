@@ -252,6 +252,29 @@ p.body-text{line-height:2;color:var(--parchment);font-size:14.5px;margin:0;}
 .mini-btn:hover{border-color:var(--gold);color:var(--gold-soft);}
 .mini-btn.confirmed{border-color:var(--gold);color:var(--gold-soft);background:rgba(201,162,39,0.1);}
 
+/* IDENTIFY-BY-TRAITS WIZARD (no AI, pure database matching) */
+.idw-options{display:flex;gap:10px;flex-wrap:wrap;}
+.idw-btn{
+  background:var(--bg-deep);border:1px solid var(--line);color:var(--parchment);
+  padding:10px 18px;border-radius:999px;cursor:pointer;font-family:inherit;font-size:13.5px;
+  transition:.2s;
+}
+.idw-btn:hover{border-color:var(--gold);color:var(--gold-soft);}
+.idw-btn.selected{background:linear-gradient(180deg,var(--gold-soft),var(--gold));color:var(--bg-deep);border-color:var(--gold);font-weight:700;}
+.idw-question-block{margin-bottom:20px;}
+.idw-question-block .q-label{font-size:13.5px;color:var(--muted);margin-bottom:10px;display:block;}
+.idw-result-card{
+  background:var(--bg-deep);border:1px solid var(--line);border-radius:16px;padding:16px;
+  display:flex;gap:14px;align-items:center;margin-bottom:12px;cursor:pointer;transition:.2s;
+}
+.idw-result-card:hover{border-color:var(--gold);}
+.idw-result-card img{width:64px;height:64px;object-fit:cover;border-radius:10px;flex-shrink:0;}
+.idw-result-info{flex:1;}
+.idw-result-info h4{margin:0 0 6px;color:var(--parchment);font-size:16px;}
+.idw-compare{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px;}
+.idw-compare img{width:100%;height:160px;object-fit:cover;border-radius:12px;border:1px solid var(--line);}
+.idw-compare .lbl{font-size:12px;color:var(--muted);text-align:center;margin-top:6px;}
+
 /* OFFLINE */
 .offline-banner{
   background:var(--rust);color:var(--parchment);text-align:center;font-size:13px;

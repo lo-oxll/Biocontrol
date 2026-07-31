@@ -9,6 +9,7 @@ const SPECIES = [
     id:'catfish', kind:'fish', kindLabel:'سمك',
     name:'السلور الأفريقي (القرموط الإفريقي)', latin:'Clarias gariepinus',
     threat:70,
+    traits:{ bodyColorGroup:'dark', whiskers:'four-pairs', hardScales:'no', dorsalFin:'long-full-body', sizeClass:'large' },
     image:'https://commons.wikimedia.org/wiki/Special:FilePath/Ikan_lele_dumbo_(4).JPG?width=1000',
     imageCredit:'Wagino 20100516 — Wikimedia Commons (CC BY-SA 3.0)',
     lookalike:{name:'الجري العراقي (سمك الشلك)', latin:'Silurus triostegus',
@@ -36,6 +37,7 @@ const SPECIES = [
     id:'tilapia', kind:'fish', kindLabel:'سمك',
     name:'البلطي (سمك المشط)', latin:'Oreochromis spp.',
     threat:65,
+    traits:{ bodyColorGroup:'blue-gray', whiskers:'none', hardScales:'no', dorsalFin:'spiny-normal', sizeClass:'medium' },
     image:'https://commons.wikimedia.org/wiki/Special:FilePath/Oreochromis-niloticus-Nairobi.JPG?width=1000',
     imageCredit:'Bjørn Christian Tørrissen — Wikimedia Commons (CC BY-SA 3.0)',
     lookalike:{name:'البني (الشبوط العراقي)', latin:'Barbus/Luciobarbus spp.',
@@ -62,6 +64,7 @@ const SPECIES = [
     id:'hyacinth', kind:'plant', kindLabel:'نبات',
     name:'زهرة النيل (ياقوت الماء)', latin:'Eichhornia crassipes',
     threat:85,
+    traits:{ plantForm:'floating', hasFlowers:'purple-pink', inflatedStems:'yes' },
     image:'https://commons.wikimedia.org/wiki/Special:FilePath/Eichhornia_crassipes-water_hyacinth.jpg?width=1000',
     imageCredit:'U.S. Army Corps of Engineers — Wikimedia Commons (ملكية عامة)',
     lookalike:{name:'عدس الماء الكبير (خس الماء)', latin:'Pistia stratiotes',
@@ -87,6 +90,7 @@ const SPECIES = [
     id:'hydrilla', kind:'plant', kindLabel:'نبات',
     name:'الهايدريلا (الكطل)', latin:'Hydrilla verticillata',
     threat:60,
+    traits:{ plantForm:'submerged', hasFlowers:'none', leafEdge:'toothed' },
     image:'https://commons.wikimedia.org/wiki/Special:FilePath/Hydrilla_verticillata-1-bsi-yercaud-salem-India.jpg?width=1000',
     imageCredit:'Yercaud-elango — Wikimedia Commons (CC BY-SA 4.0)',
     lookalike:{name:'ذيل القط (الحندقوق المائي)', latin:'Ceratophyllum demersum',
@@ -112,6 +116,7 @@ const SPECIES = [
     id:'gar', kind:'fish', kindLabel:'سمك',
     name:'الجار المدرّع (سمك التمساح)', latin:'Atractosteus spatula',
     threat:55,
+    traits:{ bodyColorGroup:'brown-olive', whiskers:'none', hardScales:'yes', dorsalFin:'none-notable', sizeClass:'very-large' },
     image:'https://commons.wikimedia.org/wiki/Special:FilePath/Alligator_gar_(Atractosteus_spatula).JPG?width=1000',
     imageCredit:'ProjectManhattan — Wikimedia Commons (CC BY-SA 4.0)',
     lookalike:{name:'الجري العراقي (سمك الشلك)', latin:'Silurus triostegus',
@@ -139,6 +144,7 @@ const SPECIES = [
     id:'oscar', kind:'fish', kindLabel:'سمك',
     name:'الأوسكار', latin:'Astronotus ocellatus',
     threat:35,
+    traits:{ bodyColorGroup:'dark', whiskers:'none', hardScales:'no', dorsalFin:'eye-spot-base', sizeClass:'small' },
     image:'https://commons.wikimedia.org/wiki/Special:FilePath/Astronotus_ocellatus.jpg?width=1000',
     imageCredit:'Jón Helgi Jónsson — Wikimedia Commons (صورة مميّزة، CC BY-SA)',
     lookalike:{name:'صغار البلطي الداكنة اللون', latin:'Oreochromis spp. (يافعة)',
@@ -164,6 +170,7 @@ const SPECIES = [
     id:'snail', kind:'other', kindLabel:'قوقع',
     name:'القوقع الأفريقي العملاق', latin:'Lissachatina fulica',
     threat:40,
+    traits:{ sizeClass:'large', shellShape:'conical-elongated' },
     image:'https://commons.wikimedia.org/wiki/Special:FilePath/Giant_African_land_snail_(Achatina_fulica)_Ranomafana.jpg?width=1000',
     imageCredit:'Charlesjsharp — Wikimedia Commons (CC BY-SA 4.0)',
     lookalike:{name:'الحلزون البري المحلي', latin:'Helix spp. (قواقع محلية صغيرة)',
@@ -188,6 +195,7 @@ const SPECIES = [
     id:'mesquite', kind:'plant', kindLabel:'نبات',
     name:'شجرة البرسوبس (الغاف الدخيل/المسكيت)', latin:'Prosopis juliflora',
     threat:50,
+    traits:{ plantForm:'tree', thornySpiny:'dense-short', crownShape:'irregular' },
     image:'https://commons.wikimedia.org/wiki/Special:FilePath/A_scene_of_Prosopis_juliflora.JPG?width=1000',
     imageCredit:'Thamizhpparithi Maari — Wikimedia Commons (CC BY-SA 3.0)',
     lookalike:{name:'السنط الصحراوي المحلي (الطلح)', latin:'Vachellia tortilis (Acacia tortilis)',
@@ -1348,68 +1356,220 @@ document.getElementById('rp-submit').addEventListener('click', async ()=>{
 });
 
 // ============================================================
-// PHOTO ID (identification tool, separate from report photo)
+// تحديد النوع حسب المواصفات — بدون ذكاء اصطناعي، مطابقة محلية
+// بالكامل مع قاعدة بيانات الأنواع (حقل traits بكل عنصر SPECIES).
+// لا يوجد أي طلب شبكة هنا؛ كل شيء يعمل داخل المتصفح فقط.
 // ============================================================
-const dropZone = document.getElementById('drop-zone');
-const fileInput = document.getElementById('file-input');
-const previewImg = document.getElementById('preview-img');
-const dropPlaceholder = document.getElementById('drop-placeholder');
-const analyzeBtn = document.getElementById('analyze-btn');
-const idResult = document.getElementById('id-result');
-let currentImageBase64 = null, currentImageMedia = null;
+const IDW_QUESTIONS = {
+  fish:[
+    { key:'bodyColorGroup', q:'ما اللون العام للجسم؟', options:[
+      {v:'dark', l:'رمادي غامق إلى أسود'},
+      {v:'blue-gray', l:'رمادي مزرق فاتح'},
+      {v:'brown-olive', l:'بني إلى زيتوني مع بقع داكنة'}
+    ]},
+    { key:'whiskers', q:'هل له شوارب واضحة حول الفم؟', options:[
+      {v:'four-pairs', l:'نعم، أربعة أزواج'},
+      {v:'none', l:'لا يوجد شوارب'}
+    ]},
+    { key:'hardScales', q:'هل جسمه مغطى بحراشف صلبة كالدروع؟', options:[
+      {v:'yes', l:'نعم'}, {v:'no', l:'لا، جلده أملس أو بحراشف عادية'}
+    ]},
+    { key:'dorsalFin', q:'كيف تصف زعنفته الظهرية؟', options:[
+      {v:'long-full-body', l:'طويلة جداً تمتد على كل الجسم تقريباً'},
+      {v:'spiny-normal', l:'عادية بأشواك حادة بالمقدمة'},
+      {v:'eye-spot-base', l:'عادية، مع بقعة دائرية بارزة عند قاعدة الذيل'},
+      {v:'none-notable', l:'لا شيء مميز فيها'}
+    ]},
+    { key:'sizeClass', q:'ما الحجم التقريبي؟', options:[
+      {v:'small', l:'صغير (أقل من 20 سم)'},
+      {v:'medium', l:'متوسط (20-60 سم)'},
+      {v:'large', l:'كبير (60-100 سم)'},
+      {v:'very-large', l:'كبير جداً (أكثر من متر)'}
+    ]}
+  ],
+  plant:[
+    { key:'plantForm', q:'ما الشكل العام للنبات؟', options:[
+      {v:'floating', l:'يطفو حراً على سطح الماء'},
+      {v:'submerged', l:'مغمور بالكامل تحت الماء'},
+      {v:'tree', l:'شجرة أو شجيرة في التربة (ليس بالماء)'}
+    ]},
+    { key:'hasFlowers', q:'هل له أزهار بارزة؟', options:[
+      {v:'purple-pink', l:'نعم، أرجوانية-وردية'},
+      {v:'none', l:'لا يوجد أزهار بارزة'}
+    ]},
+    { key:'inflatedStems', q:'هل سيقانه منتفخة كالبالون تساعده على الطفو؟', options:[
+      {v:'yes', l:'نعم'}, {v:'no', l:'لا'}
+    ]},
+    { key:'leafEdge', q:'شكل حواف الأوراق (للنباتات المغمورة)؟', options:[
+      {v:'toothed', l:'مسننة بوضوح'}, {v:'smooth', l:'ناعمة/ريشية بدون تسنين'}
+    ]},
+    { key:'thornySpiny', q:'هل عليه أشواك؟ (للأشجار والشجيرات فقط)', options:[
+      {v:'dense-short', l:'أشواك كثيفة قصيرة'},
+      {v:'long-orderly', l:'أشواك طويلة منتظمة'},
+      {v:'none', l:'لا توجد أشواك'}
+    ]}
+  ],
+  other:[
+    { key:'sizeClass', q:'ما الحجم التقريبي؟', options:[
+      {v:'small', l:'صغير (أقل من 5 سم)'},
+      {v:'large', l:'كبير (أكثر من 15-20 سم)'}
+    ]},
+    { key:'shellShape', q:'شكل القوقعة/الصدفة إن وُجدت؟', options:[
+      {v:'conical-elongated', l:'مخروطية مستطيلة'},
+      {v:'other', l:'شكل آخر أو لا توجد قوقعة'}
+    ]}
+  ]
+};
+const IDW_KIND_LABELS = { fish:'🐟 سمك', plant:'🌿 نبات', other:'🐌 قوقع / كائن آخر' };
 
-dropZone.addEventListener('click', ()=>fileInput.click());
-dropZone.addEventListener('dragover', e=>{e.preventDefault(); dropZone.style.borderColor='var(--gold)';});
-dropZone.addEventListener('dragleave', ()=>{dropZone.style.borderColor='var(--line)';});
-dropZone.addEventListener('drop', e=>{
-  e.preventDefault(); dropZone.style.borderColor='var(--line)';
-  if(e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
-});
-fileInput.addEventListener('change', e=>{ if(e.target.files[0]) handleFile(e.target.files[0]); });
+let idwKind = null;
+let idwAnswers = {};
+let idwPhotoData = null;
 
-function handleFile(file){
-  if(!file.type.startsWith('image/')) return;
-  const reader = new FileReader();
-  reader.onload = ()=>{
-    const dataUrl = reader.result;
-    currentImageBase64 = dataUrl.split(',')[1];
-    currentImageMedia = file.type;
-    previewImg.src = dataUrl;
-    previewImg.style.display='block';
-    dropPlaceholder.style.display='none';
-    analyzeBtn.style.display='inline-block';
-    idResult.style.display='none';
-  };
-  reader.readAsDataURL(file);
+function idwRenderKindStep(){
+  const box = document.getElementById('idw-kind-options');
+  box.innerHTML = Object.keys(IDW_KIND_LABELS).map(k=>
+    `<button type="button" class="idw-btn" data-kind="${k}">${IDW_KIND_LABELS[k]}</button>`
+  ).join('');
+  box.querySelectorAll('.idw-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      idwKind = btn.dataset.kind;
+      idwAnswers = {};
+      box.querySelectorAll('.idw-btn').forEach(b=>b.classList.remove('selected'));
+      btn.classList.add('selected');
+      idwRenderQuestions();
+      document.getElementById('idw-questions-step').style.display = 'block';
+      document.getElementById('idw-photo-box').style.display = 'block';
+      document.getElementById('idw-results').style.display = 'none';
+    });
+  });
 }
 
-analyzeBtn.addEventListener('click', async ()=>{
-  if(!currentImageBase64) return;
-  analyzeBtn.disabled = true;
-  analyzeBtn.innerHTML = 'جارٍ التحليل <span class="spinner"></span>';
-  idResult.style.display='block';
-  idResult.textContent = '...';
+function idwRenderQuestions(){
+  const wrap = document.getElementById('idw-questions');
+  const questions = IDW_QUESTIONS[idwKind] || [];
+  wrap.innerHTML = questions.map(q=>`
+    <div class="idw-question-block">
+      <span class="q-label">${q.q}</span>
+      <div class="idw-options" data-key="${q.key}">
+        ${q.options.map(o=>`<button type="button" class="idw-btn" data-value="${o.v}">${o.l}</button>`).join('')}
+        <button type="button" class="idw-btn" data-value="">غير متأكد — تخطَّ</button>
+      </div>
+    </div>
+  `).join('');
+  wrap.querySelectorAll('.idw-options').forEach(group=>{
+    const key = group.dataset.key;
+    group.querySelectorAll('.idw-btn').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        group.querySelectorAll('.idw-btn').forEach(b=>b.classList.remove('selected'));
+        btn.classList.add('selected');
+        if(btn.dataset.value) idwAnswers[key] = btn.dataset.value;
+        else delete idwAnswers[key];
+      });
+    });
+  });
+}
 
-  const speciesBrief = SPECIES.map(s=>`- ${s.name} (${s.latin}): ${s.features.join('؛ ')}`).join('\n');
-  const prompt = `أنت مختص بيئي عراقي. لديك صورة لكائن مائي (سمكة أو نبات) من نهر أو هور أو بحيرة في العراق.
-قارن الصورة بخصائص هذه الأنواع الغازية/الدخيلة الموثقة في العراق:
-${speciesBrief}
+function idwComputeMatches(){
+  const candidates = SPECIES.filter(s=>s.kind===idwKind && s.traits);
+  const answeredKeys = Object.keys(idwAnswers);
+  const scored = candidates.map(s=>{
+    let score = 0, applicable = 0;
+    answeredKeys.forEach(key=>{
+      const traitVal = s.traits[key];
+      if(traitVal === undefined) return; // السؤال غير مرتبط بهذا النوع أصلاً — لا يُحتسب لا سلباً ولا إيجاباً
+      applicable++;
+      if(traitVal === idwAnswers[key]) score += 2;
+      else score -= 1;
+    });
+    const maxScore = applicable * 2;
+    const pct = maxScore > 0 ? Math.max(0, Math.round((score / maxScore) * 100)) : 0;
+    return { species:s, pct, applicable };
+  });
+  return scored
+    .filter(r=>r.applicable > 0)
+    .sort((a,b)=>b.pct - a.pct)
+    .slice(0, 3);
+}
 
-أعطِ إجابة موجزة باللغة العربية بالتنسيق التالي بالضبط:
-النوع المرجّح: [اسم النوع أو "غير مطابق لأي من الأنواع الأربعة الموثقة"]
-درجة الثقة: [منخفضة/متوسطة/عالية]
-سبب التحديد: [جملتان توضحان العلامات البصرية التي دعمت أو استبعدت كل نوع]
-الإجراء الموصى به: [نصيحة عملية قصيرة]
+function idwRenderResults(){
+  const results = idwComputeMatches();
+  const box = document.getElementById('idw-results');
+  box.style.display = 'block';
 
-إذا لم تكن الصورة واضحة بما يكفي أو لا تُظهر كائناً مائياً، وضّح ذلك بدلاً من التخمين.`;
-
-  try{
-    const text = await callAI(prompt, currentImageBase64, currentImageMedia);
-    idResult.textContent = text || 'تعذّر الحصول على نتيجة، حاول بصورة أخرى.';
-  }catch(e){
-    console.error(e);
-    idResult.textContent = `حدث خطأ أثناء التحليل:\n${e.message || e}\n\nإذا كان الخطأ يذكر "API key" أو "referer" أو "403"، راجع قيود المفتاح بـ Google AI Studio. وإذا كان يذكر "CORS" أو "Failed to fetch"، تأكد من اتصال الإنترنت.`;
+  if(Object.keys(idwAnswers).length === 0){
+    box.innerHTML = `<p style="color:var(--muted);font-size:13px;">أجب عن سؤال واحد على الأقل لعرض النتائج.</p>`;
+    return;
   }
-  analyzeBtn.disabled = false;
-  analyzeBtn.textContent = 'تحليل صورة أخرى';
+  if(results.length === 0 || results[0].pct === 0){
+    box.innerHTML = `<p style="color:var(--muted);font-size:13px;">لا يوجد تطابق واضح ضمن الأنواع الموثّقة في هذا الدليل حتى الآن بناءً على إجاباتك. قد يكون نوعاً محلياً غير غازٍ، أو نوعاً جديداً لم يُوثَّق بعد — يمكنك إضافته كبلاغ "نوع آخر" من تبويب الخريطة.</p>`;
+    return;
+  }
+
+  box.innerHTML = `<div class="block-title">أقرب الأنواع تطابقاً مع إجاباتك</div>` +
+    results.map(r=>`
+      <div class="idw-result-card" data-id="${r.species.id}">
+        ${r.species.image ? `<img src="${r.species.image}" alt="${r.species.name}">` : ''}
+        <div class="idw-result-info">
+          <h4>${r.species.name} <span class="latin">${r.species.latin}</span></h4>
+          <div class="gauge-row" style="margin-top:6px;">
+            <div class="gauge-track"><div class="gauge-fill" style="width:${r.pct}%;background:${threatColor(r.pct)}"></div></div>
+            <span class="gauge-label">تطابق ${r.pct}%</span>
+          </div>
+        </div>
+      </div>
+    `).join('') +
+    `<p class="hint" style="margin-top:6px;">هذا تحديد استرشادي مبني على مقارنة مواصفات مع قاعدة بيانات محلية، وليس تحليلاً بصرياً حقيقياً للصورة — اضغط على أي نتيجة لعرض تفاصيلها الكاملة وصور مرجعية للمقارنة اليدوية بعينك.</p>`;
+
+  box.querySelectorAll('.idw-result-card').forEach(card=>{
+    card.addEventListener('click', ()=>{
+      document.querySelector('.tab[data-tab="species"]').click();
+      setTimeout(()=>showDetail(card.dataset.id), 150);
+    });
+  });
+
+  // مقارنة يدوية مع صورة المستخدم إن أُرفقت
+  if(idwPhotoData && results[0]){
+    const top = results[0].species;
+    box.innerHTML += `
+      <div class="block-title">🔍 مقارنة يدوية</div>
+      <div class="idw-compare">
+        <div><img src="${idwPhotoData}"><div class="lbl">صورتك</div></div>
+        <div>${top.image?`<img src="${top.image}">`:''}<div class="lbl">${top.name} (الأقرب تطابقاً)</div></div>
+      </div>`;
+  }
+}
+
+document.getElementById('idw-compute-btn').addEventListener('click', idwRenderResults);
+document.getElementById('idw-restart-btn').addEventListener('click', ()=>{
+  idwKind = null; idwAnswers = {}; idwPhotoData = null;
+  document.getElementById('idw-questions-step').style.display = 'none';
+  document.getElementById('idw-photo-box').style.display = 'none';
+  document.getElementById('idw-results').style.display = 'none';
+  document.getElementById('idw-photo-preview').style.display = 'none';
+  document.getElementById('idw-photo-label').textContent = 'اضغط لإرفاق صورتك ومقارنتها يدوياً بصور الأنواع المرشّحة';
+  idwRenderKindStep();
 });
+
+// إرفاق صورة المستخدم — للعرض والمقارنة اليدوية فقط، لا تُرسَل أو تُحلَّل بأي شكل
+const idwPhotoAttach = document.getElementById('idw-photo-attach');
+const idwPhotoInput = document.getElementById('idw-photo-input');
+idwPhotoAttach.addEventListener('click', ()=>idwPhotoInput.click());
+idwPhotoInput.addEventListener('change', (e)=>{
+  const file = e.target.files[0];
+  if(!file || !file.type.startsWith('image/')) return;
+  const reader = new FileReader();
+  reader.onload = ()=>{
+    compressImage(reader.result, 480, 0.75, (compressed)=>{
+      idwPhotoData = compressed;
+      const preview = document.getElementById('idw-photo-preview');
+      preview.src = compressed;
+      preview.style.display = 'block';
+      document.getElementById('idw-photo-label').textContent = 'تم إرفاق الصورة ✓ (اضغط للتغيير)';
+      if(document.getElementById('idw-results').style.display !== 'none') idwRenderResults();
+    });
+  };
+  reader.readAsDataURL(file);
+});
+
+idwRenderKindStep();

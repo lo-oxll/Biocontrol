@@ -54,7 +54,7 @@
 <div class="tabs">
   <div class="tab active" data-tab="species">الأنواع الغازية</div>
   <div class="tab" data-tab="map">خريطة الرصد والبلاغات</div>
-  <div class="tab" data-tab="idcheck">تحديد النوع بالصورة</div>
+  <div class="tab" data-tab="idcheck">تحديد النوع بالمواصفات</div>
   <div class="tab" data-tab="control">طرق المكافحة</div>
   <div class="tab" data-tab="creators">مبدعو محتوى ومصادر</div>
 </div>
@@ -146,20 +146,35 @@
     <div id="reports-list" class="reports-list"></div>
   </section>
 
-  <!-- PHOTO ID -->
+  <!-- IDENTIFY BY TRAITS (database-driven, no AI) -->
   <section class="view" id="view-idcheck">
     <div class="section-head">
-      <h2>تحديد النوع بالصورة (بالذكاء الاصطناعي)</h2>
-      <p>ارفع صورة واضحة لسمكة أو نبات مائي مشتبه به، وسيقارنها النظام بخصائص الأنواع الغازية الموثّقة في هذا الدليل ويقترح إجراءً مناسباً. هذا تحديد استرشادي وليس بديلاً عن تأكيد مختص.</p>
+      <h2>تحديد النوع حسب المواصفات</h2>
+      <p>أجب عن بضعة أسئلة بسيطة عن شكل الكائن، وسيقارنها النظام فوراً بقاعدة بيانات الأنواع الموثّقة في هذا الدليل — كل شيء يعمل داخل متصفحك مباشرة، بدون رفع أي صورة أو بيانات لأي خادم أو خدمة ذكاء اصطناعي خارجية.</p>
     </div>
     <div class="id-panel">
-      <div class="drop" id="drop-zone">
-        <div id="drop-placeholder">📷 اضغط هنا لاختيار صورة، أو اسحبها وأفلتها</div>
-        <input type="file" id="file-input" accept="image/*" style="display:none;">
-        <img id="preview-img" style="display:none;">
+      <div id="idw-kind-step">
+        <div class="block-title">1) ما نوع الكائن الذي رصدته؟</div>
+        <div class="idw-options" id="idw-kind-options"></div>
       </div>
-      <button class="btn" id="analyze-btn" style="display:none;margin-top:16px;">تحليل الصورة</button>
-      <div id="id-result" style="display:none;" class="id-result"></div>
+
+      <div id="idw-questions-step" style="display:none;margin-top:24px;">
+        <div class="block-title">2) صف مواصفاته (تخطَّ أي سؤال لست متأكداً منه)</div>
+        <div id="idw-questions"></div>
+        <button class="btn" id="idw-compute-btn" type="button">عرض الأنواع الأقرب تطابقاً</button>
+        <button class="btn secondary" id="idw-restart-btn" type="button">إعادة البدء من جديد</button>
+      </div>
+
+      <div id="idw-photo-box" style="display:none;margin-top:22px;">
+        <div class="block-title">📷 صورتك (اختياري — للمقارنة اليدوية فقط، لا تُرسَل لأي مكان)</div>
+        <div class="photo-attach" id="idw-photo-attach">
+          <span id="idw-photo-label">اضغط لإرفاق صورتك ومقارنتها يدوياً بصور الأنواع المرشّحة</span>
+          <input type="file" id="idw-photo-input" accept="image/*" style="display:none;">
+          <img id="idw-photo-preview" style="display:none;">
+        </div>
+      </div>
+
+      <div id="idw-results" style="display:none;margin-top:26px;"></div>
     </div>
   </section>
 
