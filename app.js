@@ -3,6 +3,11 @@
 // ============================================================
 const KIND_ICON = {'سمك':'🐟','نبات':'🌿','قوقع':'🐌','حشرة':'🐛','حيوان':'🐾'};
 function kindIcon(label){ return KIND_ICON[label] || '🔶'; }
+const esc = v => String(v==null?'':v).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const safeSrc = u => /^(data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+\/=]+|https:\/\/[^\s"'<>]+)$/.test(u||'') ? esc(u) : '';
+const safeUrl = u => /^https?:\/\/[^\s"'<>]+$/i.test(u||'') ? esc(u) : '#';
+const inIraq = (la,ln) => la>=28.9 && la<=37.5 && ln>=38.7 && ln<=48.8;
+document.addEventListener('error', e=>{ if(e.target && e.target.tagName==='IMG') e.target.style.display='none'; }, true);
 
 const SPECIES = [
   {
@@ -714,22 +719,22 @@ async function loadVideoFeed(){
     gallery.innerHTML = items.map(v=>{
       let embed = '';
       if(v.platform==='instagram'){
-        embed = `<blockquote class="instagram-media" data-instgrm-permalink="${v.url}" data-instgrm-version="14" style="margin:0;"></blockquote>`;
+        embed = `<blockquote class="instagram-media" data-instgrm-permalink="${safeUrl(v.url)}" data-instgrm-version="14" style="margin:0;"></blockquote>`;
       }else if(v.platform==='tiktok'){
-        embed = `<blockquote class="tiktok-embed" cite="${v.url}" style="margin:0;max-width:100%;"><section></section></blockquote>`;
+        embed = `<blockquote class="tiktok-embed" cite="${safeUrl(v.url)}" style="margin:0;max-width:100%;"><section></section></blockquote>`;
         needsTiktok = true;
       }else if(v.platform==='youtube'){
         const id = youtubeId(v.url);
         embed = id ? `<div style="position:relative;padding-bottom:56.25%;height:0;"><iframe src="https://www.youtube.com/embed/${id}" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;border-radius:10px;" allowfullscreen></iframe></div>`
-                   : `<a href="${v.url}" target="_blank" rel="noopener">فتح الفيديو ↗</a>`;
+                   : `<a href="${safeUrl(v.url)}" target="_blank" rel="noopener">فتح الفيديو ↗</a>`;
       }else{
-        embed = `<a href="${v.url}" target="_blank" rel="noopener">فتح الفيديو ↗</a>`;
+        embed = `<a href="${safeUrl(v.url)}" target="_blank" rel="noopener">فتح الفيديو ↗</a>`;
       }
       return `
       <div class="video-card">
-        ${v.caption?`<div class="video-caption">${v.caption}</div>`:''}
+        ${v.caption?`<div class="video-caption">${esc(v.caption)}</div>`:''}
         ${embed}
-        <div class="video-meta"><span class="video-platform-badge">${labels[v.platform]||'فيديو'}</span>${v.creator_name?` ${v.creator_name} · `:''}${new Date(v.created_at).toLocaleDateString('ar-IQ')}</div>
+        <div class="video-meta"><span class="video-platform-badge">${labels[v.platform]||'فيديو'}</span>${v.creator_name?` ${esc(v.creator_name)} · `:''}${new Date(v.created_at).toLocaleDateString('ar-IQ')}</div>
       </div>`;
     }).join('');
     if(window.instgrm && window.instgrm.Embeds) window.instgrm.Embeds.process();
@@ -741,7 +746,7 @@ async function loadVideoFeed(){
       items.filter(v=>v.lat && v.lng).forEach(v=>{
         const sp = SPECIES.find(s=>s.id===v.species);
         const marker = L.marker([v.lat, v.lng], {icon: window.__documentedIcon('#5aa9d6')})
-          .bindPopup(`🎬 ${sp?sp.name:(v.species||'فيديو')}<br>${v.place||''}<br><a href="${v.url}" target="_blank">مشاهدة الفيديو ↗</a>`);
+          .bindPopup(`🎬 ${esc(sp?sp.name:(v.species||'فيديو'))}<br>${esc(v.place)}<br><a href="${safeUrl(v.url)}" target="_blank">مشاهدة الفيديو ↗</a>`);
         const layer = window.__markerLayer || window.__leafletMap;
         layer.addLayer ? layer.addLayer(marker) : marker.addTo(window.__leafletMap);
         mapMarkerRefs.push({marker, species:v.species||null, gov:null});
@@ -875,7 +880,7 @@ function setPickedLocation(lat, lng, fromMap){
   latInput.value = lat.toFixed(5);
   lngInput.value = lng.toFixed(5);
   document.getElementById('pick-note').style.color = 'var(--gold-soft)';
-  document.getElementById('pick-note').textContent = `تم تحديد الموقع: ${lat.toFixed(5)}, ${lng.toFixed(5)}`;
+  document.getElementById('pick-note').textContent = `تم تحديد الموقع: ${lat.toFixed(5)}, ${lng.toFixed(5)}` + (inIraq(lat,lng) ? '' : ' ⚠️ خارج حدود العراق');
   const map = window.__leafletMap;
   if(map){
     if(pickMarker) map.removeLayer(pickMarker);
@@ -984,7 +989,7 @@ function checkFormReady(){
   const speciesOk = rpSelect.value==='other'
     ? rpSpeciesOtherInput.value.trim().length > 1
     : !!rpSelect.value;
-  const ready = pickedLatLng && speciesOk && rpGovSelect.value && document.getElementById('rp-place').value.trim();
+  const ready = pickedLatLng && inIraq(pickedLatLng.lat, pickedLatLng.lng) && speciesOk && rpGovSelect.value && document.getElementById('rp-place').value.trim();
   document.getElementById('rp-submit').disabled = !ready;
 }
 rpSpeciesOtherInput.addEventListener('input', checkFormReady);
@@ -1003,10 +1008,12 @@ const rpPhotoLabel = document.getElementById('rp-photo-label');
 rpPhotoAttach.addEventListener('click', ()=>rpPhotoInput.click());
 rpPhotoInput.addEventListener('change', (e)=>{
   const file = e.target.files[0];
-  if(!file || !file.type.startsWith('image/')) return;
+  if(!file) return;
+  if(!/^image\/(jpeg|png|webp)$/.test(file.type)) return alert('الصيغ المدعومة: JPG / PNG / WebP');
+  if(file.size > 15e6) return alert('حجم الصورة كبير جداً (الحد 15 ميغابايت).');
   const reader = new FileReader();
   reader.onload = ()=>{
-    compressImage(reader.result, 640, 0.7, (compressed)=>{
+    compressImage(reader.result, 800, 0.75, (compressed)=>{
       reportPhotoData = compressed;
       rpPhotoPreview.src = compressed;
       rpPhotoPreview.style.display = 'block';
@@ -1209,10 +1216,10 @@ function renderReportsList(){
     const sp = SPECIES.find(s=>s.id===rep.species);
     const isConfirmed = confirmed.has(rep.id);
     return `<div class="report-item">
-        ${rep.photo?`<img src="${rep.photo}" alt="">`:''}
+        ${safeSrc(rep.photo)?`<img src="${safeSrc(rep.photo)}" alt="" loading="lazy">`:''}
         <div class="report-item-body">
-          <b>${speciesDisplayName(rep)}</b> — ${rep.place}${rep.governorate?` (${rep.governorate})`:''}
-          <div class="meta">${rep.notes?rep.notes+' · ':''}${new Date(rep.created_at).toLocaleDateString('ar-IQ')}</div>
+          <b>${esc(speciesDisplayName(rep))}</b> — ${esc(rep.place)}${rep.governorate?` (${esc(rep.governorate)})`:''}
+          <div class="meta">${rep.notes?esc(rep.notes)+' · ':''}${new Date(rep.created_at).toLocaleDateString('ar-IQ')}</div>
           <div class="coords">📍 ${rep.lat.toFixed(5)}, ${rep.lng.toFixed(5)}</div>
           <div class="report-actions">
             <button class="mini-btn ${isConfirmed?'confirmed':''}" onclick="window.__rasad_confirmReport('${rep.id}', this)">${isConfirmed?`تم التأكيد ✓ (${rep.confirmations||0})`:`✅ أنا رأيته أيضاً (${rep.confirmations||0})`}</button>
@@ -1243,9 +1250,9 @@ function renderCommunitySpecies(){
   grid.innerHTML = Object.values(groups).map(g=>`
     <div class="card" style="cursor:default;">
       <span class="kind-badge">🆕 مقترح</span>
-      ${g.photo ? `<img class="card-photo" src="${g.photo}" alt="${g.name}">` : ''}
-      <h3>${g.name}</h3>
-      <p style="font-size:13.5px;color:var(--muted);line-height:1.8;margin:0;">أبلغ عنه ${g.count} ${g.count===1?'مستخدم':'مستخدمين'} — أماكن الرصد: ${[...new Set(g.places)].slice(0,3).join('، ')}${g.places.length>3?'...':''}</p>
+      ${safeSrc(g.photo) ? `<img class="card-photo" src="${safeSrc(g.photo)}" alt="${esc(g.name)}" loading="lazy">` : ''}
+      <h3>${esc(g.name)}</h3>
+      <p style="font-size:13.5px;color:var(--muted);line-height:1.8;margin:0;">أبلغ عنه ${g.count} ${g.count===1?'مستخدم':'مستخدمين'} — أماكن الرصد: ${[...new Set(g.places)].slice(0,3).map(esc).join('، ')}${g.places.length>3?'...':''}</p>
     </div>
   `).join('');
 }
@@ -1264,7 +1271,7 @@ async function loadCommunityReports(map, iconFn){
     renderStats();
     ALL_REPORTS.forEach(rep=>{
       const marker = L.marker([rep.lat,rep.lng], {icon:iconFn('#4fb0a5')})
-        .bindPopup(`<b>${speciesDisplayName(rep)}</b><br>${rep.place}${rep.photo?`<br><img src="${rep.photo}" style="width:120px;border-radius:8px;margin-top:6px;">`:''}<br><span style="color:#666">${rep.notes||''}</span>`);
+        .bindPopup(`<b>${esc(speciesDisplayName(rep))}</b><br>${esc(rep.place)}${safeSrc(rep.photo)?`<br><img src="${safeSrc(rep.photo)}" style="width:120px;border-radius:8px;margin-top:6px;">`:''}<br><span style="color:#666">${esc(rep.notes)}</span>`);
       const layer = window.__markerLayer || map;
       layer.addLayer ? layer.addLayer(marker) : marker.addTo(map);
       mapMarkerRefs.push({marker, species:rep.species, gov:rep.governorate||null});
@@ -1313,6 +1320,11 @@ document.getElementById('rp-submit').addEventListener('click', async ()=>{
   // فحص سريع من طرف المتصفح لتجربة استخدام أفضل — الفحص الحقيقي الملزم
   // يتم في قاعدة البيانات عبر device_id (انظر supabase_migration_v2.sql)
   // لأن أي فحص بالمتصفح وحده يمكن تجاوزه فوراً بمسح localStorage.
+  const dup = ALL_REPORTS.find(r=>r.species===rpSelect.value
+    && (rpSelect.value!=='other' || (r.species_other_name||'').trim().toLowerCase()===rpSpeciesOtherInput.value.trim().toLowerCase())
+    && Date.now()-new Date(r.created_at) < 864e5
+    && Math.hypot((r.lat-pickedLatLng.lat)*111, (r.lng-pickedLatLng.lng)*93) < 0.3);
+  if(dup && !confirm('يوجد بلاغ لنفس النوع قرب هذا الموقع خلال آخر 24 ساعة. الأفضل الضغط على "أنا رأيته أيضاً" في البلاغ الموجود. هل تريد المتابعة بإضافة بلاغ جديد؟')) return;
   if(!checkRateLimit('report', 5)){
     alert('لقد وصلت للحد الأقصى من البلاغات اليوم (5) من هذا الجهاز. حاول غداً أو استخدم جهازاً آخر.');
     return;
@@ -1323,8 +1335,8 @@ document.getElementById('rp-submit').addEventListener('click', async ()=>{
     species: rpSelect.value,
     species_other_name: rpSelect.value==='other' ? rpSpeciesOtherInput.value.trim() : null,
     governorate: rpGovSelect.value || null,
-    place: document.getElementById('rp-place').value.trim(),
-    notes: document.getElementById('rp-notes').value.trim() || null,
+    place: document.getElementById('rp-place').value.trim().slice(0,120),
+    notes: document.getElementById('rp-notes').value.trim().slice(0,500) || null,
     lat: pickedLatLng.lat, lng: pickedLatLng.lng,
     photo: reportPhotoData || null,
     device_id: DEVICE_ID

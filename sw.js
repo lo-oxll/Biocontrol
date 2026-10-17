@@ -7,7 +7,7 @@
 // إنترنت، بدل شاشة بيضاء أو خطأ متصفح.
 // ============================================================
 
-const CACHE_NAME = 'rasad-shell-v1';
+const CACHE_NAME = 'rasad-shell-v2';
 const APP_SHELL = [
   './',
   './index.html',
