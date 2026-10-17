@@ -49,6 +49,8 @@ const SPECIES = [
       image:'https://commons.wikimedia.org/wiki/Special:FilePath/Luciobarbus_xanthopterus_Iran.JPG?width=700',
       imageCredit:'Wikimedia Commons',
       howToTell:'البني جسمه أطول وأكثر استطالة بلون فضي-ذهبي وزعانف حمراء أو برتقالية عند القاعدة، وله شاربان صغيران عند الفم. البلطي جسمه أقصر وأكثر استدارة (بيضاوي)، بلا شوارب، وزعنفته الظهرية طويلة ذات أشواك حادة واضحة.'},
+    source:{label:'دراسة: عبدالله وآخرون — تركيب ووفرة الأسماك الدخيلة في المياه الداخلية جنوب العراق (Iraqi Journal of Science)', url:'https://ijs.uobaghdad.edu.iq/index.php/eijs/article/view/2278'},
+    reviewed:'2026-10',
     summary:'من أسرع الأسماك الدخيلة انتشاراً في الأنهار العراقية، ويُوصف بأنه ينافس بشراسة الأنواع المحلية كالكارب والبني.',
     features:[
       'جسم بيضاوي مضغوط جانبياً بلون رمادي إلى مزرق مع خطوط عمودية باهتة',
@@ -76,6 +78,8 @@ const SPECIES = [
       image:'https://commons.wikimedia.org/wiki/Special:FilePath/Pistia_stratiotes_(water_lettuce)_1.JPG?width=700',
       imageCredit:'Wikimedia Commons',
       howToTell:'خس الماء أوراقه رمادية-خضراء مخملية الملمس بدون أزهار أرجوانية بارزة، وسيقانه غير منتفخة إسفنجياً. زهرة النيل تتميز بسيقان منتفخة كالبالون تساعدها على الطفو، وأزهار أرجوانية-وردية واضحة تتوسط النبتة.'},
+    source:{label:'دراسة: Sustainability (MDPI) 2021 — زهرة النيل في العراق وتأثيرها على المجاري المائية', url:'https://www.mdpi.com/2071-1050/13/15/8274'},
+    reviewed:'2026-10',
     summary:'نبات مائي عائم جذاب المظهر تحوّل إلى "كابوس مائي" حقيقي على ضفاف دجلة والفرات لسرعة انتشاره الهائلة.',
     features:[
       'أوراق خضراء سميكة لامعة على شكل وردة عائمة فوق الماء',
@@ -102,6 +106,8 @@ const SPECIES = [
       image:'https://commons.wikimedia.org/wiki/Special:FilePath/Ceratophyllum_demersum_193786838.jpg?width=700',
       imageCredit:'Wikimedia Commons',
       howToTell:'ذيل القط نبات محلي بلا جذور حقيقية (يطفو حراً تحت الماء) وأوراقه متفرعة ثنائياً بشكل ناعم كالريشة. الهايدريلا لها جذور تثبّتها بالقاع، وأوراقها مسننة الحواف بوضوح وتنمو في دوامات حول ساق مستقيم صلب نسبياً.'},
+    source:{label:'دراسة: المياح والأسدي (2010) — النبات الدخيل Hydrilla verticillata وانتشاره في أهوار جنوب العراق (مجلة أبحاث البصرة)', url:'https://iasj.rdd.edu.iq/journals/uploads/2024/12/12/1c8d9c526227b633f183f53576e28994.pdf'},
+    reviewed:'2026-10',
     summary:'نبات مائي مغمور دخيل وثّقته دراسات بيئية عراقية في أهوار جنوب العراق وغرب البلاد.',
     features:[
       'نبات مغمور بالكامل تحت سطح الماء بسيقان طويلة متفرعة',
@@ -181,6 +187,8 @@ const SPECIES = [
     lookalike:{name:'الحلزون البري المحلي', latin:'Helix spp. (قواقع محلية صغيرة)',
       image:null, imageCredit:null,
       howToTell:'القواقع البرية المحلية بالعراق صغيرة الحجم عادة (أقل من 3-4 سم) بقواقع مخططة. القوقع الأفريقي العملاق يتميز بحجمه الضخم غير المعتاد (قد يتجاوز 20 سم) وقوقعة بنية مخروطية الشكل مستطيلة.'},
+    source:{label:'مراجعة علمية: Basic and Applied Zoology 2025 — مصنّف ضمن أسوأ 100 نوع غازٍ عالمياً (مصدر عالمي، لا يوثّق وجوده بالعراق)', url:'https://basicandappliedzoology.springeropen.com/articles/10.1186/s41936-025-00513-x'},
+    reviewed:'2026-10',
     summary:'من أخطر القواقع الغازية عالمياً، يهدد المحاصيل الزراعية والحدائق وينقل طفيليات ضارة. لم يُوثَّق انتشار مؤكَّد وواسع له بالعراق حتى الآن، لكنه مسجَّل كخطر محتمل يستدعي المراقبة المبكرة.',
     features:[
       'قوقعة بنية مخروطية الشكل مستطيلة، قد يتجاوز طولها 20 سم في الحالات الكبيرة',
@@ -207,6 +215,8 @@ const SPECIES = [
       image:'https://commons.wikimedia.org/wiki/Special:FilePath/Acacia_Negev.JPG?width=700',
       imageCredit:'Wikimedia Commons',
       howToTell:'السنط المحلي تاجه مسطّح مظلي مميز (شكل مظلة عريضة)، وأشواكه أطول وأكثر تناسقاً. البرسوبس الدخيل شجيرة أكثر تفرعاً وفوضوية الشكل، بتاج غير منتظم، وأشواك أقصر وأكثر كثافة على الأغصان الصغيرة.'},
+    source:{label:'دراسة: عثمان وآخرون (2025) — الأنواع البرية المتزايدة في البادية الغربية بالعراق، وتصنّف البرسوبس نوعاً غازياً (مجلة الأنبار للعلوم الزراعية)', url:'https://doaj.org/article/ca8863b6c7fc435184eda3c677752b73'},
+    reviewed:'2026-10',
     summary:'شجرة شوكية دخيلة إلى المنطقة، أُدخلت أصلاً لأغراض التشجير لكنها انتشرت عشوائياً بالمحافظات الوسطى والجنوبية، وتستنزف المياه الجوفية وتزاحم الغطاء النباتي المحلي والمراعي الطبيعية.',
     features:[
       'شجيرة أو شجرة شوكية يصل ارتفاعها 3-12 متراً، جذعها يتشقق مع التقدم بالعمر',
@@ -384,9 +394,50 @@ document.querySelectorAll('.tab').forEach(tab=>{
 // ============================================================
 function threatColor(v){ return v>=75?'#b5482d':v>=55?'#c9a227':'#4fb0a5'; }
 
+// ---------- شدة الانتشار الحيّة = الأساس التحريري + بلاغات المجتمع (30 يوماً) + الأخبار (90 يوماً) ----------
+// كل مكوّن محدود بسقف، ويُحسب من بلاغات غير معلّقة فقط، وعدد الأجهزة المختلفة لا عدد البلاغات.
+let LIVE_NEWS = [];
+const LIVE_D30 = 30*864e5, LIVE_D90 = 90*864e5;
+function liveThreat(sp){
+  const now = Date.now();
+  const reps = ALL_REPORTS.filter(r=>r.species===sp.id && r.status!=='pending' && now-new Date(r.created_at) < LIVE_D30);
+  const devices = new Set(reps.map(r=>r.device_id)).size;
+  const govs = new Set(reps.map(r=>r.governorate).filter(Boolean)).size;
+  const news = LIVE_NEWS.filter(n=>n.species_id===sp.id && now-new Date(n.published_at) < LIVE_D90);
+  const off = news.filter(n=>n.source_kind==='official').length;
+  const rp = Math.min(15, Math.round(3*Math.log2(1+devices) + 2*Math.max(0, govs-1)));
+  const nw = Math.min(10, 3*off + (news.length-off));
+  return { value: Math.max(5, Math.min(98, sp.baseThreat+rp+nw)), base: sp.baseThreat, rep: rp, nw, news };
+}
+function applyLiveThreat(){
+  SPECIES.forEach(sp=>{
+    if(sp.baseThreat==null) sp.baseThreat = sp.threat;
+    const t = liveThreat(sp); sp.threat = t.value; sp.live = t;
+  });
+  renderGrid();
+}
+async function loadLiveNews(){
+  if(!sb) return;
+  try{
+    const since = new Date(Date.now()-LIVE_D90).toISOString();
+    const { data, error } = await sb.from('news_items')
+      .select('species_id,title,url,source,source_kind,published_at')
+      .gte('published_at', since).order('published_at', {ascending:false}).limit(300);
+    if(!error && data) LIVE_NEWS = data;
+  }catch(e){ console.warn('news load', e); }
+  applyLiveThreat();
+}
+function liveBlock(sp){
+  const t = sp.live; if(!t) return '';
+  const sg = n=>(n>0?'+':'')+n;
+  const items = t.news.slice().sort((a,b)=>new Date(b.published_at)-new Date(a.published_at)).slice(0,3);
+  return `<div class="source-line" style="margin-top:8px;">🔄 محسوبة تلقائياً: أساس ${t.base}% · بلاغات ${sg(t.rep)} · أخبار ${sg(t.nw)}</div>`
+    + (items.length ? `<div class="block-title">آخر الأخبار المرصودة</div><ul class="clean">${items.map(n=>`<li><a href="${safeUrl(n.url)}" target="_blank" rel="noopener">${esc(n.title)}</a> <span style="color:var(--muted);font-size:12px;">— ${esc(n.source||'')} (${n.source_kind==='official'?'رسمي':'محلي'}) · ${new Date(n.published_at).toLocaleDateString('ar-IQ')}</span></li>`).join('')}</ul>` : '');
+}
+
 function renderGrid(){
   const grid = document.getElementById('species-grid');
-  grid.innerHTML = SPECIES.map(s=>`
+  grid.innerHTML = [...SPECIES].sort((a,b)=>b.threat-a.threat).map(s=>`
     <div class="card" data-id="${s.id}">
       <span class="kind-badge">${kindIcon(s.kindLabel)} ${s.kindLabel}</span>
       ${s.image ? `<img class="card-photo" src="${s.image}" alt="${s.name}">` : ''}
@@ -397,6 +448,7 @@ function renderGrid(){
         <div class="gauge-track"><div class="gauge-fill" style="width:${s.threat}%;background:${threatColor(s.threat)}"></div></div>
         <span class="gauge-label">شدة الانتشار ${s.threat}%</span>
       </div>
+      ${s.live && (s.live.rep||s.live.nw) ? `<span style="font-size:11.5px;color:var(--muted);">📈 +${s.live.rep+s.live.nw} من البلاغات والأخبار الأخيرة</span>` : ''}
     </div>
   `).join('');
   grid.querySelectorAll('.card').forEach(c=>{
@@ -422,6 +474,7 @@ function showDetail(id){
         <div class="gauge-track"><div class="gauge-fill" style="width:${s.threat}%;background:${threatColor(s.threat)}"></div></div>
         <span class="gauge-label">شدة الانتشار ${s.threat}%</span>
       </div>
+      ${liveBlock(s)}
 
       <div class="block-title">علامات التعرّف</div>
       <ul class="clean">${s.features.map(f=>`<li>${f}</li>`).join('')}</ul>
@@ -447,7 +500,7 @@ function showDetail(id){
       <div class="block-title">طرق المكافحة الموصى بها</div>
       <ul class="clean">${s.control.map(f=>`<li>${f}</li>`).join('')}</ul>
 
-      ${s.source ? `<div class="source-line">📚 ${s.source.label}${CREATORS[s.source.creator] ? ` · تابع محتوى <a href="${CREATORS[s.source.creator].instagram}" target="_blank" rel="noopener">${CREATORS[s.source.creator].name}</a> على إنستغرام` : ''}</div>` : ''}
+      ${s.source ? `<div class="source-line">📚 ${s.source.url ? `<a href="${safeUrl(s.source.url)}" target="_blank" rel="noopener">${s.source.label}</a>` : s.source.label}${CREATORS[s.source.creator] ? ` · تابع محتوى <a href="${CREATORS[s.source.creator].instagram}" target="_blank" rel="noopener">${CREATORS[s.source.creator].name}</a> على إنستغرام` : ''}${s.reviewed ? ` · آخر مراجعة: ${esc(s.reviewed)}` : ''}</div>` : ''}
     </div>
   `;
   document.getElementById('back-btn').addEventListener('click', ()=>{
@@ -1063,9 +1116,9 @@ function updateOgTags(rep){
 
 function renderStats(){
   const bar = document.getElementById('stats-bar');
-  const govCount = new Set(ALL_REPORTS.map(r=>r.governorate).filter(Boolean)).size;
+  const govCount = new Set(ALL_REPORTS.filter(r=>r.status!=='pending').map(r=>r.governorate).filter(Boolean)).size;
   bar.innerHTML = `
-    <div class="stat-chip"><span class="num">${ALL_REPORTS.length}</span><span class="lbl">بلاغ مجتمعي</span></div>
+    <div class="stat-chip"><span class="num">${ALL_REPORTS.filter(r=>r.status!=='pending').length}</span><span class="lbl">بلاغ مجتمعي</span></div>
     <div class="stat-chip"><span class="num">${govCount} / ${IRAQ_GOVERNORATES.length}</span><span class="lbl">محافظة مشمولة</span></div>
     <div class="stat-chip"><span class="num">${SIGHTINGS.length}</span><span class="lbl">رصد موثّق (مصادر بيئية)</span></div>
   `;
@@ -1164,6 +1217,7 @@ function generateShareCardImage(rep){
   if(rep.photo){
     return new Promise(resolve=>{
       const img = new Image();
+      img.crossOrigin = 'anonymous';
       img.onload = ()=> resolve(drawPhoto(img));
       img.onerror = ()=> resolve(drawPhoto(null));
       img.src = rep.photo;
@@ -1219,10 +1273,10 @@ function renderReportsList(){
         ${safeSrc(rep.photo)?`<img src="${safeSrc(rep.photo)}" alt="" loading="lazy">`:''}
         <div class="report-item-body">
           <b>${esc(speciesDisplayName(rep))}</b> — ${esc(rep.place)}${rep.governorate?` (${esc(rep.governorate)})`:''}
-          <div class="meta">${rep.notes?esc(rep.notes)+' · ':''}${new Date(rep.created_at).toLocaleDateString('ar-IQ')}</div>
+          <div class="meta">${rep.status==='pending'?'⏳ بانتظار التحقق (يلزم 3 تأكيدات) · ':''}${rep.notes?esc(rep.notes)+' · ':''}${new Date(rep.created_at).toLocaleDateString('ar-IQ')}</div>
           <div class="coords">📍 ${rep.lat.toFixed(5)}, ${rep.lng.toFixed(5)}</div>
           <div class="report-actions">
-            <button class="mini-btn ${isConfirmed?'confirmed':''}" onclick="window.__rasad_confirmReport('${rep.id}', this)">${isConfirmed?`تم التأكيد ✓ (${rep.confirmations||0})`:`✅ أنا رأيته أيضاً (${rep.confirmations||0})`}</button>
+            <button class="mini-btn ${isConfirmed?'confirmed':''}" ${rep.device_id===DEVICE_ID?'disabled title="لا يمكنك تأكيد بلاغك بنفسك"':''} onclick="window.__rasad_confirmReport('${rep.id}', this)">${isConfirmed?`تم التأكيد ✓ (${rep.confirmations||0})`:`✅ أنا رأيته أيضاً (${rep.confirmations||0})`}</button>
             <button class="mini-btn" onclick="window.__rasad_shareReport('${rep.id}')">📤 مشاركة</button>
           </div>
         </div>
@@ -1230,18 +1284,32 @@ function renderReportsList(){
   }).join('');
 }
 
+function exportReportsCSV(){
+  const cols = ['id','species','species_other_name','governorate','place','lat','lng','notes','confirmations','created_at'];
+  const cell = v=>{ let t = v==null ? '' : String(v); if(/^[=+\-@\t\r]/.test(t)) t = "'" + t; return '"' + t.replace(/"/g,'""') + '"'; };
+  const rows = ALL_REPORTS.filter(r=>r.status!=='pending').map(r=>cols.map(c=>cell(r[c])).join(','));
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob(['\ufeff' + cols.join(',') + '\n' + rows.join('\n')], {type:'text/csv;charset=utf-8'}));
+  a.download = `rasad-reports-${new Date().toISOString().slice(0,10)}.csv`;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(a.href), 1000);
+}
+const exportBtn = document.getElementById('export-csv');
+if(exportBtn) exportBtn.addEventListener('click', exportReportsCSV);
+
 function renderCommunitySpecies(){
   const section = document.getElementById('community-species-section');
   const grid = document.getElementById('community-species-grid');
   if(!section || !grid) return;
-  const others = ALL_REPORTS.filter(r=>r.species==='other' && r.species_other_name && r.species_other_name.trim());
+  const others = ALL_REPORTS.filter(r=>r.status!=='pending' && r.species==='other' && r.species_other_name && r.species_other_name.trim());
   if(others.length===0){ section.style.display='none'; return; }
 
   const groups = {};
   others.forEach(r=>{
     const key = r.species_other_name.trim().toLowerCase();
-    if(!groups[key]) groups[key] = { name:r.species_other_name.trim(), count:0, photo:null, places:[] };
+    if(!groups[key]) groups[key] = { name:r.species_other_name.trim(), count:0, photo:null, places:[], devices:new Set(), govs:new Set() };
     groups[key].count++;
+    groups[key].devices.add(r.device_id); if(r.governorate) groups[key].govs.add(r.governorate);
     if(!groups[key].photo && r.photo) groups[key].photo = r.photo;
     if(r.place) groups[key].places.push(r.place);
   });
@@ -1252,6 +1320,7 @@ function renderCommunitySpecies(){
       <span class="kind-badge">🆕 مقترح</span>
       ${safeSrc(g.photo) ? `<img class="card-photo" src="${safeSrc(g.photo)}" alt="${esc(g.name)}" loading="lazy">` : ''}
       <h3>${esc(g.name)}</h3>
+      ${g.devices.size>=5 && g.govs.size>=2 ? `<div style="font-size:12px;color:var(--gold-soft);margin:4px 0;">✅ مؤهل للمراجعة العلمية (رصده ${g.devices.size} أجهزة في ${g.govs.size} محافظات)</div>` : ''}
       <p style="font-size:13.5px;color:var(--muted);line-height:1.8;margin:0;">أبلغ عنه ${g.count} ${g.count===1?'مستخدم':'مستخدمين'} — أماكن الرصد: ${[...new Set(g.places)].slice(0,3).map(esc).join('، ')}${g.places.length>3?'...':''}</p>
     </div>
   `).join('');
@@ -1267,9 +1336,10 @@ async function loadCommunityReports(map, iconFn){
   try{
     const { data: reports, error } = await sb.from('reports').select('*').order('created_at', {ascending:false});
     if(error) throw error;
-    ALL_REPORTS = reports || [];
+    ALL_REPORTS = (reports || []).filter(r=>r.status!=='rejected');
     renderStats();
     ALL_REPORTS.forEach(rep=>{
+      if(rep.status==='pending') return;
       const marker = L.marker([rep.lat,rep.lng], {icon:iconFn('#4fb0a5')})
         .bindPopup(`<b>${esc(speciesDisplayName(rep))}</b><br>${esc(rep.place)}${safeSrc(rep.photo)?`<br><img src="${safeSrc(rep.photo)}" style="width:120px;border-radius:8px;margin-top:6px;">`:''}<br><span style="color:#666">${esc(rep.notes)}</span>`);
       const layer = window.__markerLayer || map;
@@ -1279,13 +1349,14 @@ async function loadCommunityReports(map, iconFn){
     });
     renderReportsList();
     renderCommunitySpecies();
+    applyLiveThreat();
 
     // دعم رابط مشاركة مباشر ?report=ID
     const params = new URLSearchParams(location.search);
     const targetId = params.get('report');
     if(targetId){
       const target = ALL_REPORTS.find(r=>r.id===targetId);
-      if(target){
+      if(target && target.__marker){
         updateOgTags(target);
         document.querySelector('.tab[data-tab="map"]').click();
         setTimeout(()=>{
@@ -1331,6 +1402,15 @@ document.getElementById('rp-submit').addEventListener('click', async ()=>{
   }
   const btn = document.getElementById('rp-submit');
   btn.disabled = true; btn.textContent = 'جارٍ الإضافة...';
+  let photoUrl = reportPhotoData || null;
+  if(photoUrl && navigator.onLine){
+    try{
+      const blob = await (await fetch(photoUrl)).blob();
+      const path = `${Date.now()}-${Math.random().toString(36).slice(2,10)}.jpg`;
+      const { error: upErr } = await sb.storage.from('report-photos').upload(path, blob, { contentType:'image/jpeg' });
+      if(!upErr) photoUrl = sb.storage.from('report-photos').getPublicUrl(path).data.publicUrl;
+    }catch(e){ console.warn('photo upload fallback', e); }
+  }
   const report = {
     species: rpSelect.value,
     species_other_name: rpSelect.value==='other' ? rpSpeciesOtherInput.value.trim() : null,
@@ -1338,7 +1418,7 @@ document.getElementById('rp-submit').addEventListener('click', async ()=>{
     place: document.getElementById('rp-place').value.trim().slice(0,120),
     notes: document.getElementById('rp-notes').value.trim().slice(0,500) || null,
     lat: pickedLatLng.lat, lng: pickedLatLng.lng,
-    photo: reportPhotoData || null,
+    photo: photoUrl,
     device_id: DEVICE_ID
   };
 
@@ -1354,8 +1434,8 @@ document.getElementById('rp-submit').addEventListener('click', async ()=>{
   try{
     const { error } = await sb.from('reports').insert(report);
     if(error) throw error;
-    btn.textContent = 'تمت الإضافة ✓';
-    setTimeout(()=>{ location.reload(); }, 900);
+    btn.textContent = 'تمت الإضافة ✓ — ستظهر على الخريطة بعد التحقق';
+    setTimeout(()=>{ location.reload(); }, 1800);
   }catch(e){
     console.error(e);
     if(e.message && /rate|حد أقصى|too many/i.test(e.message)){
@@ -1585,3 +1665,4 @@ idwPhotoInput.addEventListener('change', (e)=>{
 });
 
 idwRenderKindStep();
+loadLiveNews();

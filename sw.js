@@ -7,13 +7,16 @@
 // إنترنت، بدل شاشة بيضاء أو خطأ متصفح.
 // ============================================================
 
-const CACHE_NAME = 'rasad-shell-v2';
+const CACHE_NAME = 'rasad-shell-v3';
 const APP_SHELL = [
   './',
   './index.html',
   './style.css',
   './app.js',
   './config.js',
+  './manifest.json',
+  './icon-192.png',
+  './icon-512.png',
   'https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;700;900&display=swap',
   'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css',
   'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js',

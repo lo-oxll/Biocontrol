@@ -1,0 +1,27 @@
+{
+  "name": "رَصَد | دليل ومرصد الأنواع الغازية في مياه العراق",
+  "short_name": "رَصَد",
+  "description": "دليل تفاعلي وخريطة مجتمعية للأنواع الغازية في أنهار وأهوار العراق",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "dir": "rtl",
+  "lang": "ar",
+  "background_color": "#0f3a37",
+  "theme_color": "#0f3a37",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

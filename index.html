@@ -28,6 +28,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.Default.css">
 <link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0f3a37">
+<link rel="apple-touch-icon" href="icon-192.png">
 </head>
 <body>
 
@@ -89,6 +92,7 @@
       <select id="filter-species"><option value="">كل الأنواع</option></select>
       <select id="filter-gov"><option value="">كل المحافظات</option></select>
       <button type="button" id="filter-reset" class="btn secondary" style="margin-top:0;padding:9px 18px;">إعادة تعيين</button>
+      <button type="button" id="export-csv" class="btn secondary" style="margin-top:0;padding:9px 18px;">⬇️ تصدير CSV</button>
     </div>
 
     <div id="map"></div>
@@ -119,7 +123,7 @@
       <select id="rp-species">
         <option value="">اختر النوع...</option>
       </select>
-      <input id="rp-species-other" type="text" placeholder="اكتب اسم النوع (مثال: القوقع الأفريقي العملاق)" style="display:none;margin-top:8px;">
+      <input id="rp-species-other" type="text" maxlength="80" placeholder="اكتب اسم النوع (مثال: القوقع الأفريقي العملاق)" style="display:none;margin-top:8px;">
 
       <label>المحافظة</label>
       <select id="rp-gov">
@@ -127,7 +131,7 @@
       </select>
 
       <label>اسم المنطقة (مثال: هور الحويزة، ضفاف دجلة قرب...)</label>
-      <input id="rp-place" type="text" placeholder="اسم المنطقة أو أقرب علامة مميزة">
+      <input id="rp-place" type="text" maxlength="120" placeholder="اسم المنطقة أو أقرب علامة مميزة">
 
       <label>صورة الكائن المرصود (اختياري)</label>
       <div class="photo-attach" id="rp-photo-attach">
@@ -137,7 +141,7 @@
       </div>
 
       <label>ملاحظات إضافية (اختياري)</label>
-      <textarea id="rp-notes" placeholder="عدد تقريبي، تاريخ الرصد، تفاصيل أخرى..."></textarea>
+      <textarea id="rp-notes" maxlength="500" placeholder="عدد تقريبي، تاريخ الرصد، تفاصيل أخرى..."></textarea>
 
       <button class="btn" id="rp-submit" disabled>إضافة البلاغ</button>
     </div>

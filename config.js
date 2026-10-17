@@ -21,11 +21,11 @@ window.SUPABASE_ANON_KEY = 'sb_publishable_fAgA6_utUUJYDX-BG81AXg_j-yEeDaP';
 // الباقة المجانية تكفي لموقع صغير/متوسط الاستخدام بدون أي تكلفة.
 // نصيحة أمان: من نفس الصفحة اضغط على المفتاح > Restrict key، واختر
 // "Websites" وحط دومين موقعك (مثل *.github.io/*) حتى ما يُستخدم مفتاحك من مواقع ثانية.
-window.GEMINI_API_KEY = 'AQ.Ab8RN6J2ASs3ieRMCx8VxVm1bSRpGUTstExWnOXQYoTqGRdJg';
+window.GEMINI_API_KEY = ''; // أُزيل المفتاح من الواجهة — استخدم AI_PROXY_URL (supabase/functions/ai-proxy)
 
 // ============================================================
 // خيار بديل مدفوع (اختياري): Anthropic عبر دالة وسيطة على Supabase
 // ============================================================
 // إذا تركت GEMINI_API_KEY فارغاً وتريد استخدام Claude بدلاً منه، انشر
 // الدالة الموجودة بمجلد supabase-edge-function وحط رابطها هنا:
-window.AI_PROXY_URL = '';
+window.AI_PROXY_URL = 'https://hhdrueykwlbstcbqkwqh.supabase.co/functions/v1/ai-proxy';
